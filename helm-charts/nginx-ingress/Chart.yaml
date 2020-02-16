@@ -1,0 +1,23 @@
+appVersion: 3.5.0
+description: Ingress Controller for IBM Cloud Private
+home: https://github.com/kubernetes/ingress
+icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
+keywords:
+- ICP
+- RHOCP
+- kubernetes
+- ingress
+- nginx
+- IcpClusterResource
+- Network
+- Commercial
+- Limited
+- amd64
+- ppc64le
+- s390x
+kubeVersion: '>=1.11.0'
+name: nginx-ingress
+sources:
+- https://github.com/kubernetes/ingress
+tillerVersion: '>=2.12.3'
+version: 3.5.0

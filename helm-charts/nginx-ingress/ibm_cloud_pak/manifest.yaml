@@ -1,0 +1,59 @@
+charts:
+  - archive: file:repo/stable/nginx-ingress-3.5.0.tgz
+    repository-keys:
+      - ingress.image.repository
+      - defaultBackend.image.repository
+      - init.image.repository
+
+images:
+- image: ibmcom/nginx-ingress-controller:0.23.2
+  references:
+  - repository: ibmcom/nginx-ingress-controller-amd64:0.23.2
+    pull-repository: ibmcom/nginx-ingress-controller:0.23.2-amd64
+    platform:
+      os: linux
+      architecture: amd64
+  - repository: ibmcom/nginx-ingress-controller-ppc64le:0.23.2
+    pull-repository: ibmcom/nginx-ingress-controller:0.23.2-ppc64le
+    platform:
+      os: linux
+      architecture: ppc64le
+  - repository: ibmcom/nginx-ingress-controller-s390x:0.23.2
+    pull-repository: ibmcom/nginx-ingress-controller:0.23.2-s390x
+    platform:
+      os: linux
+      architecture: s390x
+- image: ibmcom/default-http-backend:1.5.2
+  references:
+  - repository: ibmcom/default-http-backend-amd64:1.5.2
+    pull-repository: ibmcom/default-http-backend:1.5.2-amd64
+    platform:
+      os: linux
+      architecture: amd64
+  - repository: ibmcom/default-http-backend-ppc64le:1.5.2
+    pull-repository: ibmcom/default-http-backend:1.5.2-ppc64le
+    platform:
+      os: linux
+      architecture: ppc64le
+  - repository: ibmcom/default-http-backend-s390x:1.5.2
+    pull-repository: ibmcom/default-http-backend:1.5.2-s390x
+    platform:
+      os: linux
+      architecture: s390x
+- image: ibmcom/icp-initcontainer:1.0.0-build.1
+  references:
+  - repository: ibmcom/icp-initcontainer-amd64:1.0.0-build.1
+    pull-repository: ibmcom/icp-initcontainer:1.0.0-build.1-amd64
+    platform:
+      os: rhel
+      architecture: amd64
+  - repository: ibmcom/icp-initcontainer-ppc64le:1.0.0-build.1
+    pull-repository: ibmcom/icp-initcontainer:1.0.0-build.1-ppc64le
+    platform:
+      os: linux
+      architecture: ppc64le
+  - repository: ibmcom/icp-initcontainer-s390x:1.0.0-build.1
+    pull-repository: ibmcom/icp-initcontainer:1.0.0-build.1-s390x
+    platform:
+      os: linux
+      architecture: s390x
