@@ -1,0 +1,205 @@
+# Licensed Materials - Property of IBM
+# 5737-E67
+# @ Copyright IBM Corporation 2016, 2020 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+ingress:
+  __metadata:
+    name: "ingress setting"
+    label: "ingress setting"
+    description: "nginx-ingress-controller setting"
+  name:
+    __metadata:
+      name: "nginx-ingress-controller setting"
+      label: "nginx-ingress-controller setting"
+      description: "nginx-ingress-controller setting, default name nginx-ingress-controller"
+  hostNetwork:
+    __metadata:
+      name: "hostNetwork setting"
+      label: "hostNetwork setting"
+      description: "hostNetwork setting, default false"
+  hostPort:
+    __metadata:
+      name: "hostPort setting"
+      label: "hostPort setting"
+      description: "use hostPort, default true"
+  httpPort:
+    __metadata:
+      name: "http port"
+      label: "http port"
+      description: "Listening port of nginx backend"
+  httpsPort:
+    __metadata:
+      name: "https port"
+      label: "https port"
+      description: "Listening port of nginx backend"
+  image:
+    repository:
+      __metadata:
+        name: "image repository setting"
+        label: "image repository setting"
+        description: "set image repository, default is ibmcom/nginx-ingress-controller"
+    tag:
+      __metadata:
+        name: "image tag setting"
+        label: "image tag setting"
+        description: "set image tag version"
+    pullPolicy:
+      __metadata:
+        name: "image pullPolicy setting"
+        label: "image pullPolicy setting"
+        description: "set image pullPolicy, default is IfNotPresent"
+
+  resources:
+    requests:
+      cpu:
+        __metadata:
+          name: "cpu resources requests"
+          label: "cpu resources requests"
+          description: "resources requests for cpu"
+      memory:
+        __metadata:
+          name: "memory resources requests"
+          label: "memory resources requests"
+          description: "resources requests for memory"
+
+  extraArgs:
+    __metadata:
+      name: "extra args setting"
+      label: "extra args setting"
+      description: "extra args to start /nginx-ingress-controller"
+
+  config:
+    disable-access-log: 
+      __metadata:
+        name: "access log setting"
+        label: "access log setting"
+        description: "enable/disable access log, default is disabled"
+    keep-alive-requests:
+      __metadata:
+        name: "keep-alive-requests setting"
+        label: "keep-alive-requests setting"
+        description: "set keep-alive-requests numbers, default is 10000"
+    upstream-keepalive-connections:
+      __metadata:
+        name: "upstream-keepalive-connections setting"
+        label: "upstream-keepalive-connections setting"
+        description: "set upstream-keepalive-connections numbers, default is 64"
+    server-tokens:
+      __metadata:
+        name: "server tokens setting"
+        label: "server tokens setting"
+        description: "show/hide nginx server version, default is hide(false)"
+    ssl-ciphers:
+      __metadata:
+        name: "ssl ciphers setting"
+        label: "ssl ciphers setting"
+        description: "set default ssl ciphers suite"
+
+  annotations:
+    __metadata:
+      name: "annotations setting"
+      label: "annotations setting"
+      description: "annotation setting added to daemonset nginx-ingress-controller spec.template"
+
+  nodeSelector:
+    __metadata:
+      name: "node selector"
+      label: "node selector"
+      description: "node selector settings"
+
+  tolerations:
+    __metadata:
+      name: "pod tolerations"
+      label: "pod tolerations"
+      description: "pod tolerations settings"
+
+defaultBackend:
+  __metadata:
+    name: "defaultBackend setting"
+    label: "defaultBackend setting"
+    description: "default-http-backend setting"
+  name:
+    __metadata:
+      name: "default-http-backend setting"
+      label: "default-http-backend setting"
+      description: "default-http-backend setting, default name default-http-backend"
+  replicaCount: 1
+  image:
+    repository:
+      __metadata:
+        name: "image repository setting"
+        label: "image repository setting"
+        description: "set image repository, default is ibmcom/default-http-backend"
+    tag:
+      __metadata:
+        name: "image tag setting"
+        label: "image tag setting"
+        description: "set image tag version"
+    pullPolicy:
+      __metadata:
+        name: "image pullPolicy setting"
+        label: "image pullPolicy setting"
+        description: "set image pullPolicy, default is IfNotPresent"
+
+  extraArgs:
+    __metadata:
+      name: "extra args setting"
+      label: "extra args setting"
+      description: "extra args to start defaultBackend"
+
+  resources:
+    requests:
+      cpu:
+        __metadata:
+          name: "cpu resources requests"
+          label: "cpu resources requests"
+          description: "resources requests for cpu"
+      memory:
+        __metadata:
+          name: "memory resources requests"
+          label: "memory resources requests"
+          description: "resources requests for memory"
+
+  nodeSelector:
+    __metadata:
+      name: "node selector"
+      label: "node selector"
+      description: "node selector settings"
+
+
+  tolerations:
+    __metadata:
+      name: "pod tolerations"
+      label: "pod tolerations"
+      description: "pod tolerations settings"
+
+init:
+  __metadata:
+    name: "init setting"
+    label: "init setting"
+    description: "icp-initcontainer setting"
+  image:
+    repository:
+      __metadata:
+        name: "image repository setting"
+        label: "image repository setting"
+        description: "set image repository, default is ibmcom/icp-initcontainer"
+    tag:
+      __metadata:
+        name: "image tag setting"
+        label: "image tag setting"
+        description: "set image tag version"
+    pullPolicy:
+      __metadata:
+        name: "image pullPolicy setting"
+        label: "image pullPolicy setting"
+        description: "set image pullPolicy, default is IfNotPresent"
+
+fips_enabled:
+  __metadata:
+    name: "FIPS mode setting"
+    label: "FIPS mode setting"
+    description: "enable/disable FIPS mode, default is disable"

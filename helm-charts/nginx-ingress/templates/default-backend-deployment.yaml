@@ -1,0 +1,95 @@
+# Licensed Materials - Property of IBM
+# 5737-E67
+# @ Copyright IBM Corporation 2016, 2020 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.defaultBackend.name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    component: {{ .Values.defaultBackend.name }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ .Release.Name }}
+    helm.sh/chart: {{ .Chart.Name }}
+  name: {{ .Values.defaultBackend.name }}
+spec:
+  selector:
+    matchLabels:
+      app: "{{ .Values.defaultBackend.name }}"
+      chart: "{{ .Chart.Name }}"
+      heritage: "{{ .Release.Service }}"
+      component: "{{ .Values.defaultBackend.name }}"
+      release: {{ .Release.Name }}
+  replicas: {{ .Values.defaultBackend.replicaCount }}
+  template:
+    metadata:
+      annotations:
+        productID: "{{ .Chart.Name }}_{{ .Chart.Version }}_00000"
+        productName: "IBM Cloud Platform Common Services"
+        productVersion: "{{ .Chart.Version }}"
+      labels:
+        app: "{{ .Values.defaultBackend.name }}"
+        chart: "{{ .Chart.Name }}"
+        heritage: "{{ .Release.Service }}"
+        component: "{{ .Values.defaultBackend.name }}"
+        release: {{ .Release.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        app.kubernetes.io/name: {{ .Release.Name }}
+        helm.sh/chart: {{ .Chart.Name }}
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - {{ .Values.defaultBackend.name }}
+                - key: component
+                  operator: In
+                  values:
+                  - {{ .Values.defaultBackend.name }}
+              topologyKey: kubernetes.io/hostname
+      serviceAccount: nginx-ingress-serviceaccount
+      containers:
+        - name: default-http-backend
+          image: "{{ .Values.defaultBackend.image.repository }}:{{ .Values.defaultBackend.image.tag }}"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          imagePullPolicy: "{{ .Values.defaultBackend.image.pullPolicy }}"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: "/healthz"
+              scheme: HTTP
+              port: 8080
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+{{ toYaml .Values.defaultBackend.resources | indent 12 }}
+      nodeSelector:
+{{ toYaml .Values.defaultBackend.nodeSelector | indent 8 }}
+      tolerations:
+{{ toYaml .Values.defaultBackend.tolerations | indent 8 }}

@@ -1,0 +1,5 @@
+---
+- version: v1alpha1
+  group: operator.ibm.com
+  kind: NginxIngress
+  chart: helm-charts/nginx-ingress

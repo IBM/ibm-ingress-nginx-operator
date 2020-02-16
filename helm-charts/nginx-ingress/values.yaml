@@ -1,0 +1,58 @@
+# Licensed Materials - Property of IBM
+# 5737-E67
+# @ Copyright IBM Corporation 2016, 2020 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+ingress:
+  name: nginx-ingress-controller
+  replicaCount: 1
+  hostNetwork: false
+  hostPort: false
+  httpPort: 80
+  httpsPort: 443
+  routeHost: cp-proxy.example.ocp.com
+  image:
+    repository: ibmcom/nginx-ingress-controller
+    tag: 0.23.2
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: 50m
+      memory: 256Mi
+
+  config:
+    disable-access-log: 'true'
+    keep-alive-requests: '10000'
+    upstream-keepalive-connections: '64'
+    server-tokens: 'false'
+    ssl-ciphers: 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256'
+
+  extraArgs: {}
+  annotations: {}
+  nodeSelector: {}
+  tolerations: []
+
+defaultBackend:
+  name: default-http-backend
+  replicaCount: 1
+  image:
+    repository: ibmcom/default-http-backend
+    tag: 1.5.2
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: 20m
+      memory: 64Mi
+
+  nodeSelector: {}
+  tolerations: []
+
+init:
+  image:
+    repository: ibmcom/icp-initcontainer
+    tag: 1.0.0-build.2
+    pullPolicy: IfNotPresent
+
+fips_enabled: false
