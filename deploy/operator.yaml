@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ingress-nginx-operator
+  name: ibm-ingress-nginx-operator
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: ingress-nginx-operator
+      name: ibm-ingress-nginx-operator
   template:
     metadata:
       labels:
-        name: ingress-nginx-operator
+        name: ibm-ingress-nginx-operator
     spec:
-      serviceAccountName: ingress-nginx-operator
+      serviceAccountName: ibm-ingress-nginx-operator
       containers:
-        - name: ingress-nginx-operator
+        - name: ibm-ingress-nginx-operator
           # Replace this with the built image name
           image: REPLACE_IMAGE
           imagePullPolicy: Always
@@ -28,4 +28,4 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
-              value: "ingress-nginx-operator"
+              value: "ibm-ingress-nginx-operator"

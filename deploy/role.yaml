@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   creationTimestamp: null
-  name: ingress-nginx-operator
+  name: ibm-ingress-nginx-operator
 rules:
 - apiGroups:
   - ""
@@ -54,7 +54,7 @@ rules:
 - apiGroups:
   - apps
   resourceNames:
-  - ingress-nginx-operator
+  - ibm-ingress-nginx-operator
   resources:
   - deployments/finalizers
   verbs:

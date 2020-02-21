@@ -1,2 +1,2 @@
-# ingress-nginx-operator
+# ibm-ingress-nginx-operator
 operator for ingress nginx
