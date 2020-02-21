@@ -1,0 +1,5 @@
+channels:
+- currentCSV: ibm-ingress-nginx-operator.v0.0.1
+  name: alpha
+defaultChannel: alpha
+packageName: ibm-ingress-nginx-operator-app
