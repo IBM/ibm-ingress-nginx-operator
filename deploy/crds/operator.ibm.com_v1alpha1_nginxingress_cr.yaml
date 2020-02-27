@@ -12,7 +12,7 @@ spec:
     httpsPort: 443
     routeHost: cp-proxy.apps.ibm.com
     image:
-      repository: quay.io/nginx-ingress-controller
+      repository: ibmcom/nginx-ingress-controller
       tag: 0.23.0
       pullPolicy: IfNotPresent
     resources:
@@ -32,8 +32,8 @@ spec:
     name: default-http-backend
     replicaCount: 1
     image:
-      repository: quay.io/default-http-backend
-      tag: 1.5.2
+      repository: ibmcom/default-http-backend
+      tag: 1.5.1
       pullPolicy: IfNotPresent
     resources:
       requests:
@@ -43,7 +43,7 @@ spec:
     tolerations: []
   init:
     image:
-      repository: quay.io/icp-initcontainer
-      tag: 1.0.0-build.2
+      repository: ibmcom/icp-initcontainer
+      tag: 1.0.0-build.1
       pullPolicy: IfNotPresent
   fips_enabled: false

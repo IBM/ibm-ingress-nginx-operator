@@ -14,8 +14,8 @@ metadata:
             "defaultBackend": {
               "image": {
                 "pullPolicy": "IfNotPresent",
-                "repository": "quay.io/default-http-backend",
-                "tag": "1.5.2"
+                "repository": "ibmcom/default-http-backend",
+                "tag": "1.5.1"
               },
               "name": "default-http-backend",
               "nodeSelector": {},
@@ -44,7 +44,7 @@ metadata:
               "httpsPort": 443,
               "image": {
                 "pullPolicy": "IfNotPresent",
-                "repository": "quay.io/nginx-ingress-controller",
+                "repository": "ibmcom/nginx-ingress-controller",
                 "tag": "0.23.0"
               },
               "name": "nginx-ingress-controller",
@@ -62,8 +62,8 @@ metadata:
             "init": {
               "image": {
                 "pullPolicy": "IfNotPresent",
-                "repository": "quay.io/icp-initcontainer",
-                "tag": "1.0.0-build.2"
+                "repository": "ibmcom/icp-initcontainer",
+                "tag": "1.0.0-build.1"
               }
             }
           }
@@ -121,12 +121,16 @@ spec:
           - clusterrolebindings
           verbs:
           - create
+          - delete
+          - get
         - apiGroups:
           - security.openshift.io
           resources:
           - securitycontextconstraints
           verbs:
           - create
+          - delete
+          - get
         - apiGroups:
           - security.openshift.io
           resources:
@@ -196,14 +200,6 @@ spec:
             - ingresses/status
           verbs:
             - update
-        - apiGroups:
-          - rbac.authorization.k8s.io
-          resources:
-          - clusterroles
-          - clusterrolebindings
-          verbs:
-          - create
-          - delete
         serviceAccountName: ibm-ingress-nginx-operator
       permissions:
       - rules:
@@ -225,13 +221,60 @@ spec:
           - configmaps
           - secrets
           verbs:
-          - '*'
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - apps
+          resources:
+          - deployments
+          - daemonsets
+          - replicasets
+          - statefulsets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - apps
+          resourceNames:
+          - ibm-ingress-nginx-operator
+          resources:
+          - deployments/finalizers
+          verbs:
+          - update
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          verbs:
+          - get
+        - apiGroups:
+          - ""
+          resources:
+          - serviceaccounts
+          verbs:
+          - get
+          - create
+          - delete
+          - list
         - apiGroups:
           - route.openshift.io
           resources:
           - routes
           verbs:
           - create
+          - delete
+          - get
+          - list
         - apiGroups:
           - route.openshift.io
           resources:
@@ -253,7 +296,6 @@ spec:
           verbs:
           - create
           - get
-          - watch
         - apiGroups:
           - monitoring.coreos.com
           resources:
@@ -262,10 +304,6 @@ spec:
           - create
           - delete
           - get
-          - list
-          - patch
-          - update
-          - watch
         - apiGroups:
           - rbac.authorization.k8s.io
           resources:
@@ -274,6 +312,16 @@ spec:
           verbs:
           - create
           - delete
+          - get
+          - list
+        - apiGroups:
+          - operator.ibm.com
+          resources:
+          - nginxingresses
+          - nginxingresses/finalizers
+          - nginxingresses/status
+          verbs:
+          - '*'
         serviceAccountName: ibm-ingress-nginx-operator
       deployments:
           # Replacm this with the built image name
