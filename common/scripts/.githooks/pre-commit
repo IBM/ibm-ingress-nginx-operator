@@ -1,3 +1,5 @@
+#!/bin/bash
+#
 # Copyright 2020 IBM Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +15,22 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator:v0.15.2
+# This hook is called with the following parameters:
+#
+# $1 -- Name of the remote to which the push is being done
+# $2 -- URL to which the push is being done
+#
+# If pushing without using a named remote those arguments will be equal.
+#
+# Information about the commits which are being pushed is supplied as lines to
+# the standard input in the form:
+#
+#   <local ref> <local sha1> <remote ref> <remote sha1>
+#
 
-COPY watches.yaml ${HOME}/watches.yaml
-COPY helm-charts/ ${HOME}/helm-charts/
+remote="$1"
+url="$2"
+
+.git/hooks/pre-commit-check.sh
+
+exit $?

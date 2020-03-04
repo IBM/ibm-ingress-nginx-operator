@@ -1,3 +1,5 @@
+#!/bin/bash
+#
 # Copyright 2020 IBM Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +15,4 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator:v0.15.2
-
-COPY watches.yaml ${HOME}/watches.yaml
-COPY helm-charts/ ${HOME}/helm-charts/
+GOGC=25 golangci-lint run -c ./common/config/.golangci.yml
