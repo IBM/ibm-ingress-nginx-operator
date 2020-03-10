@@ -1,7 +1,7 @@
 apiVersion: operator.ibm.com/v1alpha1
 kind: NginxIngress
 metadata:
-  name: example
+  name: default
 spec:
   ingress:
     name: nginx-ingress-controller
@@ -11,9 +11,10 @@ spec:
     httpPort: 80
     httpsPort: 443
     routeHost: cp-proxy.apps.ibm.com
+    imageRegistry: quay.io/opencloudio
     image:
-      repository: ibmcom/nginx-ingress-controller
-      tag: 0.23.0
+      repository: nginx-ingress-controller
+      tag: 0.23.3
       pullPolicy: IfNotPresent
     resources:
       requests:
@@ -32,8 +33,9 @@ spec:
     name: default-http-backend
     replicaCount: 1
     image:
-      repository: ibmcom/default-http-backend
-      tag: 1.5.1
+      imageRegistry: quay.io/opencloudio
+      repository: default-http-backend
+      tag: 1.5.3
       pullPolicy: IfNotPresent
     resources:
       requests:
@@ -42,8 +44,9 @@ spec:
     nodeSelector: {}
     tolerations: []
   init:
+    imageRegistry: quay.io/opencloudio
     image:
-      repository: ibmcom/icp-initcontainer
-      tag: 1.0.0-build.1
+      repository: icp-initcontainer
+      tag: 1.0.0-build.2
       pullPolicy: IfNotPresent
   fips_enabled: false

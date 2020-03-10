@@ -30,9 +30,11 @@ spec:
   template:
     metadata:
       annotations:
-        productID: "{{ .Chart.Name }}_{{ .Chart.Version }}_00000"
         productName: "IBM Cloud Platform Common Services"
-        productVersion: "{{ .Chart.Version }}"
+        productID: "068a62892a1e4db39641342e592daa25"
+        productVersion: "3.3.0"
+        productMetric: "FREE"
+        clusterhealth.ibm.com/dependencies: ""
       labels:
         app: "{{ .Values.defaultBackend.name }}"
         chart: "{{ .Chart.Name }}"
@@ -43,6 +45,7 @@ spec:
         app.kubernetes.io/managed-by: {{ .Release.Service }}
         app.kubernetes.io/name: {{ .Release.Name }}
         helm.sh/chart: {{ .Chart.Name }}
+        app.kubernetes.io/instance: nginx-ingress-controller
     spec:
       affinity:
         podAntiAffinity:
@@ -63,7 +66,7 @@ spec:
       serviceAccount: nginx-ingress-serviceaccount
       containers:
         - name: default-http-backend
-          image: "{{ .Values.defaultBackend.image.repository }}:{{ .Values.defaultBackend.image.tag }}"
+          image: "{{ .Values.defaultBackend.imageRegistry }}/{{ .Values.defaultBackend.image.repository }}:{{ .Values.defaultBackend.image.tag }}"
           securityContext:
             allowPrivilegeEscalation: false
             runAsNonRoot: true

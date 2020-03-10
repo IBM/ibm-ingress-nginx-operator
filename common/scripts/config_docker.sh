@@ -1,3 +1,5 @@
+#!/bin/bash
+#
 # Copyright 2020 IBM Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +15,13 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator:v0.15.2
+KUBECTL=$(command -v kubectl)
+DOCKER_REGISTRY="quay.io"
+DOCKER_USERNAME="multicloudlab"
+DOCKER_PASSWORD=$(${KUBECTL} -n default get secret quay-cred -o jsonpath='{.data.password}' | base64 --decode)
 
-COPY watches.yaml ${HOME}/watches.yaml
-COPY helm-charts/ ${HOME}/helm-charts/
+# support other container tools, e.g. podman
+CONTAINER_CLI=${CONTAINER_CLI:-docker}
+
+# login the docker registry
+${CONTAINER_CLI} login "${DOCKER_REGISTRY}" -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"

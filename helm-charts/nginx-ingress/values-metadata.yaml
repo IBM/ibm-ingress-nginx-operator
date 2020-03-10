@@ -35,6 +35,11 @@ ingress:
       name: "https port"
       label: "https port"
       description: "Listening port of nginx backend"
+  imageRegistry:
+    __metadata:
+      name: "image registry setting"
+      label: "image registry setting"
+      description: "set image registry, default is quay.io/opencloudio"
   image:
     repository:
       __metadata:

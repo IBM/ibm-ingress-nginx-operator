@@ -1,3 +1,5 @@
+#!/bin/bash
+#
 # Copyright 2020 IBM Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +15,19 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator:v0.15.2
+set -e
 
-COPY watches.yaml ${HOME}/watches.yaml
-COPY helm-charts/ ${HOME}/helm-charts/
+ec=0
+for fn in "$@"; do
+  if ! grep -L -q -e "Apache License, Version 2" "${fn}"; then
+    echo "Missing license: ${fn}"
+    ec=1
+  fi
+
+  if ! grep -L -q -e "Copyright" "${fn}"; then
+    echo "Missing copyright: ${fn}"
+    ec=1
+  fi
+done
+
+exit $ec
