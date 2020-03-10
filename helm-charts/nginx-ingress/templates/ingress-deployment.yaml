@@ -82,7 +82,7 @@ spec:
             port: 10254
           timeoutSeconds: 1
         name: nginx-ingress
-        image: "{{ .Values.ingress.image.repository }}:{{ .Values.ingress.image.tag }}"
+        image: "{{ .Values.defaultBackend.imageRegistry }}/{{ .Values.ingress.image.repository }}:{{ .Values.ingress.image.tag }}"
         securityContext:
           allowPrivilegeEscalation: true
           capabilities:
