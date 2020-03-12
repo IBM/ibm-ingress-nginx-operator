@@ -6,20 +6,20 @@ charts:
       - init.image.repository
 
 images:
-- image: ibmcom/nginx-ingress-controller:0.23.2
+- image: ibmcom/nginx-ingress-controller:0.23.4
   references:
-  - repository: ibmcom/nginx-ingress-controller-amd64:0.23.2
-    pull-repository: ibmcom/nginx-ingress-controller:0.23.2-amd64
+  - repository: ibmcom/nginx-ingress-controller-amd64:0.23.4
+    pull-repository: ibmcom/nginx-ingress-controller:0.23.4-amd64
     platform:
       os: linux
       architecture: amd64
-  - repository: ibmcom/nginx-ingress-controller-ppc64le:0.23.2
-    pull-repository: ibmcom/nginx-ingress-controller:0.23.2-ppc64le
+  - repository: ibmcom/nginx-ingress-controller-ppc64le:0.23.4
+    pull-repository: ibmcom/nginx-ingress-controller:0.23.4-ppc64le
     platform:
       os: linux
       architecture: ppc64le
-  - repository: ibmcom/nginx-ingress-controller-s390x:0.23.2
-    pull-repository: ibmcom/nginx-ingress-controller:0.23.2-s390x
+  - repository: ibmcom/nginx-ingress-controller-s390x:0.23.4
+    pull-repository: ibmcom/nginx-ingress-controller:0.23.4-s390x
     platform:
       os: linux
       architecture: s390x
