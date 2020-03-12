@@ -129,7 +129,7 @@ The following table lists the configurable parameters of the `ICP Management Ing
 | ingress.httpPort                                | Listening http port of nginx backend                           | 80                              |
 | ingress.httpsPort                               | Listening https port of nginx backend                          | 443                             |
 | ingress.image.repository                        | NGINX Ingress Controller image to use for this deployment      | ibmcom/nginx-ingress-controller |
-| ingress.image.tag                               | NGINX Ingress Controller image tag to use for this deployment  | 0.23.2                          |
+| ingress.image.tag                               | NGINX Ingress Controller image tag to use for this deployment  | 0.23.4                          |
 | ingress.image.pullPolicy                        | NGINX Ingress Controller image pull policy                     | IfNotPresent                    |
 | ingress.resources.requests.cpu                  | cpu request to run this deployment                             | 50m                             |
 | ingress.resources.requests.memory               | memory request to run this deployment                          | 256Mi                           |

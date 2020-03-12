@@ -14,7 +14,7 @@ spec:
     imageRegistry: quay.io/opencloudio
     image:
       repository: nginx-ingress-controller
-      tag: 0.23.3
+      tag: 0.23.4
       pullPolicy: IfNotPresent
     resources:
       requests:

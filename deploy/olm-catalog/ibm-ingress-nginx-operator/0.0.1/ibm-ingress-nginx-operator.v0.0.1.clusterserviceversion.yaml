@@ -47,7 +47,7 @@ metadata:
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "nginx-ingress-controller",
-                "tag": "0.23.3"
+                "tag": "0.23.4"
               },
               "name": "nginx-ingress-controller",
               "nodeSelector": {},
