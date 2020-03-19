@@ -68,6 +68,13 @@ metadata:
                 "repository": "icp-initcontainer",
                 "tag": "1.0.0-build.2"
               }
+            },
+            "kubectl": {
+              "imageRegistry": "quay.io/opencloudio",
+              "image": {
+                "repository": "kubectl",
+                "tag": "v1.15.9"
+              }
             }
           }
         }
@@ -122,10 +129,14 @@ spec:
           resources:
           - clusterroles
           - clusterrolebindings
+          - roles
+          - rolebindings
           verbs:
           - create
           - delete
           - get
+          - list
+          - watch
         - apiGroups:
           - security.openshift.io
           resources:
@@ -134,12 +145,8 @@ spec:
           - create
           - delete
           - get
-        - apiGroups:
-          - security.openshift.io
-          resources:
-          - securitycontextconstraints
-          verbs:
           - use
+          - patch
         - apiGroups:
           - certmanager.k8s.io
           resources:
@@ -147,39 +154,12 @@ spec:
           verbs:
           - use
         - apiGroups:
-            - ""
+          - certmanager.k8s.io
           resources:
-            - endpoints
-            - nodes
-            - pods
-            - secrets
+          - certificates
           verbs:
-            - list
-            - watch
-        - apiGroups:
-            - ""
-          resources:
-            - configmaps
-          verbs:
-            - create
-            - get
-            - list
-            - update
-            - watch
-        - apiGroups:
-            - ""
-          resources:
-            - nodes
-          verbs:
-            - get
-        - apiGroups:
-            - ""
-          resources:
-            - services
-          verbs:
-            - get
-            - list
-            - watch
+          - create
+          - get
         - apiGroups:
             - ""
           resources:
@@ -203,9 +183,14 @@ spec:
             - ingresses/status
           verbs:
             - update
-        serviceAccountName: ibm-ingress-nginx-operator
-      permissions:
-      - rules:
+        - apiGroups:
+            - "operator.openshift.io"
+          resources:
+            - ingresscontrollers
+          verbs:
+            - get
+            - list
+            - watch
         - apiGroups:
           - ""
           resources:
@@ -218,6 +203,7 @@ spec:
           - pods
           - services
           - services/finalizers
+          - serviceaccounts
           - endpoints
           - persistentvolumeclaims
           - events
@@ -247,28 +233,17 @@ spec:
           - update
           - watch
         - apiGroups:
-          - apps
-          resourceNames:
-          - ibm-ingress-nginx-operator
+          - batch
           resources:
-          - deployments/finalizers
+          - jobs
           verbs:
-          - update
-        - apiGroups:
-          - ""
-          resources:
-          - pods
-          verbs:
-          - get
-        - apiGroups:
-          - ""
-          resources:
-          - serviceaccounts
-          verbs:
-          - get
           - create
           - delete
+          - get
           - list
+          - patch
+          - update
+          - watch
         - apiGroups:
           - route.openshift.io
           resources:
@@ -278,6 +253,7 @@ spec:
           - delete
           - get
           - list
+          - patch
         - apiGroups:
           - route.openshift.io
           resources:
@@ -293,13 +269,6 @@ spec:
           - list
           - watch
         - apiGroups:
-          - certmanager.k8s.io
-          resources:
-          - certificates
-          verbs:
-          - create
-          - get
-        - apiGroups:
           - monitoring.coreos.com
           resources:
           - servicemonitors
@@ -308,16 +277,6 @@ spec:
           - delete
           - get
         - apiGroups:
-          - rbac.authorization.k8s.io
-          resources:
-          - roles
-          - rolebindings
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-        - apiGroups:
           - operator.ibm.com
           resources:
           - nginxingresses
@@ -325,10 +284,24 @@ spec:
           - nginxingresses/status
           verbs:
           - '*'
+        - apiGroups:
+          - apps
+          resourceNames:
+          - ibm-ingress-nginx-operator
+          resources:
+          - deployments/finalizers
+          verbs:
+          - update
+        - apiGroups:
+          - ""
+          resources:
+          - nodes
+          verbs:
+          - get
+          - list
+          - watch
         serviceAccountName: ibm-ingress-nginx-operator
       deployments:
-          # Replacm this with the built image name
-          # Replacm this with the built image name
       - name: ibm-ingress-nginx-operator
         spec:
           replicas: 1

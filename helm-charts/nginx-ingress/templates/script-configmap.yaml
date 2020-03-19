@@ -1,0 +1,48 @@
+# Licensed Materials - Property of IBM
+# 5737-E67
+# @ Copyright IBM Corporation 2016, 2020 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.ingress.name }}-script
+  labels:
+    app: {{ .Values.ingress.name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    component: {{ .Values.ingress.name }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ .Release.Name }}
+    helm.sh/chart: {{ .Chart.Name }}
+data:
+  route.sh: |
+    #/bin/bash
+
+    # NAME="cp-proxy"
+    # NAMESPACE="ibm-common-services"
+    # INGRESS_OPERATOR_NAMESPACE="openshift-ingress-operator"
+
+    echo "Getting config of ingresscontroller which manages OCP route."
+    appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+    if [ $? -ne 0 ]; then
+        echo "Failed to get OCP ingress operator config."
+        exit 1
+    fi
+
+    HOST="${NAME}.$appDomain"
+    cp /opt/ingress-nginx/config/cp-proxy-route.yaml /opt/ingress-nginx/data/
+
+    echo "Creating route ${NAME} to have correct host: ${HOST}."
+    sed -i 's/host: cp-proxy.apps.ibm.com/host: "'$HOST'"/g' /opt/ingress-nginx/data/cp-proxy-route.yaml
+    kubectl -n ${NAMESPACE} apply -f /opt/ingress-nginx/data/cp-proxy-route.yaml
+    if [ $? -ne 0 ]; then
+        echo "Failed to create route ${NAME}."
+        exit 1
+    fi
+
+    echo "Successfully created route ${NAME}."
+    kubectl -n ${NAMESPACE} get route ${NAME}

@@ -33,6 +33,7 @@ supplementalGroups:
 volumes:
 - configMap
 - secret
+- emptyDir
 seccompProfiles:
 - docker/default
 users:

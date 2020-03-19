@@ -5,6 +5,11 @@
 
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+
+# Whether to enable FIPS
+fips_enabled: false
+
+# Config related with ingress nginx controller
 ingress:
   name: nginx-ingress-controller
   replicaCount: 1
@@ -12,7 +17,7 @@ ingress:
   hostPort: false
   httpPort: 80
   httpsPort: 443
-  routeHost: cp-proxy.example.ocp.com
+  routeHost: cp-proxy.apps.ibm.com
   imageRegistry: quay.io/opencloudio
   image:
     repository: nginx-ingress-controller
@@ -22,19 +27,18 @@ ingress:
     requests:
       cpu: 50m
       memory: 256Mi
-
   config:
     disable-access-log: 'true'
     keep-alive-requests: '10000'
     upstream-keepalive-connections: '64'
     server-tokens: 'false'
     ssl-ciphers: 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256'
-
   extraArgs: {}
   annotations: {}
   nodeSelector: {}
   tolerations: []
 
+# Config related with default http backend
 defaultBackend:
   name: default-http-backend
   replicaCount: 1
@@ -47,10 +51,10 @@ defaultBackend:
     requests:
       cpu: 20m
       memory: 64Mi
-
   nodeSelector: {}
   tolerations: []
 
+# The init image used to configure some system setting
 init:
   imageRegistry: quay.io/opencloudio
   image:
@@ -58,4 +62,9 @@ init:
     tag: 1.0.0-build.2
     pullPolicy: IfNotPresent
 
-fips_enabled: false
+# The kubectl image used to patch route resource
+kubectl:
+  imageRegistry: quay.io/opencloudio
+  image:
+    repository: kubectl
+    tag: v1.15.9
