@@ -15,5 +15,24 @@
 
 FROM quay.io/operator-framework/helm-operator-s390x:master
 
+ARG VCS_REF
+ARG VCS_URL
+
+LABEL org.label-schema.vendor="IBM" \
+    org.label-schema.name="ibm-ingress-nignx-operator" \
+    org.label-schema.description="IBM Ingress Nignx Operator" \
+    org.label-schema.vcs-ref=$VCS_REF \
+    org.label-schema.vcs-url=$VCS_URL \
+    org.label-schema.license="Licensed Materials - Property of IBM" \
+    org.label-schema.schema-version="1.0" \
+    name="ibm-ingress-nginx-operator" \
+    vendor="IBM" \
+    description="IBM Ingress Nignx Operator" \
+    summary="IBM Ingress Nignx Operator"
+
+# Copy licenses
+RUN mkdir /licenses
+COPY LICENSE /licenses
+
 COPY watches.yaml ${HOME}/watches.yaml
 COPY helm-charts/ ${HOME}/helm-charts/
