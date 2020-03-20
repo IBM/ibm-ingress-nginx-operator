@@ -36,6 +36,9 @@ data:
     HOST="${NAME}.$appDomain"
     cp /opt/ingress-nginx/config/cp-proxy-route.yaml /opt/ingress-nginx/data/
 
+    echo "Trying to delete the route ${NAME} first."
+    kubectl -n ${NAMESPACE} delete -f /opt/ingress-nginx/data/cp-proxy-route.yaml
+
     echo "Creating route ${NAME} to have correct host: ${HOST}."
     sed -i 's/host: cp-proxy.apps.ibm.com/host: "'$HOST'"/g' /opt/ingress-nginx/data/cp-proxy-route.yaml
     kubectl -n ${NAMESPACE} apply -f /opt/ingress-nginx/data/cp-proxy-route.yaml
