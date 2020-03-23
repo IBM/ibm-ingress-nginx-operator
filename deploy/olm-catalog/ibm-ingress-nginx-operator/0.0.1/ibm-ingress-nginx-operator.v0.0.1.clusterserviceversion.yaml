@@ -25,6 +25,10 @@ metadata:
                 "requests": {
                   "cpu": "20m",
                   "memory": "64Mi"
+                },
+                "limits": {
+                  "cpu": "20m",
+                  "memory": "64Mi"
                 }
               },
               "tolerations": []
@@ -55,6 +59,10 @@ metadata:
               "resources": {
                 "requests": {
                   "cpu": "50m",
+                  "memory": "150Mi"
+                },
+                "limits": {
+                  "cpu": "200m",
                   "memory": "256Mi"
                 }
               },

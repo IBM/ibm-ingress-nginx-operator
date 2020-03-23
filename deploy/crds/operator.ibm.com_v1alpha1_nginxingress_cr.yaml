@@ -19,7 +19,10 @@ spec:
     resources:
       requests:
         cpu: 50m
-        memory: 256Mi 
+        memory: 150Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
     config:
       disable-access-log: 'true'
       keep-alive-requests: '10000'
@@ -39,6 +42,9 @@ spec:
       pullPolicy: IfNotPresent
     resources:
       requests:
+        cpu: 20m
+        memory: 64Mi
+      limits:
         cpu: 20m
         memory: 64Mi
     nodeSelector: {}
