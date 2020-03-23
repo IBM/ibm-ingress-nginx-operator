@@ -26,6 +26,9 @@ ingress:
   resources:
     requests:
       cpu: 50m
+      memory: 150Mi
+    limits:
+      cpu: 200m
       memory: 256Mi
   config:
     disable-access-log: 'true'
@@ -49,6 +52,9 @@ defaultBackend:
     pullPolicy: IfNotPresent
   resources:
     requests:
+      cpu: 20m
+      memory: 64Mi
+    limits:
       cpu: 20m
       memory: 64Mi
   nodeSelector: {}
