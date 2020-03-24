@@ -31,8 +31,10 @@ LABEL org.label-schema.vendor="IBM" \
     summary="IBM Ingress Nignx Operator"
 
 # Copy licenses
+USER root
 RUN mkdir /licenses
 COPY LICENSE /licenses
 
+USER helm
 COPY watches.yaml ${HOME}/watches.yaml
 COPY helm-charts/ ${HOME}/helm-charts/
