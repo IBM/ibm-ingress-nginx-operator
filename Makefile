@@ -97,20 +97,20 @@ fmt: format-go format-python
 # check section
 ############################################################
 
-check: lint
+check:
 
 # All available linters: lint-dockerfiles lint-scripts lint-yaml lint-copyright-banner lint-go lint-python lint-helm lint-markdown
 # Default value will run all linters, override these make target with your requirements:
 #    eg: lint: lint-go lint-yaml
 # The MARKDOWN_LINT_WHITELIST variable can be set with comma separated urls you want to whitelist
-lint: lint-all
+lint: 
 
 ############################################################
 # test section
 ############################################################
 
 test:
-	@go test ${TESTARGS} ./...
+#	@go test ${TESTARGS} ./...
 
 ############################################################
 # coverage section
@@ -123,7 +123,7 @@ coverage:
 # build section
 ############################################################
 
-build: build-amd64 build-ppc64le build-s390x
+build: image build-amd64 build-ppc64le build-s390x
 
 build-amd64:
 	@echo "Building the ${IMAGE_NAME} amd64 binary..."
