@@ -22,7 +22,7 @@ spec:
       serviceAccountName: ibm-ingress-nginx-operator
       containers:
         - name: ibm-ingress-nginx-operator
-          image: quay.io/opencloudio/ibm-ingress-nginx-operator
+          image: quay.io/opencloudio/ibm-ingress-nginx-operator:1.1.0
           imagePullPolicy: Always
           resources:
             limits:
