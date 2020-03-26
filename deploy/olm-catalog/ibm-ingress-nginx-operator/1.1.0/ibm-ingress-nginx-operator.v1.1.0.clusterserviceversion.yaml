@@ -27,8 +27,8 @@ metadata:
                   "memory": "64Mi"
                 },
                 "limits": {
-                  "cpu": "20m",
-                  "memory": "64Mi"
+                  "cpu": "50m",
+                  "memory": "128Mi"
                 }
               },
               "tolerations": []
@@ -88,7 +88,7 @@ metadata:
         }
       ]
     capabilities: Basic Install
-  name: ibm-ingress-nginx-operator.v0.0.1
+  name: ibm-ingress-nginx-operator.v1.1.0
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -321,6 +321,13 @@ spec:
             metadata:
               labels:
                 name: ibm-ingress-nginx-operator
+                app.kubernetes.io/managed-by: ""
+                app.kubernetes.io/name: "ibm-ingress-nginx-operator"
+              annotations:
+                productName: "IBM Cloud Platform Common Services"
+                productID: "068a62892a1e4db39641342e592daa25"
+                productVersion: "3.3.0"
+                productMetric: "FREE"                
             spec:
               containers:
               - env:
@@ -334,7 +341,7 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
-                image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
+                image: quay.io/opencloudio/ibm-ingress-nginx-operator:1.1.0
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
                 resources: {}
@@ -349,8 +356,8 @@ spec:
     type: MultiNamespace
   - supported: true
     type: AllNamespaces
-  maturity: alpha
+  maturity: stable
   provider:
     name: IBM
-  replaces: ibm-ingress-nginx-operator.v0.0.0
-  version: 0.0.1
+  replaces: ibm-ingress-nginx-operator.v1.0.0
+  version: 1.1.0
