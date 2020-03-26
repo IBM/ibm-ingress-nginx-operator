@@ -1,0 +1,10 @@
+scorecard:
+  bundle: deploy/olm-catalog/ibm-ingress-nginx-operator
+  plugins:
+    - basic:
+        cr-manifest:
+          - "deploy/crds/operator.ibm.com_v1alpha1_nginxingress_cr.yaml"
+    - olm:
+        cr-manifest:
+          - "deploy/crds/operator.ibm.com_v1alpha1_nginxingress_cr.yaml"
+        csv-path: "deploy/olm-catalog/ibm-ingress-nginx-operator/1.1.0/ibm-ingress-nginx-operator.v1.1.0.clusterserviceversion.yaml"
