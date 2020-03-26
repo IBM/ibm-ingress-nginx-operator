@@ -25,10 +25,6 @@ metadata:
                 "requests": {
                   "cpu": "20m",
                   "memory": "64Mi"
-                },
-                "limits": {
-                  "cpu": "20m",
-                  "memory": "64Mi"
                 }
               },
               "tolerations": []
@@ -59,10 +55,6 @@ metadata:
               "resources": {
                 "requests": {
                   "cpu": "50m",
-                  "memory": "150Mi"
-                },
-                "limits": {
-                  "cpu": "200m",
                   "memory": "256Mi"
                 }
               },
@@ -76,18 +68,18 @@ metadata:
                 "repository": "icp-initcontainer",
                 "tag": "1.0.0-build.2"
               }
-            },
-            "kubectl": {
-              "imageRegistry": "quay.io/opencloudio",
-              "image": {
-                "repository": "kubectl",
-                "tag": "v1.15.9"
-              }
             }
           }
         }
       ]
     capabilities: Basic Install
+    categories: Developer Tools
+    containerImage: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
+    createdAt: "2020-02-14T17:16:16Z"
+    certified: "false"
+    repository: https://github.com/IBM/ibm-ingress-nginx-operator.git
+    description: The ingress nginx operator provides a simple  Kubernetes CRD-Based API to manage the lifecycle of nginx ingress.
+    support: IBM
   name: ibm-ingress-nginx-operator.v0.0.1
   namespace: placeholder
 spec:
@@ -110,13 +102,25 @@ spec:
       - kind: Configmap
         name: ibm-ingress-nginx-operator
         version: v1
+      - kind: secrets
+        name: ibm-ingress-nginx-operator
+        version: v1
+      - kind: pods
+        name: ibm-ingress-nginx-operator
+        version: v1
+      - kind: nginxingresses
+        name: ibm-ingress-nginx-operator
+        version: v1alpha1
+      - kind: replicasets
+        name: ibm-ingress-nginx-operator
+        version: v1
       specDescriptors:
       - description: Image of Ingress nginx controller
         displayName: Image of Ingress nginx controller
         path: spec.ingress.image
-      - description: Image of Default http backend
-        displayName: Image of Default http backend
-        path: spec.defaultBackend.image
+      - description: Default http backend
+        displayName: Default http backend
+        path: defaultBackend
       - description: OCP route host of Ingress nginx controller
         displayName: Route Host of Ingress nginx controller
         path: spec.ingress.routeHost
@@ -125,9 +129,22 @@ spec:
         path: spec.ingress.replicaCount
       - description: Whether to enable FIPS encryption
         displayName: Enable FIPS encryption
-        path: spec.fips_enabled
+        path: fips_enabled
+      - description: Ingress
+        displayName: Ingress
+        path: ingress
+      - description: init
+        displayName: init
+        path: init
+      statusDescriptors:
+      - description: Ingress nginx controller
+        displayName: Ingress nginx controller
+        path: conditions
   description: Ibm Ingress Nginx Operator
   displayName: Ibm Ingress Nginx Operator
+  icon:
+  - base64data: 
+    mediatype: image/png
   install:
     spec:
       clusterPermissions:
@@ -137,14 +154,10 @@ spec:
           resources:
           - clusterroles
           - clusterrolebindings
-          - roles
-          - rolebindings
           verbs:
           - create
           - delete
           - get
-          - list
-          - watch
         - apiGroups:
           - security.openshift.io
           resources:
@@ -153,8 +166,12 @@ spec:
           - create
           - delete
           - get
+        - apiGroups:
+          - security.openshift.io
+          resources:
+          - securitycontextconstraints
+          verbs:
           - use
-          - patch
         - apiGroups:
           - certmanager.k8s.io
           resources:
@@ -162,12 +179,39 @@ spec:
           verbs:
           - use
         - apiGroups:
-          - certmanager.k8s.io
+            - ""
           resources:
-          - certificates
+            - endpoints
+            - nodes
+            - pods
+            - secrets
           verbs:
-          - create
-          - get
+            - list
+            - watch
+        - apiGroups:
+            - ""
+          resources:
+            - configmaps
+          verbs:
+            - create
+            - get
+            - list
+            - update
+            - watch
+        - apiGroups:
+            - ""
+          resources:
+            - nodes
+          verbs:
+            - get
+        - apiGroups:
+            - ""
+          resources:
+            - services
+          verbs:
+            - get
+            - list
+            - watch
         - apiGroups:
             - ""
           resources:
@@ -191,14 +235,9 @@ spec:
             - ingresses/status
           verbs:
             - update
-        - apiGroups:
-            - "operator.openshift.io"
-          resources:
-            - ingresscontrollers
-          verbs:
-            - get
-            - list
-            - watch
+        serviceAccountName: ibm-ingress-nginx-operator
+      permissions:
+      - rules:
         - apiGroups:
           - ""
           resources:
@@ -211,7 +250,6 @@ spec:
           - pods
           - services
           - services/finalizers
-          - serviceaccounts
           - endpoints
           - persistentvolumeclaims
           - events
@@ -241,17 +279,28 @@ spec:
           - update
           - watch
         - apiGroups:
-          - batch
+          - apps
+          resourceNames:
+          - ibm-ingress-nginx-operator
           resources:
-          - jobs
+          - deployments/finalizers
           verbs:
+          - update
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          verbs:
+          - get
+        - apiGroups:
+          - ""
+          resources:
+          - serviceaccounts
+          verbs:
+          - get
           - create
           - delete
-          - get
           - list
-          - patch
-          - update
-          - watch
         - apiGroups:
           - route.openshift.io
           resources:
@@ -261,7 +310,6 @@ spec:
           - delete
           - get
           - list
-          - patch
         - apiGroups:
           - route.openshift.io
           resources:
@@ -277,6 +325,13 @@ spec:
           - list
           - watch
         - apiGroups:
+          - certmanager.k8s.io
+          resources:
+          - certificates
+          verbs:
+          - create
+          - get
+        - apiGroups:
           - monitoring.coreos.com
           resources:
           - servicemonitors
@@ -285,6 +340,16 @@ spec:
           - delete
           - get
         - apiGroups:
+          - rbac.authorization.k8s.io
+          resources:
+          - roles
+          - rolebindings
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+        - apiGroups:
           - operator.ibm.com
           resources:
           - nginxingresses
@@ -292,24 +357,10 @@ spec:
           - nginxingresses/status
           verbs:
           - '*'
-        - apiGroups:
-          - apps
-          resourceNames:
-          - ibm-ingress-nginx-operator
-          resources:
-          - deployments/finalizers
-          verbs:
-          - update
-        - apiGroups:
-          - ""
-          resources:
-          - nodes
-          verbs:
-          - get
-          - list
-          - watch
         serviceAccountName: ibm-ingress-nginx-operator
       deployments:
+          # Replacm this with the built image name
+          # Replacm this with the built image name
       - name: ibm-ingress-nginx-operator
         spec:
           replicas: 1
@@ -350,7 +401,13 @@ spec:
   - supported: true
     type: AllNamespaces
   maturity: alpha
+  links:
+  - name: IBM MongoDB Operator Project
+    url: https://github.com/IBM/ibm-ingress-nginx-operator
+  maintainers:
+  - email: supports@ibm.com
+    name: IBM Support
   provider:
     name: IBM
-  replaces: ibm-ingress-nginx-operator.v0.0.0
+#  replaces: ibm-ingress-nginx-operator.v0.0.0
   version: 0.0.1
