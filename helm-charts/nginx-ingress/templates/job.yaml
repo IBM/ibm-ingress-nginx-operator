@@ -54,12 +54,7 @@ spec:
           - name: INGRESS_OPERATOR_NAMESPACE
             value: "openshift-ingress-operator"
         resources:
-          requests:
-            memory: "32Mi"
-            cpu: "50m"
-          limits:
-            memory: "128Mi"
-            cpu: "200m"
+{{ toYaml .Values.kubectl.resources | indent 10 }}
         securityContext:
           privileged: false
           readOnlyRootFilesystem: true
