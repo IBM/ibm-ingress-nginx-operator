@@ -56,6 +56,13 @@ spec:
       tag: 1.0.0-build.2
       pullPolicy: IfNotPresent
   kubectl:
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "50m"
+      limits:
+        memory: "256Mi"
+        cpu: "200m"
     imageRegistry: quay.io/opencloudio
     image:
       repository: kubectl
