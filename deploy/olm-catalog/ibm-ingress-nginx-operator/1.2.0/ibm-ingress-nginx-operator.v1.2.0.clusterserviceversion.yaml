@@ -1,0 +1,372 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: |-
+      [
+        {
+          "apiVersion": "operator.ibm.com/v1alpha1",
+          "kind": "NginxIngress",
+          "metadata": {
+            "name": "default"
+          },
+          "spec": {
+            "defaultBackend": {
+              "imageRegistry": "quay.io/opencloudio",
+              "image": {
+                "pullPolicy": "IfNotPresent",
+                "repository": "default-http-backend",
+                "tag": "1.5.3"
+              },
+              "name": "default-http-backend",
+              "nodeSelector": {},
+              "replicaCount": 1,
+              "resources": {
+                "requests": {
+                  "cpu": "20m",
+                  "memory": "64Mi"
+                },
+                "limits": {
+                  "cpu": "50m",
+                  "memory": "128Mi"
+                }
+              },
+              "tolerations": []
+            },
+            "fips_enabled": false,
+            "ingress": {
+              "annotations": {},
+              "config": {
+                "disable-access-log": "true",
+                "keep-alive-requests": "10000",
+                "server-tokens": "false",
+                "upstream-keepalive-connections": "64"
+              },
+              "extraArgs": {},
+              "hostNetwork": false,
+              "hostPort": false,
+              "httpPort": 80,
+              "httpsPort": 443,
+              "imageRegistry": "quay.io/opencloudio",
+              "image": {
+                "pullPolicy": "IfNotPresent",
+                "repository": "nginx-ingress-controller",
+                "tag": "0.23.4"
+              },
+              "name": "nginx-ingress-controller",
+              "nodeSelector": {},
+              "replicaCount": 1,
+              "resources": {
+                "requests": {
+                  "cpu": "50m",
+                  "memory": "150Mi"
+                },
+                "limits": {
+                  "cpu": "200m",
+                  "memory": "256Mi"
+                }
+              },
+              "routeHost": "cp-proxy.apps.ibm.com",
+              "tolerations": []
+            },
+            "init": {
+              "imageRegistry": "quay.io/opencloudio",
+              "image": {
+                "pullPolicy": "IfNotPresent",
+                "repository": "icp-initcontainer",
+                "tag": "1.0.0-build.2"
+              }
+            },
+            "kubectl": {
+              "resources": {
+                "requests": {
+                  "cpu": "50m",
+                  "memory": "64Mi"
+                },
+                "limits": {
+                  "cpu": "200m",
+                  "memory": "256Mi"
+                }
+              },
+              "imageRegistry": "quay.io/opencloudio",
+              "image": {
+                "repository": "kubectl",
+                "tag": "v1.15.9"
+              }
+            }
+          }
+        }
+      ]
+    capabilities: Basic Install
+  name: ibm-ingress-nginx-operator.v1.2.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - description: NginxIngress is the Schema for the nginxingress API
+      group: operator.ibm.com
+      kind: NginxIngress
+      name: nginxingresses.operator.ibm.com
+      version: v1alpha1
+      displayName: IBM Ingress nginx Operator
+      resources:
+      - kind: Deployment
+        name: ibm-ingress-nginx-operator
+        version: v1
+      - kind: Service
+        name: ibm-ingress-nginx-operator
+        version: v1
+      - kind: Configmap
+        name: ibm-ingress-nginx-operator
+        version: v1
+      specDescriptors:
+      - description: Image of Ingress nginx controller
+        displayName: Image of Ingress nginx controller
+        path: spec.ingress.image
+      - description: Image of Default http backend
+        displayName: Image of Default http backend
+        path: spec.defaultBackend.image
+      - description: OCP route host of Ingress nginx controller
+        displayName: Route Host of Ingress nginx controller
+        path: spec.ingress.routeHost
+      - description: Number of instance for Ingress nginx controller
+        displayName: Replica of Ingress nginx controller
+        path: spec.ingress.replicaCount
+      - description: Whether to enable FIPS encryption
+        displayName: Enable FIPS encryption
+        path: spec.fips_enabled
+  description: Ibm Ingress Nginx Operator
+  displayName: Ibm Ingress Nginx Operator
+  install:
+    spec:
+      clusterPermissions:
+      - rules:
+        - apiGroups:
+          - rbac.authorization.k8s.io
+          resources:
+          - clusterroles
+          - clusterrolebindings
+          - roles
+          - rolebindings
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - watch
+        - apiGroups:
+          - security.openshift.io
+          resources:
+          - securitycontextconstraints
+          verbs:
+          - create
+          - delete
+          - get
+          - use
+          - patch
+        - apiGroups:
+          - certmanager.k8s.io
+          resources:
+          - clusterissuers
+          verbs:
+          - use
+        - apiGroups:
+          - certmanager.k8s.io
+          resources:
+          - certificates
+          verbs:
+          - create
+          - get
+        - apiGroups:
+            - ""
+          resources:
+            - events
+          verbs:
+            - create
+            - patch
+        - apiGroups:
+            - "extensions"
+            - "networking.k8s.io"
+          resources:
+            - ingresses
+          verbs:
+            - get
+            - list
+            - watch
+        - apiGroups:
+            - "extensions"
+            - "networking.k8s.io"
+          resources:
+            - ingresses/status
+          verbs:
+            - update
+        - apiGroups:
+            - "operator.openshift.io"
+          resources:
+            - ingresscontrollers
+          verbs:
+            - get
+            - list
+            - watch
+        - apiGroups:
+          - ""
+          resources:
+          - namespaces
+          verbs:
+          - get
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          - services
+          - services/finalizers
+          - serviceaccounts
+          - endpoints
+          - persistentvolumeclaims
+          - events
+          - configmaps
+          - secrets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - apps
+          resources:
+          - deployments
+          - daemonsets
+          - replicasets
+          - statefulsets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - batch
+          resources:
+          - jobs
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - route.openshift.io
+          resources:
+          - routes
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+        - apiGroups:
+          - route.openshift.io
+          resources:
+          - routes/custom-host
+          verbs:
+          - create
+        - apiGroups:
+          - route.openshift.io
+          resources:
+          - routes/status
+          verbs:
+          - get
+          - list
+          - watch
+        - apiGroups:
+          - monitoring.coreos.com
+          resources:
+          - servicemonitors
+          verbs:
+          - create
+          - delete
+          - get
+        - apiGroups:
+          - operator.ibm.com
+          resources:
+          - nginxingresses
+          - nginxingresses/finalizers
+          - nginxingresses/status
+          verbs:
+          - '*'
+        - apiGroups:
+          - apps
+          resourceNames:
+          - ibm-ingress-nginx-operator
+          resources:
+          - deployments/finalizers
+          verbs:
+          - update
+        - apiGroups:
+          - ""
+          resources:
+          - nodes
+          verbs:
+          - get
+          - list
+          - watch
+        serviceAccountName: ibm-ingress-nginx-operator
+      deployments:
+      - name: ibm-ingress-nginx-operator
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              name: ibm-ingress-nginx-operator
+          strategy: {}
+          template:
+            metadata:
+              labels:
+                name: ibm-ingress-nginx-operator
+                app.kubernetes.io/managed-by: ""
+                app.kubernetes.io/name: "ibm-ingress-nginx-operator"
+              annotations:
+                productName: "IBM Cloud Platform Common Services"
+                productID: "068a62892a1e4db39641342e592daa25"
+                productVersion: "3.3.0"
+                productMetric: "FREE"                
+            spec:
+              containers:
+              - env:
+                - name: WATCH_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.annotations['olm.targetNamespaces']
+                - name: POD_NAME
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.name
+                - name: OPERATOR_NAME
+                  value: ibm-ingress-nginx-operator
+                image: quay.io/opencloudio/ibm-ingress-nginx-operator:1.1.0
+                imagePullPolicy: Always
+                name: ibm-ingress-nginx-operator
+                resources: {}
+              serviceAccountName: ibm-ingress-nginx-operator
+    strategy: deployment
+  installModes:
+  - supported: true
+    type: OwnNamespace
+  - supported: true
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  maturity: stable
+  provider:
+    name: IBM
+  version: 1.2.0
