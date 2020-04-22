@@ -351,7 +351,7 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
-                image: quay.io/opencloudio/ibm-ingress-nginx-operator:1.1.0
+                image: quay.io/opencloudio/ibm-ingress-nginx-operator:1.2.0
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
                 resources: {}
@@ -369,4 +369,5 @@ spec:
   maturity: stable
   provider:
     name: IBM
+  replaces: ibm-ingress-nginx-operator.v1.1.0
   version: 1.2.0
