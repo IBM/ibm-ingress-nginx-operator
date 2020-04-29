@@ -63,7 +63,7 @@ metadata:
                 },
                 "limits": {
                   "cpu": "200m",
-                  "memory": "256Mi"
+                  "memory": "512Mi"
                 }
               },
               "routeHost": "cp-proxy.apps.ibm.com",
