@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator:v0.15.2
+FROM quay.io/operator-framework/helm-operator:v0.17.0
 
 ARG VCS_REF
 ARG VCS_URL
