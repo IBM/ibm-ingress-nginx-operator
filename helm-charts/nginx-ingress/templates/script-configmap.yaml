@@ -49,3 +49,28 @@ data:
 
     echo "Successfully created route ${NAME}."
     kubectl -n ${NAMESPACE} get route ${NAME}
+
+    kubectl -n ${NAMESPACE} get configmap ibmcloud-cluster-info
+    if [ $? -ne 0 ]; then
+        echo "Configmap ibmcloud-cluster-info not found, create it"
+        kubectl -n ${NAMESPACE} create configmap ibmcloud-cluster-info --from-literal=proxy_address=${HOST}
+        if [ $? -ne 0 ]; then
+            echo "Failed to create configmap ibmcloud-cluster-info"
+            exit 1
+        fi
+        kubectl -n ${NAMESPACE} label configmap ibmcloud-cluster-info app=management-ingress \
+        app.kubernetes.io/component=management-ingress \
+        app.kubernetes.io/instance=icp-management-ingress \
+        app.kubernetes.io/managed-by="" \
+        app.kubernetes.io/name=management-ingress \
+        component=management-ingress
+    else
+        #patch configmap
+        echo "Patching configmap ibmcloud-cluster-info with proxy_address" ${HOST}
+        kubectl -n ${NAMESPACE} patch configmap ibmcloud-cluster-info -p '{"data":{"proxy_address": "'${HOST}'"}}'
+        if [ $? -ne 0 ]; then
+            echo "Failed to patch configmap ibmcloud-cluster-info"
+            exit 1
+        fi
+    fi
+
