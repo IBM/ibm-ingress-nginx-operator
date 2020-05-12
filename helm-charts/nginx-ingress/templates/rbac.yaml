@@ -24,7 +24,6 @@ rules:
   - apiGroups:
       - ""
     resources:
-      - configmaps
       - endpoints
       - nodes
       - pods
@@ -38,6 +37,14 @@ rules:
       - nodes
     verbs:
       - get
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - list
+      - watch
+      - patch
   - apiGroups:
       - ""
     resources:
@@ -90,7 +97,6 @@ rules:
   - apiGroups:
       - ""
     resources:
-      - configmaps
       - pods
       - secrets
       - namespaces
@@ -114,7 +120,9 @@ rules:
     resources:
       - configmaps
     verbs:
+      - get
       - create
+      - patch
   - apiGroups:
       - ""
     resources:
