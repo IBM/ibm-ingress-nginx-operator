@@ -148,23 +148,29 @@ endif
 
 build-image-amd64:
 	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:$(VERSION) -f build/Dockerfile .
+	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:latest -f build/Dockerfile .
 
 build-image-ppc64le:
 	@docker run --rm --privileged multiarch/qemu-user-static:register --reset
 	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-ppc64le:$(VERSION) -f build/Dockerfile.ppc64le .
+	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-ppc64le:latest -f build/Dockerfile.ppc64le .
 
 build-image-s390x:
 	@docker run --rm --privileged multiarch/qemu-user-static:register --reset
 	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-s390x:$(VERSION) -f build/Dockerfile.s390x .
+	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-s390x:latest -f build/Dockerfile.s390x .
 
 push-image-amd64: $(CONFIG_DOCKER_TARGET) build-image-amd64
 	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:$(VERSION)
+	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:latest
 
 push-image-ppc64le: $(CONFIG_DOCKER_TARGET) build-image-ppc64le
 	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-ppc64le:$(VERSION)
+	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-ppc64le:latest
 
 push-image-s390x: $(CONFIG_DOCKER_TARGET) build-image-s390x
 	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-s390x:$(VERSION)
+	 @docker push $(IMAGE_REPO)/$(IMAGE_NAME)-s390x:latest
 
 ############################################################
 # multiarch-image section
