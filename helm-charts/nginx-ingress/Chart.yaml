@@ -1,4 +1,4 @@
-appVersion: 3.5.0
+appVersion: 3.6.0
 description: Ingress Controller for IBM Cloud Private
 home: https://github.com/kubernetes/ingress
 icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
