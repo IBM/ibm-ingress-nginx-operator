@@ -154,6 +154,8 @@ spec:
           - delete
           - get
           - list
+          - patch
+          - update
           - watch
         - apiGroups:
           - security.openshift.io
@@ -165,6 +167,7 @@ spec:
           - get
           - use
           - patch
+          - update
         - apiGroups:
           - certmanager.k8s.io
           resources:

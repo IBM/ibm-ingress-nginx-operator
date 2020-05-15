@@ -15,6 +15,8 @@ rules:
   - delete
   - get
   - list
+  - patch
+  - update
   - watch
 - apiGroups:
   - security.openshift.io
@@ -26,6 +28,7 @@ rules:
   - get
   - use
   - patch
+  - update
 - apiGroups:
   - certmanager.k8s.io
   resources:
