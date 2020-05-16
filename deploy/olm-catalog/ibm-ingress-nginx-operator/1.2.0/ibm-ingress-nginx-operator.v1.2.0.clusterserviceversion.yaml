@@ -2,6 +2,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
   annotations:
+    olm.skipRange: '>=1.1.0 <1.2.0'
     alm-examples: |-
       [
         {
@@ -15,8 +16,8 @@ metadata:
               "imageRegistry": "quay.io/opencloudio",
               "image": {
                 "pullPolicy": "IfNotPresent",
-                "repository": "default-http-backend",
-                "tag": "1.5.4"
+                "repository": "default-http-backend@sha256",
+                "tag": "2a5e3bfe7a771d36ad186e2ab8303ea2fbb854b4a7437e7c3b3f1d8e87d9e286"
               },
               "name": "default-http-backend",
               "nodeSelector": {},
@@ -50,8 +51,8 @@ metadata:
               "imageRegistry": "quay.io/opencloudio",
               "image": {
                 "pullPolicy": "IfNotPresent",
-                "repository": "nginx-ingress-controller",
-                "tag": "0.23.5"
+                "repository": "nginx-ingress-controller@sha256",
+                "tag": "1b9ca6c316f853cef939e5c4ec59c7a01081dd80712961358722a582a1ada842"
               },
               "name": "nginx-ingress-controller",
               "nodeSelector": {},
@@ -73,8 +74,8 @@ metadata:
               "imageRegistry": "quay.io/opencloudio",
               "image": {
                 "pullPolicy": "IfNotPresent",
-                "repository": "icp-initcontainer",
-                "tag": "1.0.0-build.4"
+                "repository": "icp-initcontainer@sha256",
+                "tag": "9aad9fd724ec9308bec711d7738b5f0ae0c37a72ffb19a26dbcf622f1a603e89"
               }
             },
             "kubectl": {
@@ -90,14 +91,21 @@ metadata:
               },
               "imageRegistry": "quay.io/opencloudio",
               "image": {
-                "repository": "kubectl",
-                "tag": "v1.15.9.1"
+                "repository": "kubectl@sha256",
+                "tag": "deeb798aaa12142c95ba37bd90ae99ed112afda1170be321db8b1476c7ac9fdd"
               }
             }
           }
         }
       ]
     capabilities: Basic Install
+    categories: Developer Tools
+    certified: "false"
+    containerImage: quay.io/opencloudio/ibm-ingress-nginx-operator:1.2.0
+    createdAt: "2020-01-14T10:16:16Z"
+    description: Operator for managing deployment of ingress nginx service.
+    repository: https://github.com/IBM/ibm-ingress-nginx-operator.git
+    support: IBM
   name: ibm-ingress-nginx-operator.v1.2.0
   namespace: placeholder
 spec:
@@ -354,7 +362,7 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
-                image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
+                image: quay.io/opencloudio/ibm-ingress-nginx-operator@sha256:a1c49e3c644885102325833d2bef114a9f736aa4addfda77538a17053d2dfec1
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
                 resources: {}
