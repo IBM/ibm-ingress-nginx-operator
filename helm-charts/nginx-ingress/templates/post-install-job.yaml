@@ -1,0 +1,90 @@
+# Licensed Materials - Property of IBM
+# 5737-E67
+# @ Copyright IBM Corporation 2016, 2020 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.ingress.name }}-job
+  labels:
+    app: {{ .Values.ingress.name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    component: {{ .Values.ingress.name }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ .Release.Name }}
+    helm.sh/chart: {{ .Chart.Name }}
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      name: {{ .Values.ingress.name }}-job
+      labels:
+        app: {{ .Values.ingress.name }}
+        chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+        component: {{ .Values.ingress.name }}
+        heritage: {{ .Release.Service }}
+        release: {{ .Release.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        app.kubernetes.io/name: {{ .Release.Name }}
+        helm.sh/chart: {{ .Chart.Name }}
+    spec:
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      serviceAccount: nginx-ingress-serviceaccount
+      containers:
+      - name: post-install-job
+        image: "{{ .Values.kubectl.imageRegistry }}/{{ .Values.kubectl.image.repository }}:{{ .Values.kubectl.image.tag }}"
+        imagePullPolicy: "IfNotPresent"
+        env:
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: NAME
+            value: "cp-proxy"
+          - name: INGRESS_OPERATOR_NAMESPACE
+            value: "openshift-ingress-operator"
+        resources:
+{{ toYaml .Values.kubectl.resources | indent 10 }}
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1000
+          capabilities:
+            drop:
+            - ALL
+        command:
+        - bash
+        - /opt/ingress-nginx/bin/route.sh
+        volumeMounts:
+        - name: script
+          mountPath: /opt/ingress-nginx/bin/
+        - name: data
+          mountPath: /opt/ingress-nginx/data/
+        - name: route
+          mountPath: /opt/ingress-nginx/config/
+      volumes:
+      - name: route
+        configMap:
+          name: {{ .Values.ingress.name }}-route
+      - name: script
+        configMap:
+          name: {{ .Values.ingress.name }}-script
+      - name: data
+        emptyDir: {}
+      restartPolicy: OnFailure

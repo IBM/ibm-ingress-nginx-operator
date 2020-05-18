@@ -18,6 +18,10 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/name: {{ .Release.Name }}
     helm.sh/chart: {{ .Chart.Name }}
+  annotations:
+    "helm.sh/hook": pre-delete
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   template:
     metadata:
@@ -41,7 +45,7 @@ spec:
         runAsUser: 1000
       serviceAccount: nginx-ingress-serviceaccount
       containers:
-      - name: kubectl
+      - name: pre-delete-job
         image: "{{ .Values.kubectl.imageRegistry }}/{{ .Values.kubectl.image.repository }}:{{ .Values.kubectl.image.tag }}"
         imagePullPolicy: "IfNotPresent"
         env:
@@ -66,10 +70,12 @@ spec:
             - ALL
         command:
         - bash
-        - /opt/ingress-nginx/bin/route.sh
+        - /opt/ingress-nginx/delete/delete.sh
         volumeMounts:
         - name: script
           mountPath: /opt/ingress-nginx/bin/
+        - name: delete
+          mountPath: /opt/ingress-nginx/delete/
         - name: data
           mountPath: /opt/ingress-nginx/data/
         - name: route
@@ -78,6 +84,9 @@ spec:
       - name: route
         configMap:
           name: {{ .Values.ingress.name }}-route
+      - name: delete
+        configMap:
+          name: {{ .Values.ingress.name }}-delete
       - name: script
         configMap:
           name: {{ .Values.ingress.name }}-script
