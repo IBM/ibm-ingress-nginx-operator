@@ -19,6 +19,7 @@ ingress:
   httpsPort: 443
   routeHost: cp-proxy.apps.ibm.com
   imageRegistry: quay.io/opencloudio
+  imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:1b9ca6c316f853cef939e5c4ec59c7a01081dd80712961358722a582a1ada842
   image:
     repository: nginx-ingress-controller
     tag: 0.23.5
@@ -46,6 +47,7 @@ defaultBackend:
   name: default-http-backend
   replicaCount: 1
   imageRegistry: quay.io/opencloudio
+  imageDigest: quay.io/opencloudio/default-http-backend@sha256:2a5e3bfe7a771d36ad186e2ab8303ea2fbb854b4a7437e7c3b3f1d8e87d9e286
   image:
     repository: default-http-backend
     tag: 1.5.4
@@ -62,6 +64,7 @@ defaultBackend:
 
 # The init image used to configure some system setting
 init:
+  imageDigest: quay.io/opencloudio/icp-initcontainer@sha256:9aad9fd724ec9308bec711d7738b5f0ae0c37a72ffb19a26dbcf622f1a603e89
   imageRegistry: quay.io/opencloudio
   image:
     repository: icp-initcontainer
@@ -77,6 +80,7 @@ kubectl:
     limits:
       memory: "512Mi"
       cpu: "200m"
+  imageDigest: quay.io/opencloudio/kubectl@sha256:deeb798aaa12142c95ba37bd90ae99ed112afda1170be321db8b1476c7ac9fdd
   imageRegistry: quay.io/opencloudio
   image:
     repository: kubectl

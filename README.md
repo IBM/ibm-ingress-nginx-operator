@@ -86,7 +86,7 @@ Use the following commands to debug the operator:
 #### Check the Cluster Service Version (CSV) installation status
 ```
 # oc get csv
-# oc describe csv ibm-ingress-nginx-operator.v1.2.0
+# oc describe csv ibm-ingress-nginx-operator.v1.2.1
 ```
 
 #### Check the operator status and log

@@ -23,7 +23,7 @@ BUILD_LOCALLY ?= 1
 # IMAGE_REPO, IMAGE_NAME and RELEASE_TAG environment variable.
 IMAGE_REPO ?= quay.io/opencloudio
 IMAGE_NAME ?= ibm-ingress-nginx-operator
-CSV_VERSION ?= 1.2.0
+CSV_VERSION ?= 1.2.1
 
 # Github host to use for checking the source tree;
 # Override this variable ue with your own value if you're working on forked repo.

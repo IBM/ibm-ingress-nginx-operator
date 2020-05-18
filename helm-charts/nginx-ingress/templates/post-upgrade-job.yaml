@@ -7,21 +7,21 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Values.ingress.name }}-job
+  name: nginx-ingress-controller-route-job
   labels:
     app: {{ .Values.ingress.name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     component: {{ .Values.ingress.name }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/instance: nginx-ingress-controller
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/name: {{ .Release.Name }}
     helm.sh/chart: {{ .Chart.Name }}
   annotations:
-    "helm.sh/hook": post-install
+    "helm.sh/hook": post-install,post-upgrade
     "helm.sh/hook-weight": "-5"
-    "helm.sh/hook-delete-policy": hook-succeeded
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   template:
     metadata:
@@ -32,7 +32,7 @@ spec:
         component: {{ .Values.ingress.name }}
         heritage: {{ .Release.Service }}
         release: {{ .Release.Name }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/instance: nginx-ingress-controller
         app.kubernetes.io/managed-by: {{ .Release.Service }}
         app.kubernetes.io/name: {{ .Release.Name }}
         helm.sh/chart: {{ .Chart.Name }}
@@ -45,8 +45,12 @@ spec:
         runAsUser: 1000
       serviceAccount: nginx-ingress-serviceaccount
       containers:
-      - name: post-install-job
+      - name: kubectl
+        {{- if .Values.kubectl.imageDigest }}
+        image: {{ .Values.kubectl.imageDigest }}
+        {{- else }}
         image: "{{ .Values.kubectl.imageRegistry }}/{{ .Values.kubectl.image.repository }}:{{ .Values.kubectl.image.tag }}"
+        {{- end }}
         imagePullPolicy: "IfNotPresent"
         env:
           - name: NAMESPACE

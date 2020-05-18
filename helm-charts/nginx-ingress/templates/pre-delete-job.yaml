@@ -7,21 +7,21 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Values.ingress.name }}-job
+  name: pre-delete-job
   labels:
     app: {{ .Values.ingress.name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     component: {{ .Values.ingress.name }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/instance: nginx-ingress-controller
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/name: {{ .Release.Name }}
     helm.sh/chart: {{ .Chart.Name }}
   annotations:
     "helm.sh/hook": pre-delete
     "helm.sh/hook-weight": "-5"
-    "helm.sh/hook-delete-policy": hook-succeeded
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
 spec:
   template:
     metadata:
@@ -32,7 +32,7 @@ spec:
         component: {{ .Values.ingress.name }}
         heritage: {{ .Release.Service }}
         release: {{ .Release.Name }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/instance: nginx-ingress-controller
         app.kubernetes.io/managed-by: {{ .Release.Service }}
         app.kubernetes.io/name: {{ .Release.Name }}
         helm.sh/chart: {{ .Chart.Name }}
@@ -46,7 +46,11 @@ spec:
       serviceAccount: nginx-ingress-serviceaccount
       containers:
       - name: pre-delete-job
+        {{- if .Values.kubectl.imageDigest }}
+        image: {{ .Values.kubectl.imageDigest }}
+        {{- else }}
         image: "{{ .Values.kubectl.imageRegistry }}/{{ .Values.kubectl.image.repository }}:{{ .Values.kubectl.image.tag }}"
+        {{- end }}
         imagePullPolicy: "IfNotPresent"
         env:
           - name: NAMESPACE
@@ -55,8 +59,6 @@ spec:
                 fieldPath: metadata.namespace
           - name: NAME
             value: "cp-proxy"
-          - name: INGRESS_OPERATOR_NAMESPACE
-            value: "openshift-ingress-operator"
         resources:
 {{ toYaml .Values.kubectl.resources | indent 10 }}
         securityContext:
@@ -68,28 +70,5 @@ spec:
           capabilities:
             drop:
             - ALL
-        command:
-        - bash
-        - /opt/ingress-nginx/delete/delete.sh
-        volumeMounts:
-        - name: script
-          mountPath: /opt/ingress-nginx/bin/
-        - name: delete
-          mountPath: /opt/ingress-nginx/delete/
-        - name: data
-          mountPath: /opt/ingress-nginx/data/
-        - name: route
-          mountPath: /opt/ingress-nginx/config/
-      volumes:
-      - name: route
-        configMap:
-          name: {{ .Values.ingress.name }}-route
-      - name: delete
-        configMap:
-          name: {{ .Values.ingress.name }}-delete
-      - name: script
-        configMap:
-          name: {{ .Values.ingress.name }}-script
-      - name: data
-        emptyDir: {}
+        command: ["bash", "-c", "kubectl -n $(NAMESPACE) delete route $(NAME) --ignore-not-found=true"]
       restartPolicy: OnFailure
