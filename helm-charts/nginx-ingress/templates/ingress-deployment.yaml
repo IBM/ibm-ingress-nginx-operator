@@ -15,7 +15,7 @@ metadata:
     heritage: {{ .Release.Service }}
     k8s-app: nginx-ingress-controller
     release: {{ .Release.Name }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/instance: nginx-ingress-controller
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/name: {{ .Release.Name }}
     helm.sh/chart: {{ .Chart.Name }}
@@ -81,7 +81,11 @@ spec:
             port: 10254
           timeoutSeconds: 1
         name: nginx-ingress
+        {{- if .Values.ingress.imageDigest }}
+        image: {{ .Values.ingress.imageDigest }}
+        {{- else }}
         image: "{{ .Values.defaultBackend.imageRegistry }}/{{ .Values.ingress.image.repository }}:{{ .Values.ingress.image.tag }}"
+        {{- end }}
         securityContext:
           allowPrivilegeEscalation: true
           capabilities:
