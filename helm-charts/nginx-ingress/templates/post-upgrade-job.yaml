@@ -61,6 +61,8 @@ spec:
             value: "cp-proxy"
           - name: INGRESS_OPERATOR_NAMESPACE
             value: "openshift-ingress-operator"
+          - name: INGRESS_ROUTE_HOST
+            value: {{ .Values.ingerss.routeHost }}
         resources:
 {{ toYaml .Values.kubectl.resources | indent 10 }}
         securityContext:
