@@ -29,7 +29,11 @@ data:
         exit 1
     fi
 
-    HOST="${NAME}.$appDomain"
+    if [ -z "$INGRERSS_ROUTE_HOST" ]; then
+        HOST="${NAME}.$appDomain"
+    else
+        HOST="${INGRERSS_ROUTE_HOST}"
+    fi
     cp /opt/ingress-nginx/config/cp-proxy-route.yaml /opt/ingress-nginx/data/
 
     echo "Trying to delete the route ${NAME} first."
