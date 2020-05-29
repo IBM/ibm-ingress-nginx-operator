@@ -67,7 +67,7 @@ metadata:
                   "memory": "512Mi"
                 }
               },
-              "routeHost": "cp-proxy.apps.ibm.com",
+              "routeHost": "",
               "tolerations": []
             },
             "init": {

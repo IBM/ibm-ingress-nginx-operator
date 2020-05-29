@@ -29,10 +29,10 @@ data:
         exit 1
     fi
 
-    if [ -z "$INGRERSS_ROUTE_HOST" ]; then
+    if [ -z "$INGRESS_ROUTE_HOST" -o "E$INGRESS_ROUTE_HOST" == "Ecp-proxy.apps.ibm.com" ]; then
         HOST="${NAME}.$appDomain"
     else
-        HOST="${INGRERSS_ROUTE_HOST}"
+        HOST="${INGRESS_ROUTE_HOST}"
     fi
     cp /opt/ingress-nginx/config/cp-proxy-route.yaml /opt/ingress-nginx/data/
 
