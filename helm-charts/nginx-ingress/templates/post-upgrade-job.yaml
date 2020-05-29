@@ -62,7 +62,7 @@ spec:
           - name: INGRESS_OPERATOR_NAMESPACE
             value: "openshift-ingress-operator"
           - name: INGRESS_ROUTE_HOST
-            value: {{ .Values.ingerss.routeHost }}
+            value: {{ .Values.ingress.routeHost }}
         resources:
 {{ toYaml .Values.kubectl.resources | indent 10 }}
         securityContext:
