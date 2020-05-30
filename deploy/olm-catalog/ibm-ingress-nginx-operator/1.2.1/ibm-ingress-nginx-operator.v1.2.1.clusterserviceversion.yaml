@@ -101,7 +101,7 @@ metadata:
     capabilities: Basic Install
     categories: Developer Tools
     certified: "false"
-    containerImage: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
+    containerImage: quay.io/opencloudio/ibm-ingress-nginx-operator:1.2.1
     createdAt: "2020-05-18T10:16:16Z"
     description: Operator for managing deployment of ingress nginx service.
     repository: https://github.com/IBM/ibm-ingress-nginx-operator.git
@@ -370,7 +370,7 @@ spec:
                   value: quay.io/opencloudio/icp-initcontainer@sha256:9aad9fd724ec9308bec711d7738b5f0ae0c37a72ffb19a26dbcf622f1a603e89
                 - name: KUBECTL_IMAGE_DIGEST
                   value: quay.io/opencloudio/kubectl@sha256:deeb798aaa12142c95ba37bd90ae99ed112afda1170be321db8b1476c7ac9fdd
-                image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
+                image: quay.io/opencloudio/ibm-ingress-nginx-operator@sha256:64318fb6e506054260b8e49e6a6cada4892f06abdea54bc1a83622ee120fa124
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
                 resources: {}
