@@ -53,7 +53,7 @@ data:
     kubectl -n ${NAMESPACE} get configmap ibmcloud-cluster-info
     if [ $? -ne 0 ]; then
         echo "Configmap ibmcloud-cluster-info not found, create it"
-        kubectl -n ${NAMESPACE} create configmap ibmcloud-cluster-info --from-literal=proxy_address=${HOST}
+        kubectl -n ${NAMESPACE} create configmap ibmcloud-cluster-info --from-literal=proxy_address=${HOST} --from-literal=proxy_ingress_https_port=443 --from-literal=proxy_ingress_http_port=80
         if [ $? -ne 0 ]; then
             echo "Failed to create configmap ibmcloud-cluster-info"
             exit 1
@@ -67,7 +67,7 @@ data:
     else
         #patch configmap
         echo "Patching configmap ibmcloud-cluster-info with proxy_address" ${HOST}
-        kubectl -n ${NAMESPACE} patch configmap ibmcloud-cluster-info -p '{"data":{"proxy_address": "'${HOST}'"}}'
+        kubectl -n ${NAMESPACE} patch configmap ibmcloud-cluster-info -p '{"data":{"proxy_address": "'${HOST}'", "proxy_ingress_https_port": "443", "proxy_ingress_http_port": "80"}}'
         if [ $? -ne 0 ]; then
             echo "Failed to patch configmap ibmcloud-cluster-info"
             exit 1
