@@ -370,7 +370,7 @@ spec:
                   value: quay.io/opencloudio/icp-initcontainer@sha256:9aad9fd724ec9308bec711d7738b5f0ae0c37a72ffb19a26dbcf622f1a603e89
                 - name: KUBECTL_IMAGE_DIGEST
                   value: quay.io/opencloudio/kubectl@sha256:deeb798aaa12142c95ba37bd90ae99ed112afda1170be321db8b1476c7ac9fdd
-                image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
+                image: quay.io/opencloudio/ibm-ingress-nginx-operator@sha256:0c7f6328bd492b784f262f937d6df54765c64bdaab9aead1b1fcacad25983f1b
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
                 resources: {}
