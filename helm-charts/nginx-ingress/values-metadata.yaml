@@ -132,6 +132,7 @@ defaultBackend:
       label: "default-http-backend setting"
       description: "default-http-backend setting, default name default-http-backend"
   replicaCount: 1
+  replicas: 1
   image:
     repository:
       __metadata:

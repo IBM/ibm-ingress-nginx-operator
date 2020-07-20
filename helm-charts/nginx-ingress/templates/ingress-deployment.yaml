@@ -28,7 +28,11 @@ spec:
       component: {{ .Values.ingress.name }}
       k8s-app: nginx-ingress-controller
       release: {{ .Release.Name }}
+  {{- if .Values.defaultBackend.replicas }}
+  replicas: {{ .Values.defaultBackend.replicas }}
+  {{- else }}
   replicas: {{ .Values.defaultBackend.replicaCount }}
+  {{- end }}
   template:
     metadata:
       annotations:

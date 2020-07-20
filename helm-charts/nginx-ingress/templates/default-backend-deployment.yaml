@@ -26,7 +26,11 @@ spec:
       heritage: "{{ .Release.Service }}"
       component: "{{ .Values.defaultBackend.name }}"
       release: {{ .Release.Name }}
+  {{- if .Values.defaultBackend.replicas }}
+  replicas: {{ .Values.defaultBackend.replicas }}
+  {{- else }}
   replicas: {{ .Values.defaultBackend.replicaCount }}
+  {{- end }}
   template:
     metadata:
       annotations:
