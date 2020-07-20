@@ -13,6 +13,7 @@ fips_enabled: false
 ingress:
   name: nginx-ingress-controller
   replicaCount: 1
+  replicas: 1
   hostNetwork: false
   hostPort: false
   httpPort: 80
@@ -46,6 +47,7 @@ ingress:
 defaultBackend:
   name: default-http-backend
   replicaCount: 1
+  replicas: 1
   imageRegistry: quay.io/opencloudio
   imageDigest: quay.io/opencloudio/default-http-backend@sha256:2a5e3bfe7a771d36ad186e2ab8303ea2fbb854b4a7437e7c3b3f1d8e87d9e286
   image:

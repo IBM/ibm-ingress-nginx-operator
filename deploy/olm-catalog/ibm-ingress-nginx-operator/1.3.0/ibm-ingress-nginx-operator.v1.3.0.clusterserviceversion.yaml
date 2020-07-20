@@ -22,6 +22,7 @@ metadata:
               "name": "default-http-backend",
               "nodeSelector": {},
               "replicaCount": 1,
+              "replicas": 1,
               "resources": {
                 "requests": {
                   "cpu": "20m",
@@ -57,6 +58,7 @@ metadata:
               "name": "nginx-ingress-controller",
               "nodeSelector": {},
               "replicaCount": 1,
+              "replicas": 1,
               "resources": {
                 "requests": {
                   "cpu": "50m",
@@ -141,6 +143,9 @@ spec:
       - description: Number of instance for Ingress nginx controller
         displayName: Replica of Ingress nginx controller
         path: spec.ingress.replicaCount
+      - description: Number of instance for Ingress nginx controller
+        displayName: Replicas of Ingress nginx controller
+        path: spec.ingress.replicas
       - description: Whether to enable FIPS encryption
         displayName: Enable FIPS encryption
         path: spec.fips_enabled

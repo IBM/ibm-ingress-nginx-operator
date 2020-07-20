@@ -6,6 +6,7 @@ spec:
   ingress:
     name: nginx-ingress-controller
     replicaCount: 1
+    replicas: 1
     hostNetwork: false
     hostPort: false
     httpPort: 80
@@ -35,6 +36,7 @@ spec:
   defaultBackend:
     name: default-http-backend
     replicaCount: 1
+    replicas: 1
     image:
       imageRegistry: quay.io/opencloudio
       repository: default-http-backend
