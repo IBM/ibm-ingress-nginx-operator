@@ -52,7 +52,7 @@ metadata:
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "nginx-ingress-controller@sha256",
-                "tag": "c971fb492689906ae3509e551eabd160eba762b143157791e9fc0ad0775ab2f1"
+                "tag": "a58b51919d27190f52460b6d381ad0b60eb59d719d261e79b0f11c3f5bab98f9"
               },
               "name": "nginx-ingress-controller",
               "nodeSelector": {},
@@ -363,7 +363,7 @@ spec:
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
                 - name: INGRESS_IMAGE_DIGEST
-                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:c971fb492689906ae3509e551eabd160eba762b143157791e9fc0ad0775ab2f1
+                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:a58b51919d27190f52460b6d381ad0b60eb59d719d261e79b0f11c3f5bab98f9
                 - name: DEFAULT_BACKEND_IMAGE_DIGEST
                   value: quay.io/opencloudio/default-http-backend@sha256:2a5e3bfe7a771d36ad186e2ab8303ea2fbb854b4a7437e7c3b3f1d8e87d9e286
                 - name: INIT_IMAGE_DIGEST
