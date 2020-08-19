@@ -207,7 +207,7 @@ spec:
           - get
           - list
           - watch
-        serviceAccountName: ibm-ingress-nginx-operator
+        serviceAccountName: ibm-ingress-nginx-serviceaccount
       permissions:
       - rules:
         - apiGroups:
@@ -341,7 +341,7 @@ spec:
           - deployments/finalizers
           verbs:
           - update
-        serviceAccountName: ibm-ingress-nginx-operator
+        serviceAccountName: ibm-ingress-nginx-serviceaccount
       deployments:
       - name: ibm-ingress-nginx-operator
         spec:
@@ -384,7 +384,7 @@ spec:
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
                 resources: {}
-              serviceAccountName: ibm-ingress-nginx-operator
+              serviceAccountName: ibm-ingress-nginx-serviceaccount
     strategy: deployment
   installModes:
   - supported: true

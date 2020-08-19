@@ -8,5 +8,5 @@ roleRef:
   name: ibm-ingress-nginx-operator
 subjects:
 - kind: ServiceAccount
-  name: ibm-ingress-nginx-operator
+  name: ibm-ingress-nginx-serviceaccount
   namespace: REPLACE_NAMESPACE

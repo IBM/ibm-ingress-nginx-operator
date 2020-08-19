@@ -18,7 +18,7 @@ spec:
         productID: "068a62892a1e4db39641342e592daa25"
         productMetric: "FREE"
     spec:
-      serviceAccountName: ibm-ingress-nginx-operator
+      serviceAccountName: ibm-ingress-nginx-serviceaccount
       containers:
         - name: ibm-ingress-nginx-operator
           image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
