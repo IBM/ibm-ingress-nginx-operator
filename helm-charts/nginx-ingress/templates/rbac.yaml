@@ -12,28 +12,28 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
 rules:
-    - apiGroups:
-      - ""
-      resources:
-        - namespaces
-      verbs:
-        - get
-    - apiGroups:
-      - ""
-      resources:
-        - nodes
-      verbs:
-        - get
-        - list
-        - watch
   - apiGroups:
-      - "operator.openshift.io"
+    - ""
     resources:
-      - ingresscontrollers
+    - namespaces
     verbs:
-      - get
-      - list
-      - watch
+    - get
+  - apiGroups:
+    - ""
+    resources:
+    - nodes
+    verbs:
+    - get
+    - list
+    - watch
+  - apiGroups:
+    - "operator.openshift.io"
+    resources:
+    - ingresscontrollers
+    verbs:
+    - get
+    - list
+    - watch
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -45,62 +45,62 @@ metadata:
     app.kubernetes.io/part-of: ingress-nginx
 rules:
   - apiGroups:
-      - ""
+    - ""
     resources:
-      - endpoints
-      - pods
-      - secrets
-      - services
+    - endpoints
+    - pods
+    - secrets
+    - services
     verbs:
-      - get
-      - list
-      - watch
+    - get
+    - list
+    - watch
   - apiGroups:
-      - ""
+    - ""
     resources:
-      - configmaps
+    - configmaps
     resourceNames:
-      # Defaults to "<election-id>-<ingress-class>"
-      # Here: "<ingress-controller-leader>-<nginx>"
-      # This has to be adapted if you change either parameter
-      # when launching the nginx-ingress-controller.
-      - "ingress-controller-leader-nginx"
+    # Defaults to "<election-id>-<ingress-class>"
+    # Here: "<ingress-controller-leader>-<nginx>"
+    # This has to be adapted if you change either parameter
+    # when launching the nginx-ingress-controller.
+    - "ingress-controller-leader-nginx"
     verbs:
-      - get
-      - update
+    - get
+    - update
   - apiGroups:
-      - ""
+    - ""
     resources:
-      - configmaps
+    - configmaps
     verbs:
-      - create
-      - get
-      - list
-      - watch
-      - patch
+    - create
+    - get
+    - list
+    - watch
+    - patch
   - apiGroups:
-      - ""
+    - ""
     resources:
-      - events
+    - events
     verbs:
-      - create
-      - patch
+    - create
+    - patch
   - apiGroups:
-      - "extensions"
-      - "networking.k8s.io"
+    - "extensions"
+    - "networking.k8s.io"
     resources:
-      - ingresses
+    - ingresses
     verbs:
-      - get
-      - list
-      - watch
+    - get
+    - list
+    - watch
   - apiGroups:
-      - "extensions"
-      - "networking.k8s.io"
+    - "extensions"
+    - "networking.k8s.io"
     resources:
-      - ingresses/status
+    - ingresses/status
     verbs:
-      - update
+    - update
   - apiGroups:
     - route.openshift.io
     resources:
