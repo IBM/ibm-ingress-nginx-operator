@@ -70,6 +70,8 @@ rules:
     - "networking.k8s.io"
     resources:
     - ingresses/status
+    verbs:
+    - update
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -100,8 +102,6 @@ rules:
     verbs:
     - create
     - patch
-    verbs:
-    - update
   - apiGroups:
     - route.openshift.io
     resources:
