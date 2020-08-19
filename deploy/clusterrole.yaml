@@ -56,6 +56,43 @@ rules:
   - get
   - list
   - watch
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - services
+  - services/finalizers
+  - serviceaccounts
+  - endpoints
+  - persistentvolumeclaims
+  - events
+  - configmaps
+  - secrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - "extensions"
+  - "networking.k8s.io"
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - "extensions"
+  - "networking.k8s.io"
+  resources:
+  - ingresses/status
+  verbs:
+  - update
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -82,42 +119,6 @@ rules:
   verbs:
   - create
   - get
-- apiGroups:
-  - "extensions"
-  - "networking.k8s.io"
-  resources:
-  - ingresses
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - "extensions"
-  - "networking.k8s.io"
-  resources:
-  - ingresses/status
-  verbs:
-  - update
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  - services
-  - services/finalizers
-  - serviceaccounts
-  - endpoints
-  - persistentvolumeclaims
-  - events
-  - configmaps
-  - secrets
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
 - apiGroups:
   - apps
   resources:
