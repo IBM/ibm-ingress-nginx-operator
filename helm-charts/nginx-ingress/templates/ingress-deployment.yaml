@@ -74,7 +74,7 @@ spec:
                   - {{ .Values.ingress.name }}
               topologyKey: kubernetes.io/hostname
       hostNetwork: {{ .Values.ingress.hostNetwork }}
-      serviceAccount: ibm-ingress-nginx-serviceaccount
+      serviceAccount: nginx-ingress-serviceaccount
       containers:
       - livenessProbe:
           initialDelaySeconds: 10

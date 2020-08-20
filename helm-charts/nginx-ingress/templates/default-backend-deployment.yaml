@@ -65,7 +65,7 @@ spec:
                   values:
                   - {{ .Values.defaultBackend.name }}
               topologyKey: kubernetes.io/hostname
-      serviceAccount: ibm-ingress-nginx-serviceaccount
+      serviceAccount: nginx-ingress-serviceaccount
       containers:
         - name: default-http-backend
           {{- if .Values.defaultBackend.imageDigest }}
