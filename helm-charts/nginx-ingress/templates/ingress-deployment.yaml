@@ -100,6 +100,7 @@ spec:
           - "--default-backend-service=$(POD_NAMESPACE)/{{ .Values.defaultBackend.name }}"
           - "--configmap=$(POD_NAMESPACE)/{{ .Values.ingress.name }}"
           - "--annotations-prefix=ingress.kubernetes.io"
+          - "--watch-namespace={{.Values.ingress.watchNamespace}}"
         {{- range $key, $value := .Values.ingress.extraArgs }}
           {{- if $value }}
           - --{{ $key }}={{ $value }}

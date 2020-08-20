@@ -207,42 +207,6 @@ spec:
           - get
           - list
           - watch
-        - apiGroups:
-          - ""
-          resources:
-          - pods
-          - services
-          - services/finalizers
-          - serviceaccounts
-          - endpoints
-          - persistentvolumeclaims
-          - events
-          - configmaps
-          - secrets
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
-        - apiGroups:
-          - "extensions"
-          - "networking.k8s.io"
-          resources:
-          - ingresses
-          verbs:
-          - get
-          - list
-          - watch
-        - apiGroups:
-          - "extensions"
-          - "networking.k8s.io"
-          resources:
-          - ingresses/status
-          verbs:
-          - update
         serviceAccountName: ibm-ingress-nginx-serviceaccount
       permissions:
       - rules:
@@ -266,6 +230,26 @@ spec:
           verbs:
           - create
           - get
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          - services
+          - services/finalizers
+          - serviceaccounts
+          - endpoints
+          - persistentvolumeclaims
+          - events
+          - configmaps
+          - secrets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
         - apiGroups:
           - apps
           resources:
@@ -293,6 +277,22 @@ spec:
           - patch
           - update
           - watch
+        - apiGroups:
+          - "extensions"
+          - "networking.k8s.io"
+          resources:
+          - ingresses
+          verbs:
+          - get
+          - list
+          - watch
+        - apiGroups:
+          - "extensions"
+          - "networking.k8s.io"
+          resources:
+          - ingresses/status
+          verbs:
+          - update
         - apiGroups:
           - route.openshift.io
           resources:

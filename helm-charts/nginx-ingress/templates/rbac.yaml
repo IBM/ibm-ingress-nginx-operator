@@ -34,7 +34,16 @@ rules:
     - get
     - list
     - watch
-  # nginx ingress controller need to list watch condigmap endpoint secret and service in all namespaces
+
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: nginx-ingress-role
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+rules:
   - apiGroups:
     - ""
     resources:
@@ -57,32 +66,6 @@ rules:
     - watch
     - patch
   - apiGroups:
-    - "extensions"
-    - "networking.k8s.io"
-    resources:
-    - ingresses
-    verbs:
-    - get
-    - list
-    - watch
-  - apiGroups:
-    - "extensions"
-    - "networking.k8s.io"
-    resources:
-    - ingresses/status
-    verbs:
-    - update
-
----
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: Role
-metadata:
-  name: nginx-ingress-role
-  labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-rules:
-  - apiGroups:
     - ""
     resources:
     - configmaps
@@ -102,6 +85,22 @@ rules:
     verbs:
     - create
     - patch
+  - apiGroups:
+    - "extensions"
+    - "networking.k8s.io"
+    resources:
+    - ingresses
+    verbs:
+    - get
+    - list
+    - watch
+  - apiGroups:
+    - "extensions"
+    - "networking.k8s.io"
+    resources:
+    - ingresses/status
+    verbs:
+    - update
   - apiGroups:
     - route.openshift.io
     resources:
