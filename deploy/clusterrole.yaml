@@ -56,43 +56,6 @@ rules:
   - get
   - list
   - watch
-# add the following rules to cluster permission because operand need these permissions for all namespaces mode
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  - services
-  - services/finalizers
-  - serviceaccounts
-  - endpoints
-  - persistentvolumeclaims
-  - events
-  - configmaps
-  - secrets
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - "extensions"
-  - "networking.k8s.io"
-  resources:
-  - ingresses
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - "extensions"
-  - "networking.k8s.io"
-  resources:
-  - ingresses/status
-  verbs:
-  - update
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -121,6 +84,26 @@ rules:
   - create
   - get
 - apiGroups:
+  - ""
+  resources:
+  - pods
+  - services
+  - services/finalizers
+  - serviceaccounts
+  - endpoints
+  - persistentvolumeclaims
+  - events
+  - configmaps
+  - secrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
   - apps
   resources:
   - deployments
@@ -147,6 +130,22 @@ rules:
   - patch
   - update
   - watch
+- apiGroups:
+  - "extensions"
+  - "networking.k8s.io"
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - "extensions"
+  - "networking.k8s.io"
+  resources:
+  - ingresses/status
+  verbs:
+  - update
 - apiGroups:
   - route.openshift.io
   resources:
