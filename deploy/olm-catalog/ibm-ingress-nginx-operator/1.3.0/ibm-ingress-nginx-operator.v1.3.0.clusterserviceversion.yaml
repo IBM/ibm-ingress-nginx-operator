@@ -368,7 +368,7 @@ spec:
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
                 - name: INGRESS_IMAGE_DIGEST
-                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:d8bb7173e041f2dcae52cdc2fedaa640788d8f3008add924133f4bb7b864b362 
+                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:7818d00fda114c2753082100c708415c8b7e0ae5c7793401885a5c17c1bf3664 
                 - name: DEFAULT_BACKEND_IMAGE_DIGEST
                   value: quay.io/opencloudio/default-http-backend@sha256:1f79d79eb77637b964a3d3b6c25659ce083e2c86da6825c6aceafcff17d6b23e
                 - name: KUBECTL_IMAGE_DIGEST
