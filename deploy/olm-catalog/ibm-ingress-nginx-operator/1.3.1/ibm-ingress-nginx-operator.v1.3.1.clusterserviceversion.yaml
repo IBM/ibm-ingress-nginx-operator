@@ -183,6 +183,7 @@ spec:
           - create
           - delete
           - get
+          - list
           - use
           - patch
           - update
