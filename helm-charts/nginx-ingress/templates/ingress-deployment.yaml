@@ -28,10 +28,10 @@ spec:
       component: {{ .Values.ingress.name }}
       k8s-app: nginx-ingress-controller
       release: {{ .Release.Name }}
-  {{- if .Values.defaultBackend.replicas }}
-  replicas: {{ .Values.defaultBackend.replicas }}
+  {{- if .Values.ingress.replicas }}
+  replicas: {{ .Values.ingress.replicas }}
   {{- else }}
-  replicas: {{ .Values.defaultBackend.replicaCount }}
+  replicas: {{ .Values.ingress.replicaCount }}
   {{- end }}
   template:
     metadata:
@@ -87,7 +87,7 @@ spec:
         {{- if .Values.ingress.imageDigest }}
         image: {{ .Values.ingress.imageDigest }}
         {{- else }}
-        image: "{{ .Values.defaultBackend.imageRegistry }}/{{ .Values.ingress.image.repository }}:{{ .Values.ingress.image.tag }}"
+        image: "{{ .Values.ingress.imageRegistry }}/{{ .Values.ingress.image.repository }}:{{ .Values.ingress.image.tag }}"
         {{- end }}
         securityContext:
           allowPrivilegeEscalation: true
