@@ -5,10 +5,10 @@
 The IBM Ingress Nginx Repo operator provides a Helm chart repository for storing and supplying IBM and local charts.
 
 The Ingress Nginx Operator installs the following components:
-- The Ingress Nginx service (controller). 
-- A deployment to running Ingress Nginx controller pod. 
-- A service default-http-backend. 
-- A configmap nginx-ingress-controller.
+- The Ingress Nginx service (controller)
+- A deployment to running Ingress Nginx controller pod
+- A service default-http-backend
+- A configmap nginx-ingress-controller
 - A service account nginx-ingress-serviceaccount
 - A route cp-proxy
 
@@ -21,7 +21,7 @@ Red Hat OpenShift Container Platform 4.3 or newer installed on one of the follow
 - Linux x86_64
 - Linux on Power (ppc64le)
 - Linux on IBM Z and LinuxONE
-  
+
 ## Operator versions
 
 - 1.1.0
@@ -63,23 +63,27 @@ If, as a developer, you are looking to build and test this operator to try out a
 Use the following quick start commands for building and testing the operator:
 
 #### Cloning the operator repository
-```
+
+```bash
 # git clone https://github.com/IBM/ibm-ingress-nginx-operator.git
 # cd ibm-ingress-nginx-operator
 ```
 
 #### Building the operator image
-```
+
+```bash
 # make build
 ```
 
-#### Installing the operator 
-```
+#### Installing the operator
+
+```bash
 # make install
 ```
 
 #### Uninstalling the operator
-```
+
+```bash
 # make uninstall
 ```
 
@@ -88,13 +92,15 @@ Use the following quick start commands for building and testing the operator:
 Use the following commands to debug the operator:
 
 #### Check the Cluster Service Version (CSV) installation status
-```
+
+```bash
 # oc get csv
 # oc describe csv ibm-ingress-nginx-operator.v1.3.1
 ```
 
 #### Check the operator status and log
-```
+
+```bash
 # oc describe po -l name=ibm-ingress-nginx-operator
 # oc logs -f $(oc get po -l name=ibm-ingress-nginx-operator -o name)
 ```

@@ -13,10 +13,16 @@
 # limitations under the License.
 #
 
+# Default goal
+.DEFAULT_GOAL:=help
+
 # Specify whether this repo is build locally or not, default values is '1';
 # If set to 1, then you need to also set 'DOCKER_USERNAME' and 'DOCKER_PASSWORD'
 # environment variables before build the repo.
 BUILD_LOCALLY ?= 1
+
+# The namespace that the test operator will be deployed in
+NAMESPACE ?= ibm-common-services
 
 # Image URL to use all building/pushing image targets;
 # Use your own docker registry and image name for dev/test by overridding the
@@ -29,20 +35,9 @@ CSV_VERSION ?= 1.3.1
 # Override this variable ue with your own value if you're working on forked repo.
 GIT_HOST ?= github.com
 
-PWD := $(shell pwd)
-BASE_DIR := $(shell basename $(PWD))
+VERSION ?= $(shell date +v%Y%m%d)-$(shell git describe --match=$(git rev-parse --short=8 HEAD) --tags --always --dirty)
+RELEASE_VERSION ?= $(shell cat ./helm-charts/nginx-ingress/Chart.yaml | grep "^version" | awk '{print $2}')
 
-# Keep an existing GOPATH, make a private one if it is undefined
-GOPATH_DEFAULT := $(PWD)/.go
-export GOPATH ?= $(GOPATH_DEFAULT)
-GOBIN_DEFAULT := $(GOPATH)/bin
-export GOBIN ?= $(GOBIN_DEFAULT)
-TESTARGS_DEFAULT := "-v"
-export TESTARGS ?= $(TESTARGS_DEFAULT)
-DEST := $(GOPATH)/src/$(GIT_HOST)/$(BASE_DIR)
-#VERSION ?= $(shell git describe --exact-match 2> /dev/null || \
-                 git describe --match=$(git rev-parse --short=8 HEAD) --always --dirty --abbrev=8)
-VERSION ?= $(shell cat ./helm-charts/nginx-ingress/Chart.yaml | grep "^version" | awk '{print $$2}')
 LOCAL_OS := $(shell uname)
 ifeq ($(LOCAL_OS),Linux)
     TARGET_OS ?= linux
@@ -66,24 +61,9 @@ else
     $(error "This system's ARCH $(ARCH) isn't recognized/supported")
 endif
 
-all: fmt check test coverage build images
-
-# ifeq (,$(wildcard go.mod))
-# ifneq ("$(realpath $(DEST))", "$(realpath $(PWD))")
-#    $(error Please run 'make' from $(DEST). Current directory is $(PWD))
-# endif
-# endif
+all: fmt check test coverage build-image images
 
 include common/Makefile.common.mk
-
-############################################################
-# work section
-############################################################
-$(GOBIN):
-	@echo "create gobin"
-	@mkdir -p $(GOBIN)
-
-work: $(GOBIN)
 
 ############################################################
 # format section
@@ -110,8 +90,18 @@ lint: lint-all
 # test section
 ############################################################
 
-test:
-	@go test ${TESTARGS} ./...
+test: test-e2e ## Run integration e2e tests with different options
+
+test-e2e: 
+	@echo ... Running the same e2e tests with different args ...
+	@echo ... Running locally ...
+	- operator-sdk test local ./test/e2e --verbose --up-local --namespace=${NAMESPACE}
+	# @echo ... Running with the param ...
+	# - operator-sdk test local ./test/e2e --namespace=${NAMESPACE}
+
+scorecard: ## Run scorecard test
+	@echo ... Running the scorecard test
+	- operator-sdk scorecard --verbose
 
 ############################################################
 # coverage section
@@ -121,71 +111,42 @@ coverage:
 	@common/scripts/codecov.sh ${BUILD_LOCALLY}
 
 ############################################################
-# build section
+# build image section
 ############################################################
 
-build: build-amd64 build-ppc64le build-s390x
+build: build-image
 
-build-amd64:
-	@echo "Building the ${IMAGE_NAME} amd64 binary..."
-	@GOARCH=amd64 common/scripts/gobuild.sh build/_output/bin/$(IMAGE_NAME) ./cmd
-
-build-ppc64le:
-	@echo "Building the ${IMAGE_NAME} ppc64le binary..."
-	@GOARCH=ppc64le common/scripts/gobuild.sh build/_output/bin/$(IMAGE_NAME)-ppc64le ./cmd
-
-build-s390x:
-	@echo "Building the ${IMAGE_NAME} s390x binary..."
-	@GOARCH=s390x common/scripts/gobuild.sh build/_output/bin/$(IMAGE_NAME)-s390x ./cmd
+build-image:
+	@echo "Building the $(IMAGE_NAME) image for $(LOCAL_ARCH)..."
+	@operator-sdk build --image-build-args "-f build/Dockerfile-$(LOCAL_ARCH)" $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:$(VERSION)
 
 ############################################################
-# image section
+# push image section
 ############################################################
 
 ifeq ($(BUILD_LOCALLY),0)
     export CONFIG_DOCKER_TARGET = config-docker
 endif
 
-build-image-amd64:
-	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:$(VERSION) -f build/Dockerfile .
-	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:latest -f build/Dockerfile .
-
-build-image-ppc64le:
-	@docker run --rm --privileged multiarch/qemu-user-static:register --reset
-	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-ppc64le:$(VERSION) -f build/Dockerfile.ppc64le .
-	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-ppc64le:latest -f build/Dockerfile.ppc64le .
-
-build-image-s390x:
-	@docker run --rm --privileged multiarch/qemu-user-static:register --reset
-	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-s390x:$(VERSION) -f build/Dockerfile.s390x .
-	@docker build -t $(IMAGE_REPO)/$(IMAGE_NAME)-s390x:latest -f build/Dockerfile.s390x .
-
-push-image-amd64: $(CONFIG_DOCKER_TARGET) build-image-amd64
+push-image: $(CONFIG_DOCKER_TARGET) build-image
+	@echo "Pushing the $(IMAGE_NAME) image for $(LOCAL_ARCH)..."
 	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:$(VERSION)
-	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:latest
-
-push-image-ppc64le: $(CONFIG_DOCKER_TARGET) build-image-ppc64le
-	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-ppc64le:$(VERSION)
-	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-ppc64le:latest
-
-push-image-s390x: $(CONFIG_DOCKER_TARGET) build-image-s390x
-	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-s390x:$(VERSION)
-	 @docker push $(IMAGE_REPO)/$(IMAGE_NAME)-s390x:latest
 
 ############################################################
 # multiarch-image section
 ############################################################
 
-images: push-image-amd64 push-image-ppc64le push-image-s390x multiarch-image
+images: build-image push-image multiarch-image
 
 multiarch-image:
-	@curl -L -o /tmp/manifest-tool https://github.com/estesp/manifest-tool/releases/download/v1.0.0/manifest-tool-linux-amd64
-	@chmod +x /tmp/manifest-tool
-	/tmp/manifest-tool push from-args --platforms linux/amd64,linux/ppc64le,linux/s390x --template $(IMAGE_REPO)/$(IMAGE_NAME)-ARCH:$(VERSION) --target $(IMAGE_REPO)/$(IMAGE_NAME) --ignore-missing
-	/tmp/manifest-tool push from-args --platforms linux/amd64,linux/ppc64le,linux/s390x --template $(IMAGE_REPO)/$(IMAGE_NAME)-ARCH:$(VERSION) --target $(IMAGE_REPO)/$(IMAGE_NAME):$(VERSION) --ignore-missing
-	/tmp/manifest-tool push from-args --platforms linux/amd64,linux/ppc64le,linux/s390x --template $(IMAGE_REPO)/$(IMAGE_NAME)-ARCH:latest --target $(IMAGE_REPO)/$(IMAGE_NAME):latest --ignore-missing
+	@echo "Build multiarch image for $(REGISTRY)/$(IMG):$(RELEASE_VERSION)..."
+	@common/scripts/multiarch_image.sh $(REGISTRY) $(IMG) $(VERSION) $(RELEASE_VERSION)
 
-csv: ## Push CSV package to the catalog
+############################################################
+# push CSV section
+############################################################
+
+csv:
 	@RELEASE=${CSV_VERSION} common/scripts/push-csv.sh
 
 ############################################################
@@ -194,4 +155,13 @@ csv: ## Push CSV package to the catalog
 clean:
 	@rm -rf build/_output
 
-.PHONY: all work fmt check coverage lint test build image images multiarch-image clean
+############################################################
+# help section
+############################################################
+help: ## Display this help
+	@echo "Usage:\n  make \033[36m<target>\033[0m"
+	@awk 'BEGIN {FS = ":.*##"}; \
+		/^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2 } \
+		/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
+.PHONY: all fmt check coverage test build-image multiarch-image images clean

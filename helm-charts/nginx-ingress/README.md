@@ -1,7 +1,11 @@
+# Nginx Ingress
+
 ## Introduction
+
 This chart installs NGINX Ingress Controller for IBM Cloud Private in your cluster.
 
 ## Chart Details
+
 This chart:
 * Installs NGINX Ingress Controller.
 * Adds a daemonset to running NGINX Ingress Controller pod on proxy nodes.
@@ -9,16 +13,19 @@ This chart:
 * Adds a configmap nginx-ingress-controller.
 
 ## Prerequisites
+
 * Installing a PodDisruptionBudget
 * Kubernetes v1.11+
 * OpenShift 3.11+
 * Tiller v2.12.3+
 
 ### PodSecurityPolicy Requirements
+
 The predefined PodSecurityPolicy name: [`ibm-privileged-psp`](https://ibm.biz/cpkspec-psp) has been verified for this chart, if your target namespace is bound to this PodSecurityPolicy you can proceed to install the chart.
 
 Custom PodSecurityPolicy definition:
-```
+
+```yaml
 apiVersion: extensions/v1beta1
 kind: PodSecurityPolicy
 metadata:
@@ -57,18 +64,20 @@ spec:
 ```
 
 ### Red Hat OpenShift SecurityContextConstraints Requirements
+
 The predefined SecurityContextConstraints name: [`ibm-privileged-scc`](https://ibm.biz/cpkspec-scc) has been verified for this chart, if your target namespace is bound to this SecurityContextConstraints resource you can proceed to install the chart.
 
 Custom SecurityContextConstraints definition:
-```
+
+```yaml
 apiVersion: security.openshift.io/v1
   kind: SecurityContextConstraints
   metadata:
     annotations:
-      kubernetes.io/description: "This policy grants access to all privileged 
-        host features and allows a pod to run with any 
+      kubernetes.io/description: "This policy grants access to all privileged
+        host features and allows a pod to run with any
         UID and GID and any volume.
-        WARNING:  This policy is the least restrictive and 
+        WARNING:  This policy is the least restrictive and
         should only be used for cluster administration.
         Use with caution."
       cloudpak.ibm.com/version: "1.1.0"
@@ -80,10 +89,10 @@ apiVersion: security.openshift.io/v1
   allowHostPorts: true
   allowPrivilegedContainer: true
   allowPrivilegeEscalation: true
-  allowedCapabilities: 
+  allowedCapabilities:
   - '*'
   allowedFlexVolumes: []
-  allowedUnsafeSysctls: 
+  allowedUnsafeSysctls:
   - '*'
   defaultAddCapabilities: []
   defaultAllowPrivilegeEscalation: true
@@ -109,16 +118,20 @@ apiVersion: security.openshift.io/v1
   volumes:
   - '*'
 ```
+
 ## Resources Required
+
 * cpu: 50m
 * memory: 256Mi
 
 ## Installing the Chart
-```
+
+```bash
 helm install --namespace kube-system --name nginx-ingress nginx-ingress --tls
 ```
 
 ## Configuration
+
 The following table lists the configurable parameters of the `ICP Management Ingress` chart and their default values.
 
 | Parameter                                       | Description                                                    | Default                         |
@@ -158,5 +171,6 @@ The following table lists the configurable parameters of the `ICP Management Ing
 | fips_enabled                                    | enable FIPS mode                                               | false                           |
 
 ## Limitations
+
 * Works on x86, ppc64le and s390x platform.
 * Only users with privileged podsecuritypolicies can install this chart.
