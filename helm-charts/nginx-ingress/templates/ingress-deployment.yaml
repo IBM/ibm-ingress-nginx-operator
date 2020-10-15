@@ -94,8 +94,6 @@ spec:
           capabilities:
             drop:
               - ALL
-          # www-data -> 1000586666
-          runAsUser: 1000586666
         imagePullPolicy: {{ .Values.ingress.image.pullPolicy }}
         args:
           - "/nginx-ingress-controller"
