@@ -139,8 +139,8 @@ push-image: $(CONFIG_DOCKER_TARGET) build-image
 images: build-image push-image multiarch-image
 
 multiarch-image:
-	@echo "Build multiarch image for $(REGISTRY)/$(IMG):$(RELEASE_VERSION)..."
-	@common/scripts/multiarch_image.sh $(REGISTRY) $(IMG) $(VERSION) $(RELEASE_VERSION)
+	@echo "Build multiarch image for $(IMAGE_REPO)/$(IMAGE_NAME):$(RELEASE_VERSION)..."
+	@common/scripts/multiarch_image.sh $(IMAGE_REPO) $(IMAGE_REPO) $(VERSION) $(RELEASE_VERSION)
 
 ############################################################
 # push CSV section
