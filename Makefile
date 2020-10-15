@@ -138,7 +138,7 @@ push-image: $(CONFIG_DOCKER_TARGET) build-image
 
 images: build-image push-image multiarch-image
 
-multiarch-image:
+multiarch-image: $(CONFIG_DOCKER_TARGET)
 	@echo "Build multiarch image for $(IMAGE_REPO)/$(IMAGE_NAME):$(RELEASE_VERSION)..."
 	@common/scripts/multiarch_image.sh $(IMAGE_REPO) $(IMAGE_NAME) $(VERSION) $(RELEASE_VERSION)
 
