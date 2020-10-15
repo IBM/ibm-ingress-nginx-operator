@@ -118,7 +118,7 @@ build: build-image
 
 build-image:
 	@echo "Building the $(IMAGE_NAME) image for $(LOCAL_ARCH)..."
-	@operator-sdk build --image-build-args "-f build/Dockerfile-$(LOCAL_ARCH)" $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:$(VERSION)
+	@operator-sdk build --image-build-args "-f build/Dockerfile-$(LOCAL_ARCH)" $(IMAGE_REPO)/$(IMAGE_NAME)-$(LOCAL_ARCH):$(VERSION)
 
 ############################################################
 # push image section
@@ -130,7 +130,7 @@ endif
 
 push-image: $(CONFIG_DOCKER_TARGET) build-image
 	@echo "Pushing the $(IMAGE_NAME) image for $(LOCAL_ARCH)..."
-	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-amd64:$(VERSION)
+	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-$(LOCAL_ARCH):$(VERSION)
 
 ############################################################
 # multiarch-image section
