@@ -94,10 +94,8 @@ spec:
           capabilities:
             drop:
               - ALL
-            add:
-              - NET_BIND_SERVICE
-          # www-data -> 1000576666
-          runAsUser: 1000576666
+          # www-data -> 1000586666
+          runAsUser: 1000586666
         imagePullPolicy: {{ .Values.ingress.image.pullPolicy }}
         args:
           - "/nginx-ingress-controller"
