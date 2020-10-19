@@ -94,10 +94,6 @@ spec:
           capabilities:
             drop:
               - ALL
-            add:
-              - NET_BIND_SERVICE
-          # www-data -> 33
-          runAsUser: 33
         imagePullPolicy: {{ .Values.ingress.image.pullPolicy }}
         args:
           - "/nginx-ingress-controller"
@@ -118,13 +114,13 @@ spec:
             port: 10254
         ports:
         - name: http
-          containerPort: 80
+          containerPort: 7080
           protocol: TCP
           {{- if .Values.ingress.hostPort }}
           hostPort: {{ .Values.ingress.httpPort }}
           {{- end }}
         - name: https
-          containerPort: 443
+          containerPort: 7443
           protocol: TCP
           {{- if .Values.ingress.hostPort }}
           hostPort: {{ .Values.ingress.httpsPort }}

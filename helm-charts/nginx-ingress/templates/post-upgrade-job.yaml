@@ -42,7 +42,6 @@ spec:
       hostIPC: false
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
       serviceAccount: nginx-ingress-serviceaccount
       containers:
       - name: kubectl
@@ -70,7 +69,6 @@ spec:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
           runAsNonRoot: true
-          runAsUser: 1000
           capabilities:
             drop:
             - ALL

@@ -20,14 +20,14 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 80
+  - port: 7080
     name: http
     protocol: TCP
-    targetPort: 80
-  - port: 443
+    targetPort: 7080
+  - port: 7443
     name: https
     protocol: TCP
-    targetPort: 443
+    targetPort: 7443
   selector:
     app: "{{ .Values.ingress.name }}"
     release: {{ .Release.Name }}
