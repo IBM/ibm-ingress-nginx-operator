@@ -16,8 +16,8 @@ ingress:
   replicas: 1
   hostNetwork: false
   hostPort: false
-  httpPort: 80
-  httpsPort: 443
+  httpPort: 7080
+  httpsPort: 7443
   routeHost: ""
   imageRegistry: quay.io/opencloudio
   imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:1b9ca6c316f853cef939e5c4ec59c7a01081dd80712961358722a582a1ada842
