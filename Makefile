@@ -29,7 +29,7 @@ NAMESPACE ?= ibm-common-services
 # IMAGE_REPO, IMAGE_NAME and RELEASE_TAG environment variable.
 IMAGE_REPO ?= "hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom"
 IMAGE_NAME ?= ibm-ingress-nginx-operator
-CSV_VERSION ?= 1.3.1
+CSV_VERSION ?= 1.3.2
 
 # Github host to use for checking the source tree;
 # Override this variable ue with your own value if you're working on forked repo.
