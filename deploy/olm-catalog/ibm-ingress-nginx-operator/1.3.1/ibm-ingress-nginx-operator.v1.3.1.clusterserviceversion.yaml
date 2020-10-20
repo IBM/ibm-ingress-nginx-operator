@@ -161,6 +161,21 @@ spec:
       clusterPermissions:
       - rules:
         - apiGroups:
+          - rbac.authorization.k8s.io
+          resources:
+          - clusterroles
+          - clusterrolebindings
+          - roles
+          - rolebindings
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
           - security.openshift.io
           resources:
           - securitycontextconstraints
@@ -172,7 +187,6 @@ spec:
           - use
           - patch
           - update
-          - watch
         - apiGroups:
           - certmanager.k8s.io
           resources:
@@ -180,61 +194,69 @@ spec:
           verbs:
           - use
         - apiGroups:
-          - "operator.openshift.io"
-          resources:
-          - ingresscontrollers
-          verbs:
-          - get
-          - list
-          - watch
-        - apiGroups:
-          - ""
-          resources:
-          - namespaces
-          verbs:
-          - get
-        - apiGroups:
-          - ""
-          resources:
-          - nodes
-          verbs:
-          - get
-          - list
-          - watch
-        serviceAccountName: ibm-ingress-nginx-operator
-      - rules:
-        - apiGroups:
-          - ""
-          resources:
-          - namespaces
-          verbs:
-          - get
-        - apiGroups:
-          - ""
-          resources:
-          - nodes
-          verbs:
-          - get
-          - list
-          - watch
-        - apiGroups:
-          - "operator.openshift.io"
-          resources:
-          - ingresscontrollers
-          verbs:
-          - get
-          - list
-          - watch
-        serviceAccountName: nginx-ingress-serviceaccount
-      permissions:
-      - rules:
-        - apiGroups:
           - certmanager.k8s.io
           resources:
           - certificates
           verbs:
           - create
           - get
+        - apiGroups:
+            - ""
+          resources:
+            - events
+          verbs:
+            - create
+            - patch
+        - apiGroups:
+            - "extensions"
+            - "networking.k8s.io"
+          resources:
+            - ingresses
+          verbs:
+            - get
+            - list
+            - watch
+        - apiGroups:
+            - "extensions"
+            - "networking.k8s.io"
+          resources:
+            - ingresses/status
+          verbs:
+            - update
+        - apiGroups:
+            - "operator.openshift.io"
+          resources:
+            - ingresscontrollers
+          verbs:
+            - get
+            - list
+            - watch
+        - apiGroups:
+          - ""
+          resources:
+          - namespaces
+          verbs:
+          - get
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          - services
+          - services/finalizers
+          - serviceaccounts
+          - endpoints
+          - persistentvolumeclaims
+          - events
+          - configmaps
+          - secrets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
         - apiGroups:
           - apps
           resources:
@@ -313,114 +335,12 @@ spec:
         - apiGroups:
           - ""
           resources:
-          - pods
-          - services
-          - services/finalizers
-          - serviceaccounts
-          - endpoints
-          - persistentvolumeclaims
-          - events
-          - configmaps
-          - secrets
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
-        - apiGroups:
-          - "extensions"
-          - "networking.k8s.io"
-          resources:
-          - ingresses
+          - nodes
           verbs:
           - get
           - list
           - watch
-        - apiGroups:
-          - "extensions"
-          - "networking.k8s.io"
-          resources:
-          - ingresses/status
-          verbs:
-          - update
         serviceAccountName: ibm-ingress-nginx-operator
-      - rules:
-        - apiGroups:
-          - ""
-          resources:
-          - endpoints
-          - pods
-          - secrets
-          - services
-          verbs:
-          - get
-          - list
-          - watch
-        - apiGroups:
-          - ""
-          resources:
-          - configmaps
-          verbs:
-          - create
-          - get
-          - list
-          - watch
-          - patch
-        - apiGroups:
-          - ""
-          resources:
-          - configmaps
-          resourceNames:
-          # Defaults to "<election-id>-<ingress-class>"
-          # Here: "<ingress-controller-leader>-<nginx>"
-          # This has to be adapted if you change either parameter
-          # when launching the nginx-ingress-controller.
-          - "ingress-controller-leader-nginx"
-          verbs:
-          - get
-          - update
-        - apiGroups:
-          - ""
-          resources:
-          - events
-          verbs:
-          - create
-          - patch
-        - apiGroups:
-          - "extensions"
-          - "networking.k8s.io"
-          resources:
-          - ingresses
-          verbs:
-          - get
-          - list
-          - watch
-        - apiGroups:
-          - "extensions"
-          - "networking.k8s.io"
-          resources:
-          - ingresses/status
-          verbs:
-          - update
-        - apiGroups:
-          - route.openshift.io
-          resources:
-          - routes
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-        - apiGroups:
-          - route.openshift.io
-          resources:
-          - routes/custom-host
-          verbs:
-          - create
-        serviceAccountName: nginx-ingress-serviceaccount
       deployments:
       - name: ibm-ingress-nginx-operator
         spec:
@@ -458,7 +378,7 @@ spec:
                   value: quay.io/opencloudio/default-http-backend@sha256:1f79d79eb77637b964a3d3b6c25659ce083e2c86da6825c6aceafcff17d6b23e
                 - name: KUBECTL_IMAGE_DIGEST
                   value: quay.io/opencloudio/kubectl@sha256:c5ee37c2dd2f34c155faabc88f7b4e4d79646f8947ef6517fcb8c78ddf143356
-                image: hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom/ibm-ingress-nginx-operator:citi
+                image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
                 resources: {}

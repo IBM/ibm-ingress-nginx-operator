@@ -104,7 +104,7 @@ metadata:
     categories: Developer Tools
     certified: "false"
     containerImage: quay.io/opencloudio/ibm-ingress-nginx-operator:1.3.2
-    createdAt: "2020-05-18T10:16:16Z"
+    createdAt: "2020-10-20T10:16:16Z"
     description: Operator for managing deployment of ingress nginx service.
     repository: https://github.com/IBM/ibm-ingress-nginx-operator.git
     support: IBM
@@ -161,38 +161,41 @@ spec:
       clusterPermissions:
       - rules:
         - apiGroups:
-          - rbac.authorization.k8s.io
-          resources:
-          - clusterroles
-          - clusterrolebindings
-          - roles
-          - rolebindings
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
-        - apiGroups:
-          - security.openshift.io
-          resources:
-          - securitycontextconstraints
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - use
-          - patch
-          - update
-        - apiGroups:
           - certmanager.k8s.io
           resources:
           - clusterissuers
           verbs:
           - use
+        # nginx-ingress operator needs to read ingresscontrollers from namespace openshift-ingress-operator to get router app domain
+        - apiGroups:
+          - "operator.openshift.io"
+          resources:
+          - ingresscontrollers
+          verbs:
+          - get
+          - list
+          - watch
+        serviceAccountName: ibm-ingress-nginx-operator
+      - rules:
+        # ngin-ingress controller needs to get namespace for the current watched namespace
+        - apiGroups:
+          - ""
+          resources:
+          - namespaces
+          verbs:
+          - get
+        # ngin-ingress controller needs to read node info to update ingress status
+        - apiGroups:
+          - ""
+          resources:
+          - nodes
+          verbs:
+          - get
+          - list
+          - watch
+        serviceAccountName: nginx-ingress-serviceaccount
+      permissions:
+      - rules:
         - apiGroups:
           - certmanager.k8s.io
           resources:
@@ -200,90 +203,6 @@ spec:
           verbs:
           - create
           - get
-        - apiGroups:
-            - ""
-          resources:
-            - events
-          verbs:
-            - create
-            - patch
-        - apiGroups:
-            - "extensions"
-            - "networking.k8s.io"
-          resources:
-            - ingresses
-          verbs:
-            - get
-            - list
-            - watch
-        - apiGroups:
-            - "extensions"
-            - "networking.k8s.io"
-          resources:
-            - ingresses/status
-          verbs:
-            - update
-        - apiGroups:
-            - "operator.openshift.io"
-          resources:
-            - ingresscontrollers
-          verbs:
-            - get
-            - list
-            - watch
-        - apiGroups:
-          - ""
-          resources:
-          - namespaces
-          verbs:
-          - get
-        - apiGroups:
-          - ""
-          resources:
-          - pods
-          - services
-          - services/finalizers
-          - serviceaccounts
-          - endpoints
-          - persistentvolumeclaims
-          - events
-          - configmaps
-          - secrets
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
-        - apiGroups:
-          - apps
-          resources:
-          - deployments
-          - daemonsets
-          - replicasets
-          - statefulsets
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
-        - apiGroups:
-          - batch
-          resources:
-          - jobs
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
         - apiGroups:
           - route.openshift.io
           resources:
@@ -309,6 +228,20 @@ spec:
           - list
           - watch
         - apiGroups:
+          - operator.ibm.com
+          resources:
+          - nginxingresses
+          - nginxingresses/finalizers
+          - nginxingresses/status
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
           - monitoring.coreos.com
           resources:
           - servicemonitors
@@ -317,13 +250,32 @@ spec:
           - delete
           - get
         - apiGroups:
-          - operator.ibm.com
+          - batch
           resources:
-          - nginxingresses
-          - nginxingresses/finalizers
-          - nginxingresses/status
+          - jobs
           verbs:
-          - '*'
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - apps
+          resources:
+          - deployments
+          - daemonsets
+          - replicasets
+          - statefulsets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
         - apiGroups:
           - apps
           resourceNames:
@@ -335,12 +287,83 @@ spec:
         - apiGroups:
           - ""
           resources:
-          - nodes
+          - pods
+          - services
+          - services/finalizers
+          - serviceaccounts
+          - endpoints
+          - persistentvolumeclaims
+          - events
+          - configmaps
+          - secrets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        serviceAccountName: ibm-ingress-nginx-operator
+      - rules:
+        - apiGroups:
+          - ""
+          resources:
+          - endpoints
+          - pods
+          - secrets
+          - services
           verbs:
           - get
           - list
           - watch
-        serviceAccountName: ibm-ingress-nginx-operator
+        - apiGroups:
+          - ""
+          resources:
+          - configmaps
+          verbs:
+          - create
+          - get
+          - list
+          - watch
+          - patch
+        - apiGroups:
+          - ""
+          resources:
+          - configmaps
+          resourceNames:
+          # Defaults to "<election-id>-<ingress-class>"
+          # Here: "<ingress-controller-leader>-<nginx>"
+          # This has to be adapted if you change either parameter
+          # when launching the nginx-ingress-controller.
+          - "ingress-controller-leader-nginx"
+          verbs:
+          - get
+          - update
+        - apiGroups:
+          - ""
+          resources:
+          - events
+          verbs:
+          - create
+          - patch
+        - apiGroups:
+          - "extensions"
+          - "networking.k8s.io"
+          resources:
+          - ingresses
+          verbs:
+          - get
+          - list
+          - watch
+        - apiGroups:
+          - "extensions"
+          - "networking.k8s.io"
+          resources:
+          - ingresses/status
+          verbs:
+          - update
+        serviceAccountName: nginx-ingress-serviceaccount
       deployments:
       - name: ibm-ingress-nginx-operator
         spec:
