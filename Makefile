@@ -36,7 +36,7 @@ CSV_VERSION ?= 1.3.2
 GIT_HOST ?= github.com
 
 VERSION ?= $(shell date +v%Y%m%d)-$(shell git describe --match=$(git rev-parse --short=8 HEAD) --tags --always --dirty)
-RELEASE_VERSION ?= $(shell cat ./helm-charts/nginx-ingress/Chart.yaml | grep "^version" | awk '{print $2}')
+RELEASE_VERSION ?= $(shell cat ./version/version.go | grep "Version =" | awk '{ print $$3}' | tr -d '"')
 
 LOCAL_OS := $(shell uname)
 ifeq ($(LOCAL_OS),Linux)
