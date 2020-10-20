@@ -160,12 +160,6 @@ spec:
     spec:
       clusterPermissions:
       - rules:
-        - apiGroups:
-          - certmanager.k8s.io
-          resources:
-          - clusterissuers
-          verbs:
-          - use
         # nginx-ingress operator needs to read ingresscontrollers from namespace openshift-ingress-operator to get router app domain
         - apiGroups:
           - "operator.openshift.io"
@@ -175,8 +169,6 @@ spec:
           - get
           - list
           - watch
-        serviceAccountName: ibm-ingress-nginx-operator
-      - rules:
         # ngin-ingress controller needs to get namespace for the current watched namespace
         - apiGroups:
           - ""
@@ -196,37 +188,6 @@ spec:
         serviceAccountName: nginx-ingress-serviceaccount
       permissions:
       - rules:
-        - apiGroups:
-          - certmanager.k8s.io
-          resources:
-          - certificates
-          verbs:
-          - create
-          - get
-        - apiGroups:
-          - route.openshift.io
-          resources:
-          - routes
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-        - apiGroups:
-          - route.openshift.io
-          resources:
-          - routes/custom-host
-          verbs:
-          - create
-        - apiGroups:
-          - route.openshift.io
-          resources:
-          - routes/status
-          verbs:
-          - get
-          - list
-          - watch
         - apiGroups:
           - operator.ibm.com
           resources:
@@ -306,6 +267,31 @@ spec:
           - watch
         serviceAccountName: ibm-ingress-nginx-operator
       - rules:
+        # post-install hook job need to create route to expose nginx-ingress service.
+        - apiGroups:
+          - route.openshift.io
+          resources:
+          - routes
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+        - apiGroups:
+          - route.openshift.io
+          resources:
+          - routes/custom-host
+          verbs:
+          - create
+        - apiGroups:
+          - route.openshift.io
+          resources:
+          - routes/status
+          verbs:
+          - get
+          - list
+          - watch
         - apiGroups:
           - ""
           resources:
@@ -396,7 +382,7 @@ spec:
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
                 - name: INGRESS_IMAGE_DIGEST
-                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:0d34c0e5d60d331765f3e5bf605a83294414d48d6b9beeae35ab85baaf7ef758 
+                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:0d34c0e5d60d331765f3e5bf605a83294414d48d6b9beeae35ab85baaf7ef758
                 - name: DEFAULT_BACKEND_IMAGE_DIGEST
                   value: quay.io/opencloudio/default-http-backend@sha256:1f79d79eb77637b964a3d3b6c25659ce083e2c86da6825c6aceafcff17d6b23e
                 - name: KUBECTL_IMAGE_DIGEST
