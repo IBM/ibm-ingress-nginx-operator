@@ -139,8 +139,8 @@ The following table lists the configurable parameters of the `ICP Management Ing
 | ingress.name                                    | NGINX Ingress Controller deployment name                       | nginx-ingress-controller        |
 | ingress.hostNetwork                             | using host network                                             | false                           |
 | ingress.hostPort                                | exposing container port as host port                           | true                            |
-| ingress.httpPort                                | Listening http port of nginx backend                           | 7080                            |
-| ingress.httpsPort                               | Listening https port of nginx backend                          | 7443                            |
+| ingress.httpPort                                | Listening http port of nginx backend                           | 80                            |
+| ingress.httpsPort                               | Listening https port of nginx backend                          | 443                            |
 | ingress.image.repository                        | NGINX Ingress Controller image to use for this deployment      | ibmcom/nginx-ingress-controller |
 | ingress.image.tag                               | NGINX Ingress Controller image tag to use for this deployment  | 0.23.4                          |
 | ingress.image.pullPolicy                        | NGINX Ingress Controller image pull policy                     | IfNotPresent                    |
