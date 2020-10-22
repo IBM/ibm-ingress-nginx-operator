@@ -40,8 +40,6 @@ spec:
       hostNetwork: false
       hostPID: false
       hostIPC: false
-      securityContext:
-        runAsNonRoot: true
       serviceAccount: nginx-ingress-serviceaccount
       containers:
       - name: kubectl
@@ -68,7 +66,6 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
-          runAsNonRoot: true
           capabilities:
             drop:
             - ALL
