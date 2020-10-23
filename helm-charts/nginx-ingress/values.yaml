@@ -42,7 +42,7 @@ ingress:
   annotations: {}
   nodeSelector: {}
   tolerations: []
-  watchNamespace: ""
+  watchNamespace: []
 
 # Config related with default http backend
 defaultBackend:
