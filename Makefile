@@ -118,7 +118,7 @@ build: build-image
 
 build-image:
 	@echo "Building the $(IMAGE_NAME) image for $(LOCAL_ARCH)..."
-	@operator-sdk build --image-build-args "-f build/Dockerfile-$(LOCAL_ARCH)" $(IMAGE_REPO)/$(IMAGE_NAME)-$(LOCAL_ARCH):$(VERSION)
+	@docker build -f build/Dockerfile-$(LOCAL_ARCH) -t $(IMAGE_REPO)/$(IMAGE_NAME)-$(LOCAL_ARCH):$(VERSION) .
 
 ############################################################
 # push image section
