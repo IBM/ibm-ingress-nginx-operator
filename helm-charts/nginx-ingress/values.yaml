@@ -16,8 +16,8 @@ ingress:
   replicas: 1
   hostNetwork: false
   hostPort: false
-  httpPort: 80
-  httpsPort: 443
+  httpPort: 7080
+  httpsPort: 7443
   routeHost: ""
   imageRegistry: quay.io/opencloudio
   imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:dcd2f2fed620339b0931d0ed3977e27612182e13c68f02c717a16cfc04b9b0f6
@@ -64,17 +64,12 @@ defaultBackend:
       memory: 128Mi
   nodeSelector: {}
   tolerations: []
-
-# The init image used to configure some system setting
 init:
-  imageDigest: quay.io/opencloudio/icp-initcontainer@sha256:9aad9fd724ec9308bec711d7738b5f0ae0c37a72ffb19a26dbcf622f1a603e89
   imageRegistry: quay.io/opencloudio
   image:
     repository: icp-initcontainer
     tag: 1.0.0-build.4
     pullPolicy: IfNotPresent
-
-# The kubectl image used to patch route resource
 kubectl:
   resources:
     requests:
@@ -83,7 +78,6 @@ kubectl:
     limits:
       memory: "512Mi"
       cpu: "200m"
-  imageDigest: quay.io/opencloudio/kubectl@sha256:deeb798aaa12142c95ba37bd90ae99ed112afda1170be321db8b1476c7ac9fdd
   imageRegistry: quay.io/opencloudio
   image:
     repository: kubectl

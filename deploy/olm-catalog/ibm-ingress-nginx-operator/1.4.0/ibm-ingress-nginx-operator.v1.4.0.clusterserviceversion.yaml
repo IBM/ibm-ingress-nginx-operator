@@ -47,8 +47,8 @@ metadata:
               "extraArgs": {},
               "hostNetwork": false,
               "hostPort": false,
-              "httpPort": 80,
-              "httpsPort": 443,
+              "httpPort": 7080,
+              "httpsPort": 7443,
               "imageRegistry": "quay.io/opencloudio",
               "image": {
                 "pullPolicy": "IfNotPresent",
@@ -71,31 +71,6 @@ metadata:
               },
               "routeHost": "",
               "tolerations": []
-            },
-            "init": {
-              "imageRegistry": "quay.io/opencloudio",
-              "image": {
-                "pullPolicy": "IfNotPresent",
-                "repository": "icp-initcontainer@sha256",
-                "tag": "9aad9fd724ec9308bec711d7738b5f0ae0c37a72ffb19a26dbcf622f1a603e89"
-              }
-            },
-            "kubectl": {
-              "resources": {
-                "requests": {
-                  "cpu": "50m",
-                  "memory": "64Mi"
-                },
-                "limits": {
-                  "cpu": "200m",
-                  "memory": "512Mi"
-                }
-              },
-              "imageRegistry": "quay.io/opencloudio",
-              "image": {
-                "repository": "kubectl@sha256",
-                "tag": "deeb798aaa12142c95ba37bd90ae99ed112afda1170be321db8b1476c7ac9fdd"
-              }
             }
           }
         }
@@ -142,9 +117,6 @@ spec:
       - description: Image of Default http backend
         displayName: Image of Default http backend
         path: spec.defaultBackend.image
-      - description: OCP route host of Ingress nginx controller
-        displayName: Route Host of Ingress nginx controller
-        path: spec.ingress.routeHost
       - description: Number of instance for Ingress nginx controller
         displayName: Replica of Ingress nginx controller
         path: spec.ingress.replicaCount
@@ -160,15 +132,6 @@ spec:
     spec:
       clusterPermissions:
       - rules:
-        # nginx-ingress operator needs to read ingresscontrollers from namespace openshift-ingress-operator to get router app domain
-        - apiGroups:
-          - "operator.openshift.io"
-          resources:
-          - ingresscontrollers
-          verbs:
-          - get
-          - list
-          - watch
         # ngin-ingress controller needs to get namespace for the current watched namespace
         - apiGroups:
           - ""
@@ -195,13 +158,7 @@ spec:
           - nginxingresses/finalizers
           - nginxingresses/status
           verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
+          - '*'
         - apiGroups:
           - monitoring.coreos.com
           resources:
@@ -211,18 +168,6 @@ spec:
           - delete
           - get
         - apiGroups:
-          - batch
-          resources:
-          - jobs
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
-        - apiGroups:
           - apps
           resources:
           - deployments
@@ -230,13 +175,7 @@ spec:
           - replicasets
           - statefulsets
           verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
+          - '*'
         - apiGroups:
           - apps
           resourceNames:
@@ -258,40 +197,9 @@ spec:
           - configmaps
           - secrets
           verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
+          - '*'
         serviceAccountName: ibm-ingress-nginx-operator
       - rules:
-        # post-install hook job need to create route to expose nginx-ingress service.
-        - apiGroups:
-          - route.openshift.io
-          resources:
-          - routes
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-        - apiGroups:
-          - route.openshift.io
-          resources:
-          - routes/custom-host
-          verbs:
-          - create
-        - apiGroups:
-          - route.openshift.io
-          resources:
-          - routes/status
-          verbs:
-          - get
-          - list
-          - watch
         - apiGroups:
           - ""
           resources:
@@ -308,11 +216,9 @@ spec:
           resources:
           - configmaps
           verbs:
-          - create
           - get
           - list
           - watch
-          - patch
         - apiGroups:
           - ""
           resources:
