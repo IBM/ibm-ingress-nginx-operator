@@ -158,7 +158,13 @@ spec:
           - nginxingresses/finalizers
           - nginxingresses/status
           verbs:
-          - '*'
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
         - apiGroups:
           - monitoring.coreos.com
           resources:
@@ -175,7 +181,13 @@ spec:
           - replicasets
           - statefulsets
           verbs:
-          - '*'
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
         - apiGroups:
           - apps
           resourceNames:
@@ -197,7 +209,13 @@ spec:
           - configmaps
           - secrets
           verbs:
-          - '*'
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
         serviceAccountName: ibm-ingress-nginx-operator
       - rules:
         - apiGroups:
@@ -216,9 +234,11 @@ spec:
           resources:
           - configmaps
           verbs:
+          - create
           - get
           - list
           - watch
+          - patch
         - apiGroups:
           - ""
           resources:
