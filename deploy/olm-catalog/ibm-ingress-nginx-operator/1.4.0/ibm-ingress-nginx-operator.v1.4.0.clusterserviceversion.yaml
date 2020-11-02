@@ -287,6 +287,7 @@ spec:
           template:
             metadata:
               labels:
+                intent: projected
                 name: ibm-ingress-nginx-operator
                 app.kubernetes.io/managed-by: ""
                 app.kubernetes.io/name: "ibm-ingress-nginx-operator"
@@ -299,8 +300,9 @@ spec:
               - env:
                 - name: WATCH_NAMESPACE
                   valueFrom:
-                    fieldRef:
-                      fieldPath: metadata.annotations['olm.targetNamespaces']
+                    configMapKeyRef:
+                      name: namespace-scope
+                      key: namespaces
                 - name: POD_NAME
                   valueFrom:
                     fieldRef:
