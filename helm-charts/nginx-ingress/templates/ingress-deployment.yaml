@@ -46,6 +46,7 @@ spec:
 {{ toYaml .Values.ingress.annotations | indent 8 }}
     {{- end }}
       labels:
+        intent: projected
         app: {{ .Values.ingress.name }}
         chart: {{ .Chart.Name }}
         heritage: {{ .Release.Service }}
