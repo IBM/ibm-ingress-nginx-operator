@@ -239,6 +239,7 @@ spec:
           - list
           - watch
           - patch
+          - update
         - apiGroups:
           - ""
           resources:
@@ -251,6 +252,7 @@ spec:
           - "ingress-controller-leader-nginx"
           verbs:
           - get
+          - patch
           - update
         - apiGroups:
           - ""
