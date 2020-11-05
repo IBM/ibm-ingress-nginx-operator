@@ -148,7 +148,7 @@ spec:
           - get
           - list
           - watch
-        serviceAccountName: nginx-ingress-serviceaccount
+        serviceAccountName: nginx-ingress
       permissions:
       - rules:
         - apiGroups:
@@ -275,7 +275,7 @@ spec:
           - ingresses/status
           verbs:
           - update
-        serviceAccountName: nginx-ingress-serviceaccount
+        serviceAccountName: nginx-ingress
       deployments:
       - name: ibm-ingress-nginx-operator
         spec:
