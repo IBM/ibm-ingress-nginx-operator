@@ -9,7 +9,7 @@ The Ingress Nginx Operator installs the following components:
 - A deployment to running Ingress Nginx controller pod
 - A service default-http-backend
 - A configmap nginx-ingress-controller
-- A service account nginx-ingress-serviceaccount
+- A service account nginx-ingress
 - A route cp-proxy
 
 For more information about the available IBM Cloud Platform Common Services, see the [IBM Knowledge Center](http://ibm.biz/cpcsdocs).

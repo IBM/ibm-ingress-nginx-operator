@@ -23,11 +23,11 @@ spec:
   - port: 80
     name: http
     protocol: TCP
-    targetPort: {{ .Values.ingress.httpPort }}
+    targetPort: http
   - port: 443
     name: https
     protocol: TCP
-    targetPort: {{ .Values.ingress.httpsPort }}
+    targetPort: https
   selector:
     app: "{{ .Values.ingress.name }}"
     release: {{ .Release.Name }}
