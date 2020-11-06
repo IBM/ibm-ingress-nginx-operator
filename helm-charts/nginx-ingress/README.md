@@ -8,7 +8,7 @@ This chart installs NGINX Ingress Controller for IBM Cloud Private in your clust
 
 This chart:
 * Installs NGINX Ingress Controller.
-* Adds a daemonset to running NGINX Ingress Controller pod on proxy nodes.
+* Adds a deployment to running NGINX Ingress Controller pod on proxy nodes.
 * Adds a service default-http-backend.
 * Adds a configmap nginx-ingress-controller.
 
