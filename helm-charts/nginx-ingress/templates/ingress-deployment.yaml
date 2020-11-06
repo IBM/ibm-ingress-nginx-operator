@@ -7,7 +7,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-ingress
+  name: {{ .Values.ingress.name }}
   labels:
     app: {{ .Values.ingress.name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
@@ -76,6 +76,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       hostNetwork: {{ .Values.ingress.hostNetwork }}
       serviceAccount: nginx-ingress
+      serviceAccountName: nginx-ingress
       containers:
       - livenessProbe:
           initialDelaySeconds: 10
