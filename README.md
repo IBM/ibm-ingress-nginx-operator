@@ -31,6 +31,7 @@ Red Hat OpenShift Container Platform 4.3 or newer installed on one of the follow
 - 1.3.0
 - 1.3.1
 - 1.4.0
+- 1.4.1
 
 ## Prerequisites
 
@@ -96,7 +97,7 @@ Use the following commands to debug the operator:
 
 ```bash
 # oc get csv
-# oc describe csv ibm-ingress-nginx-operator.v1.4.0
+# oc describe csv ibm-ingress-nginx-operator.v1.4.1
 ```
 
 #### Check the operator status and log
