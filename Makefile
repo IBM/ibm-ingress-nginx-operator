@@ -29,14 +29,15 @@ NAMESPACE ?= ibm-common-services
 # IMAGE_REPO, IMAGE_NAME and RELEASE_TAG environment variable.
 IMAGE_REPO ?= "hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom"
 IMAGE_NAME ?= ibm-ingress-nginx-operator
-CSV_VERSION ?= 1.4.0
+CSV_VERSION ?= 1.4.1
 
 # Github host to use for checking the source tree;
 # Override this variable ue with your own value if you're working on forked repo.
 GIT_HOST ?= github.com
 
 VERSION ?= $(shell date +v%Y%m%d)-$(shell git describe --match=$(git rev-parse --short=8 HEAD) --tags --always --dirty)
-RELEASE_VERSION ?= $(shell cat ./version/version.go | grep "Version =" | awk '{ print $$3}' | tr -d '"')
+RELEASE_VERSION ?= $(shell cat ./version/version.go | grep "Version =" | awk '{ print $3}' | tr -d '"')
+LATEST_VERSION ?= latest
 
 LOCAL_OS := $(shell uname)
 ifeq ($(LOCAL_OS),Linux)
@@ -141,6 +142,7 @@ images: build-image push-image multiarch-image
 multiarch-image: $(CONFIG_DOCKER_TARGET)
 	@echo "Build multiarch image for $(IMAGE_REPO)/$(IMAGE_NAME):$(RELEASE_VERSION)..."
 	@common/scripts/multiarch_image.sh $(IMAGE_REPO) $(IMAGE_NAME) $(VERSION) $(RELEASE_VERSION)
+	@common/scripts/multiarch_image.sh $(IMAGE_REPO) $(IMAGE_NAME) $(VERSION) $(LATEST_VERSION)
 
 ############################################################
 # push CSV section
