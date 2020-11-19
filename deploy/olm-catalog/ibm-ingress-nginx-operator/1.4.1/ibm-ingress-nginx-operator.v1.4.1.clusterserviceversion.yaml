@@ -71,6 +71,31 @@ metadata:
               },
               "routeHost": "",
               "tolerations": []
+            },
+            "init": {
+              "imageRegistry": "quay.io/opencloudio",
+              "image": {
+                "pullPolicy": "IfNotPresent",
+                "repository": "icp-initcontainer@sha256",
+                "tag": "c0820a378fe87f79e0d553e3ff0bc4dc3d2d3312b7b6ae0c788f9bfe8a632966"
+              }
+            },
+            "kubectl": {
+              "resources": {
+                "requests": {
+                  "cpu": "50m",
+                  "memory": "64Mi"
+                },
+                "limits": {
+                  "cpu": "200m",
+                  "memory": "512Mi"
+                }
+              },
+              "imageRegistry": "quay.io/opencloudio",
+              "image": {
+                "repository": "kubectl@sha256",
+                "tag": "8d8e730df85c925287c6db21801ef426a155500740447ae43f7f88d5e2b0aeef"
+              }
             }
           }
         }
