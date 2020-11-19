@@ -64,12 +64,17 @@ defaultBackend:
       memory: 128Mi
   nodeSelector: {}
   tolerations: []
+
+# The init image used to configure some system setting
 init:
+  imageDigest: quay.io/opencloudio/icp-initcontainer@sha256:c0820a378fe87f79e0d553e3ff0bc4dc3d2d3312b7b6ae0c788f9bfe8a632966
   imageRegistry: quay.io/opencloudio
   image:
     repository: icp-initcontainer
     tag: 1.0.0-build.4
     pullPolicy: IfNotPresent
+
+# The kubectl image used to patch route resource
 kubectl:
   resources:
     requests:
@@ -78,7 +83,8 @@ kubectl:
     limits:
       memory: "512Mi"
       cpu: "200m"
+  imageDigest: quay.io/opencloudio/kubectl@sha256:8d8e730df85c925287c6db21801ef426a155500740447ae43f7f88d5e2b0aeef
   imageRegistry: quay.io/opencloudio
   image:
     repository: kubectl
-    tag: v1.15.9.1
+    tag: v1.15.9.3
