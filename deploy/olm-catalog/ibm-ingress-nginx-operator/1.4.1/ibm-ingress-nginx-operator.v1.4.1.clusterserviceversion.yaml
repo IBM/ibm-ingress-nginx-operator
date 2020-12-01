@@ -53,7 +53,7 @@ metadata:
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "nginx-ingress-controller@sha256",
-                "tag": "4c8ad1a75ece03342f0c479769c0332ab6be5565b7a456954b23b022cc109759"
+                "tag": "d7a720a6700893f3838067c0006d89e93967c5c5f0a75727717328b13e9f56c1"
               },
               "name": "nginx-ingress-controller",
               "nodeSelector": {},
@@ -337,7 +337,7 @@ spec:
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
                 - name: INGRESS_IMAGE_DIGEST
-                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:4c8ad1a75ece03342f0c479769c0332ab6be5565b7a456954b23b022cc109759
+                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:d7a720a6700893f3838067c0006d89e93967c5c5f0a75727717328b13e9f56c1
                 - name: DEFAULT_BACKEND_IMAGE_DIGEST
                   value: quay.io/opencloudio/default-http-backend@sha256:fbc932057bf5efc546273ea649ead6c6cf23f97cbdf8642712b8a5601376a7a3
                 - name: KUBECTL_IMAGE_DIGEST
