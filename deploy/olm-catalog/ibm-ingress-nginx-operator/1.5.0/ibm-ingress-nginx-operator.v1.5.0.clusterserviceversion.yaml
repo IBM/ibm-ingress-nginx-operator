@@ -2,7 +2,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
   annotations:
-    olm.skipRange: '>=1.1.0 <1.5.0'
+    olm.skipRange: '<1.5.0'
     alm-examples: |-
       [
         {
@@ -360,5 +360,4 @@ spec:
   maturity: stable
   provider:
     name: IBM
-  replaces: ibm-ingress-nginx-operator.v1.4.1
   version: 1.5.0
