@@ -1,4 +1,4 @@
-# Copyright 2020 IBM Corporation
+# Copyright 2021 IBM Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,22 +13,22 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator-ppc64le:v1.2.0
+FROM quay.io/operator-framework/helm-operator-ppc64le:v1.3.0
 
 ARG VCS_REF
 ARG VCS_URL
 
 LABEL org.label-schema.vendor="IBM" \
-    org.label-schema.name="ibm-ingress-nignx-operator" \
-    org.label-schema.description="IBM Ingress Nignx Operator" \
+    org.label-schema.name="ibm-ingress-nginx-operator" \
+    org.label-schema.description="IBM Ingress Nginx Operator" \
     org.label-schema.vcs-ref=$VCS_REF \
     org.label-schema.vcs-url=$VCS_URL \
     org.label-schema.license="Licensed Materials - Property of IBM" \
     org.label-schema.schema-version="1.0" \
     name="ibm-ingress-nginx-operator" \
     vendor="IBM" \
-    description="IBM Ingress Nignx Operator" \
-    summary="IBM Ingress Nignx Operator"
+    description="IBM Ingress Nginx Operator" \
+    summary="IBM Ingress Nginx Operator"
 
 COPY watches.yaml ${HOME}/watches.yaml
 COPY helm-charts/ ${HOME}/helm-charts/
