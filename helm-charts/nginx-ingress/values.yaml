@@ -1,6 +1,6 @@
 # Licensed Materials - Property of IBM
 # 5737-E67
-# @ Copyright IBM Corporation 2016, 2020 All Rights Reserved
+# @ Copyright IBM Corporation 2016, 2021. All Rights Reserved
 # US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
 
 # This is a YAML-formatted file.
@@ -20,7 +20,7 @@ ingress:
   httpsPort: 7443
   routeHost: ""
   imageRegistry: quay.io/opencloudio
-  imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:9d97654e0eee9baf29686e151738819adb82dee218ba65fd6df3d12d528f6e5b
+  imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:c0364a6112550d74d812f65213787f4ed95f847fdbdb19769bb10e1761abf48a
   image:
     repository: nginx-ingress-controller
     tag: 0.23.5
@@ -50,7 +50,7 @@ defaultBackend:
   replicaCount: 1
   replicas: 1
   imageRegistry: quay.io/opencloudio
-  imageDigest: quay.io/opencloudio/default-http-backend@sha256:2a5e3bfe7a771d36ad186e2ab8303ea2fbb854b4a7437e7c3b3f1d8e87d9e286
+  imageDigest: quay.io/opencloudio/default-http-backend@sha256:c5d1a3e2365fe438c30b984417120abf3259d6d7ecba203868ca19818b91ad51
   image:
     repository: default-http-backend
     tag: 1.5.4
@@ -67,7 +67,7 @@ defaultBackend:
 
 # The init image used to configure some system setting
 init:
-  imageDigest: quay.io/opencloudio/icp-initcontainer@sha256:c0820a378fe87f79e0d553e3ff0bc4dc3d2d3312b7b6ae0c788f9bfe8a632966
+  imageDigest: quay.io/opencloudio/icp-initcontainer@sha256:87b30476a024b7a3870cd6b68c0f859cd29b908e9c99f07375f3dfb29d00b963
   imageRegistry: quay.io/opencloudio
   image:
     repository: icp-initcontainer
@@ -83,7 +83,7 @@ kubectl:
     limits:
       memory: "512Mi"
       cpu: "200m"
-  imageDigest: quay.io/opencloudio/kubectl@sha256:8d8e730df85c925287c6db21801ef426a155500740447ae43f7f88d5e2b0aeef
+  imageDigest: quay.io/opencloudio/kubectl@sha256:c22b6031a3274c38bbcdcfe0604d7f292b05d3f457aeb0a73930602decc4daf3
   imageRegistry: quay.io/opencloudio
   image:
     repository: kubectl
