@@ -37,7 +37,7 @@ GIT_HOST ?= github.com
 
 #VERSION ?= $(shell date +v%Y%m%d)-$(shell git describe --match=$(git rev-parse --short=8 HEAD) --tags --always --dirty)
 RELEASE_VERSION ?= $(shell cat ./version/version.go | grep "Version =" | awk '{ print $$3}' | tr -d '"')
-VERSION ?= RELEASE_VERSION
+VERSION ?= $(RELEASE_VERSION)
 
 LOCAL_OS := $(shell uname)
 ifeq ($(LOCAL_OS),Linux)
