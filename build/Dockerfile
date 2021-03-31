@@ -1,4 +1,4 @@
-# Copyright 2020 IBM Corporation
+# Copyright 2021 IBM Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator:v1.2.0
+FROM quay.io/operator-framework/helm-operator:v1.3.0
 
 ARG VCS_REF
 ARG VCS_URL
