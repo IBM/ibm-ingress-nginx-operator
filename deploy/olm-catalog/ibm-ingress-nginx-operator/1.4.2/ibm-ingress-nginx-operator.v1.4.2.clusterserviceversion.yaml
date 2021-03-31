@@ -17,7 +17,7 @@ metadata:
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "default-http-backend@sha256",
-                "tag": "2a5e3bfe7a771d36ad186e2ab8303ea2fbb854b4a7437e7c3b3f1d8e87d9e286"
+                "tag": "c5d1a3e2365fe438c30b984417120abf3259d6d7ecba203868ca19818b91ad51"
               },
               "name": "default-http-backend",
               "nodeSelector": {},
@@ -53,7 +53,7 @@ metadata:
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "nginx-ingress-controller@sha256",
-                "tag": "9d97654e0eee9baf29686e151738819adb82dee218ba65fd6df3d12d528f6e5b"
+                "tag": "d98ec776682dfaeb70afe9196013e491c45f77f2bf0c34f826f98fcab0b9660f"
               },
               "name": "nginx-ingress-controller",
               "nodeSelector": {},
@@ -77,7 +77,7 @@ metadata:
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "icp-initcontainer@sha256",
-                "tag": "c0820a378fe87f79e0d553e3ff0bc4dc3d2d3312b7b6ae0c788f9bfe8a632966"
+                "tag": "87b30476a024b7a3870cd6b68c0f859cd29b908e9c99f07375f3dfb29d00b963"
               }
             },
             "kubectl": {
@@ -94,7 +94,7 @@ metadata:
               "imageRegistry": "quay.io/opencloudio",
               "image": {
                 "repository": "kubectl@sha256",
-                "tag": "8d8e730df85c925287c6db21801ef426a155500740447ae43f7f88d5e2b0aeef"
+                "tag": "c22b6031a3274c38bbcdcfe0604d7f292b05d3f457aeb0a73930602decc4daf3"
               }
             }
           }
@@ -337,11 +337,11 @@ spec:
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
                 - name: INGRESS_IMAGE_DIGEST
-                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:9d97654e0eee9baf29686e151738819adb82dee218ba65fd6df3d12d528f6e5b
+                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:d98ec776682dfaeb70afe9196013e491c45f77f2bf0c34f826f98fcab0b9660f
                 - name: DEFAULT_BACKEND_IMAGE_DIGEST
-                  value: quay.io/opencloudio/default-http-backend@sha256:fbc932057bf5efc546273ea649ead6c6cf23f97cbdf8642712b8a5601376a7a3
+                  value: quay.io/opencloudio/default-http-backend@sha256:c5d1a3e2365fe438c30b984417120abf3259d6d7ecba203868ca19818b91ad51
                 - name: KUBECTL_IMAGE_DIGEST
-                  value: quay.io/opencloudio/kubectl@sha256:8d8e730df85c925287c6db21801ef426a155500740447ae43f7f88d5e2b0aeef
+                  value: quay.io/opencloudio/kubectl@sha256:c22b6031a3274c38bbcdcfe0604d7f292b05d3f457aeb0a73930602decc4daf3
                 image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
