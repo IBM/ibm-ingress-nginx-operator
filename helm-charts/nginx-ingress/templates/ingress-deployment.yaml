@@ -1,6 +1,6 @@
 # Licensed Materials - Property of IBM
 # 5737-E67
-# @ Copyright IBM Corporation 2016, 2020 All Rights Reserved
+# @ Copyright IBM Corporation 2016, 2021 All Rights Reserved
 # US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
 
 ---
@@ -74,6 +74,21 @@ spec:
                   values:
                   - {{ .Values.ingress.name }}
               topologyKey: kubernetes.io/hostname
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            key: app
+            values: {{ .Values.ingress.name }}
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/region
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            key: app
+            values: {{ .Values.ingress.name }}
       hostNetwork: {{ .Values.ingress.hostNetwork }}
       serviceAccount: nginx-ingress
       serviceAccountName: nginx-ingress
