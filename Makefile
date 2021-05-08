@@ -1,4 +1,4 @@
-# Copyright 2020 IBM Corporation
+# Copyright 2020,2021 IBM Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ NAMESPACE ?= ibm-common-services
 # IMAGE_REPO, IMAGE_NAME and RELEASE_TAG environment variable.
 IMAGE_REPO ?= hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom
 IMAGE_NAME ?= ibm-ingress-nginx-operator
-CSV_VERSION ?= 1.5.0
+CSV_VERSION ?= 1.6.0
 
 # Github host to use for checking the source tree;
 # Override this variable ue with your own value if you're working on forked repo.

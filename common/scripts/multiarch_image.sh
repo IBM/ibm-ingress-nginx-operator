@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2020 IBM Corporation
+# Copyright 2020,2021 IBM Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ IMAGE_REPO=${1}
 IMAGE_NAME=${2}
 # shellcheck disable=SC2046
 VERSION=${3-"$(git describe --exact-match 2> /dev/null || git describe --match=$(git rev-parse --short=8 HEAD) --always --dirty --abbrev=8)"}
-RELEASE_VERSION=${4:-1.5.0}
+RELEASE_VERSION=${4:-1.6.0}
 
 # support other container tools, e.g. podman
 CONTAINER_CLI=${CONTAINER_CLI:-docker}

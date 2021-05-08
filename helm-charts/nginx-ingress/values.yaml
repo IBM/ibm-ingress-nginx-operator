@@ -1,6 +1,5 @@
 # Licensed Materials - Property of IBM
-# 5737-E67
-# @ Copyright IBM Corporation 2016, 2021. All Rights Reserved
+# Copyright IBM Corporation 2016,2021. All Rights Reserved
 # US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
 
 # This is a YAML-formatted file.
@@ -20,10 +19,10 @@ ingress:
   httpsPort: 7443
   routeHost: ""
   imageRegistry: quay.io/opencloudio
-  imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:c0364a6112550d74d812f65213787f4ed95f847fdbdb19769bb10e1761abf48a
+  imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:b1aa46ae49591025efea19dc894460433241943031b7c5221a549c0a5c163363
   image:
     repository: nginx-ingress-controller
-    tag: 0.23.5
+    tag: 0.23.13
     pullPolicy: IfNotPresent
   resources:
     requests:
@@ -50,10 +49,10 @@ defaultBackend:
   replicaCount: 1
   replicas: 1
   imageRegistry: quay.io/opencloudio
-  imageDigest: quay.io/opencloudio/default-http-backend@sha256:c5d1a3e2365fe438c30b984417120abf3259d6d7ecba203868ca19818b91ad51
+  imageDigest: quay.io/opencloudio/default-http-backend@sha256:9e886cace21a0e9f3265d268e1ad652ae53030835cc0f095308b23dc5df62b6b
   image:
     repository: default-http-backend
-    tag: 1.5.4
+    tag: 1.5.8
     pullPolicy: IfNotPresent
   resources:
     requests:
@@ -71,7 +70,7 @@ init:
   imageRegistry: quay.io/opencloudio
   image:
     repository: icp-initcontainer
-    tag: 1.0.0-build.4
+    tag: 1.0.0-build.9
     pullPolicy: IfNotPresent
 
 # The kubectl image used to patch route resource
@@ -83,8 +82,8 @@ kubectl:
     limits:
       memory: "512Mi"
       cpu: "200m"
-  imageDigest: quay.io/opencloudio/kubectl@sha256:c22b6031a3274c38bbcdcfe0604d7f292b05d3f457aeb0a73930602decc4daf3
+  imageDigest: quay.io/opencloudio/kubectl@sha256:78b8c05746d6cdef32dbabd31ee7a658ad6ac15aec9939e14385dafffb4eb3ab
   imageRegistry: quay.io/opencloudio
   image:
     repository: kubectl
-    tag: v1.15.9.3
+    tag: v1.15.9.5
