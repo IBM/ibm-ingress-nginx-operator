@@ -49,7 +49,7 @@ defaultBackend:
   replicaCount: 1
   replicas: 1
   imageRegistry: quay.io/opencloudio
-  imageDigest: quay.io/opencloudio/default-http-backend@sha256:9e886cace21a0e9f3265d268e1ad652ae53030835cc0f095308b23dc5df62b6b
+  imageDigest: quay.io/opencloudio/default-http-backend@sha256:df00d527d36c67d8746f35d346edd600d2fb65db70ced420abc3de255eb51afd
   image:
     repository: default-http-backend
     tag: 1.5.8
@@ -66,11 +66,11 @@ defaultBackend:
 
 # The init image used to configure some system setting
 init:
-  imageDigest: quay.io/opencloudio/icp-initcontainer@sha256:87b30476a024b7a3870cd6b68c0f859cd29b908e9c99f07375f3dfb29d00b963
+  imageDigest: quay.io/opencloudio/icp-initcontainer@sha256:60699eab29e17db05963ed19f8bbd0c6124b2b6d19c2d2563698660f9f46997e
   imageRegistry: quay.io/opencloudio
   image:
     repository: icp-initcontainer
-    tag: 1.0.0-build.9
+    tag: 1.0.0-build.10
     pullPolicy: IfNotPresent
 
 # The kubectl image used to patch route resource
@@ -82,7 +82,7 @@ kubectl:
     limits:
       memory: "512Mi"
       cpu: "200m"
-  imageDigest: quay.io/opencloudio/kubectl@sha256:78b8c05746d6cdef32dbabd31ee7a658ad6ac15aec9939e14385dafffb4eb3ab
+  imageDigest: quay.io/opencloudio/kubectl@sha256:3aebec68f70b466d3e18a1bad8dd54c9220887a5fe1d779fb8a10aca4cbe3347
   imageRegistry: quay.io/opencloudio
   image:
     repository: kubectl
