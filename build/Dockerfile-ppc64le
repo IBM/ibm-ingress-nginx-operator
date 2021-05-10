@@ -13,7 +13,8 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator-ppc64le:v1.6
+# use multi-arch base image
+FROM quay.io/operator-framework/helm-operator:v1.6
 
 ARG VCS_REF
 ARG VCS_URL
