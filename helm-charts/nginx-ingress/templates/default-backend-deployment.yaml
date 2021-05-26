@@ -65,6 +65,21 @@ spec:
                   values:
                   - {{ .Values.defaultBackend.name }}
               topologyKey: kubernetes.io/hostname
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            key: app
+            values: {{ .Values.defaultBackend.name }}
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/region
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            key: app
+            values: {{ .Values.defaultBackend.name }}
       serviceAccount: nginx-ingress
       serviceAccountName: nginx-ingress
       containers:
