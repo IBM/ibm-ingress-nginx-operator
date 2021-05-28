@@ -19,7 +19,7 @@ ingress:
   httpsPort: 7443
   routeHost: ""
   imageRegistry: quay.io/opencloudio
-  imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:b1aa46ae49591025efea19dc894460433241943031b7c5221a549c0a5c163363
+  imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:54996a84c918eabca0c4ec7f91da203cfe7229c43615d41c1b3b2adc4c18629e
   image:
     repository: nginx-ingress-controller
     tag: 0.23.13
@@ -49,7 +49,7 @@ defaultBackend:
   replicaCount: 1
   replicas: 1
   imageRegistry: quay.io/opencloudio
-  imageDigest: quay.io/opencloudio/default-http-backend@sha256:9e886cace21a0e9f3265d268e1ad652ae53030835cc0f095308b23dc5df62b6b
+  imageDigest: quay.io/opencloudio/default-http-backend@sha256:ddf76bee841ee4ba75ff096534eda6a754ee2b1c845e9b762dd670fafe321b9d
   image:
     repository: default-http-backend
     tag: 1.5.8
