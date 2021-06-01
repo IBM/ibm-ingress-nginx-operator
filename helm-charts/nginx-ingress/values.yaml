@@ -82,7 +82,7 @@ kubectl:
     limits:
       memory: "512Mi"
       cpu: "200m"
-  imageDigest: quay.io/opencloudio/kubectl@sha256:78b8c05746d6cdef32dbabd31ee7a658ad6ac15aec9939e14385dafffb4eb3ab
+  imageDigest: quay.io/opencloudio/kubectl@sha256:8f8a010daf257b89fead6bc1bfdb7835ff9054b1cfaaea796304ec8c7e0f5c5d
   imageRegistry: quay.io/opencloudio
   image:
     repository: kubectl
