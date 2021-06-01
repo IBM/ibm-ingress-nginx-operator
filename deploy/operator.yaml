@@ -46,4 +46,4 @@ spec:
             - name: DEFAULT_BACKEND_IMAGE_DIGEST
               value: "quay.io/opencloudio/default-http-backend@sha256:b1d0ee79102dcb183b684e049c7102fb287f94cf30d9765cb6f4a2dd0feb8b25"
             - name: KUBECTL_IMAGE_DIGEST
-              value: "quay.io/opencloudio/kubectl@sha256:78b8c05746d6cdef32dbabd31ee7a658ad6ac15aec9939e14385dafffb4eb3ab"
+              value: "quay.io/opencloudio/kubectl@sha256:8f8a010daf257b89fead6bc1bfdb7835ff9054b1cfaaea796304ec8c7e0f5c5d"
