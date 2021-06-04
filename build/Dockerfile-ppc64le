@@ -13,7 +13,9 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator-ppc64le:v1.3.0
+FROM quay.io/operator-framework/helm-operator@sha256:9970ce163b8b943352c62017b4001b7c34afd287d0fc2b56b55c8b172a7aa495
+
+
 
 ARG VCS_REF
 ARG VCS_URL
