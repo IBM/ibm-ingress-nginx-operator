@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator-s390x:v1.8.0
+FROM quay.io/operator-framework/helm-operator@sha256:f2e6234de58ff7f3d46184c858f7c53a876f26abd74708c0d1a7f812a6709f0f
 
 ARG VCS_REF
 ARG VCS_URL
