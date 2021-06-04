@@ -19,7 +19,7 @@ ingress:
   httpsPort: 7443
   routeHost: ""
   imageRegistry: quay.io/opencloudio
-  imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:5e7503f1f278544be36c408440dd4477db5b681533f3356485c255b8df0c8680
+  imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:572eb9a2e503e3643bd85454fb36ef23761367bf3d0b54fb9a287d406bcc677e
   image:
     repository: nginx-ingress-controller
     tag: 0.23.13
