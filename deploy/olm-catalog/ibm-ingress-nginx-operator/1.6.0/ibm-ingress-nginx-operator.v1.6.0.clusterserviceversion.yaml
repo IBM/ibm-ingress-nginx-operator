@@ -17,7 +17,7 @@ metadata:
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "default-http-backend@sha256",
-                "tag": "9e886cace21a0e9f3265d268e1ad652ae53030835cc0f095308b23dc5df62b6b"
+                "tag": "7cee76c44492269053c38374319e84273fe94dadfcfb97cfddfae9d0b017e786"
               },
               "name": "default-http-backend",
               "nodeSelector": {},
@@ -53,7 +53,7 @@ metadata:
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "nginx-ingress-controller@sha256",
-                "tag": "54996a84c918eabca0c4ec7f91da203cfe7229c43615d41c1b3b2adc4c18629e"
+                "tag": "572eb9a2e503e3643bd85454fb36ef23761367bf3d0b54fb9a287d406bcc677e"
               },
               "name": "nginx-ingress-controller",
               "nodeSelector": {},
@@ -94,7 +94,7 @@ metadata:
               "imageRegistry": "quay.io/opencloudio",
               "image": {
                 "repository": "kubectl@sha256",
-                "tag": "78b8c05746d6cdef32dbabd31ee7a658ad6ac15aec9939e14385dafffb4eb3ab"
+                "tag": "8f8a010daf257b89fead6bc1bfdb7835ff9054b1cfaaea796304ec8c7e0f5c5d"
               }
             }
           }
@@ -339,7 +339,7 @@ spec:
                 - name: INGRESS_IMAGE_DIGEST
                   value: quay.io/opencloudio/nginx-ingress-controller@sha256:572eb9a2e503e3643bd85454fb36ef23761367bf3d0b54fb9a287d406bcc677e
                 - name: DEFAULT_BACKEND_IMAGE_DIGEST
-                  value: quay.io/opencloudio/default-http-backend@sha256:b1d0ee79102dcb183b684e049c7102fb287f94cf30d9765cb6f4a2dd0feb8b25
+                  value: quay.io/opencloudio/default-http-backend@sha256:7cee76c44492269053c38374319e84273fe94dadfcfb97cfddfae9d0b017e786
                 - name: KUBECTL_IMAGE_DIGEST
                   value: quay.io/opencloudio/kubectl@sha256:8f8a010daf257b89fead6bc1bfdb7835ff9054b1cfaaea796304ec8c7e0f5c5d
                 image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
