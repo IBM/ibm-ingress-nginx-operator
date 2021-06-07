@@ -49,7 +49,7 @@ defaultBackend:
   replicaCount: 1
   replicas: 1
   imageRegistry: quay.io/opencloudio
-  imageDigest: quay.io/opencloudio/default-http-backend@sha256:b1d0ee79102dcb183b684e049c7102fb287f94cf30d9765cb6f4a2dd0feb8b25
+  imageDigest: quay.io/opencloudio/default-http-backend@sha256:7cee76c44492269053c38374319e84273fe94dadfcfb97cfddfae9d0b017e786
   image:
     repository: default-http-backend
     tag: 1.5.8
