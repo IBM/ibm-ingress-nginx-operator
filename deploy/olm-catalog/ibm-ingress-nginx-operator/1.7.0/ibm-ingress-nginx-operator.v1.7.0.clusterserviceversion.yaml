@@ -345,7 +345,13 @@ spec:
                 image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
-                resources: {}
+                resources:
+                  limits:
+                    cpu: 50m
+                    memory: 128Mi
+                  requests:
+                    cpu: 20m
+                    memory: 64Mi
               serviceAccountName: ibm-ingress-nginx-operator
     strategy: deployment
   installModes:
