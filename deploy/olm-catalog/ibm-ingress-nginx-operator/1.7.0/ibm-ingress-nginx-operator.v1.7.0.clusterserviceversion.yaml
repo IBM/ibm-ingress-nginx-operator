@@ -336,12 +336,12 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
-                - name: INGRESS_IMAGE_DIGEST
-                  value: quay.io/opencloudio/nginx-ingress-controller@sha256:572eb9a2e503e3643bd85454fb36ef23761367bf3d0b54fb9a287d406bcc677e
-                - name: DEFAULT_BACKEND_IMAGE_DIGEST
-                  value: quay.io/opencloudio/default-http-backend@sha256:b1d0ee79102dcb183b684e049c7102fb287f94cf30d9765cb6f4a2dd0feb8b25
-                - name: KUBECTL_IMAGE_DIGEST
-                  value: quay.io/opencloudio/kubectl@sha256:8f8a010daf257b89fead6bc1bfdb7835ff9054b1cfaaea796304ec8c7e0f5c5d
+                - name: NGINX_INGRESS_CONTROLLER_IMAGE
+                  value: quay.io/opencloudio/nginx-ingress-controller:0.23.15
+                - name: DEFAULT_HTTP_BACKEND_IMAGE
+                  value: quay.io/opencloudio/default-http-backend:1.5.9
+                - name: KUBECTL_IMAGE
+                  value: quay.io/opencloudio/kubectl:v1.15.9.6
                 image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
