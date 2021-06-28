@@ -364,6 +364,7 @@ spec:
   - supported: true
     type: AllNamespaces
   maturity: stable
+  minKubeVersion: 1.9.0
   provider:
     name: IBM
   replaces: ibm-ingress-nginx-operator.v1.6.0
