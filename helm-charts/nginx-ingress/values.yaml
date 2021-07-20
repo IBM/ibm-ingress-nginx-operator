@@ -22,7 +22,7 @@ ingress:
   imageDigest: quay.io/opencloudio/nginx-ingress-controller@sha256:572eb9a2e503e3643bd85454fb36ef23761367bf3d0b54fb9a287d406bcc677e
   image:
     repository: nginx-ingress-controller
-    tag: 0.23.13
+    tag: 0.23.17
     pullPolicy: IfNotPresent
   resources:
     requests:
@@ -52,7 +52,7 @@ defaultBackend:
   imageDigest: quay.io/opencloudio/default-http-backend@sha256:7cee76c44492269053c38374319e84273fe94dadfcfb97cfddfae9d0b017e786
   image:
     repository: default-http-backend
-    tag: 1.5.8
+    tag: 1.5.10
     pullPolicy: IfNotPresent
   resources:
     requests:
@@ -86,4 +86,4 @@ kubectl:
   imageRegistry: quay.io/opencloudio
   image:
     repository: kubectl
-    tag: v1.15.9.5
+    tag: v1.15.9.7
