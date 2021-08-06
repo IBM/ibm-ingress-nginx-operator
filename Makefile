@@ -15,6 +15,7 @@
 
 # Default goal
 .DEFAULT_GOAL:=help
+GIT_COMMIT_ID=$(shell git rev-parse --short HEAD)
 
 # Specify whether this repo is build locally or not, default values is '1';
 # If set to 1, then you need to also set 'DOCKER_USERNAME' and 'DOCKER_PASSWORD'
@@ -30,6 +31,7 @@ NAMESPACE ?= ibm-common-services
 IMAGE_REPO ?= hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom
 IMAGE_NAME ?= ibm-ingress-nginx-operator
 CSV_VERSION ?= 1.7.1
+IMAGE_BUILD_OPTS=--build-arg "VCS_REF=$(GIT_COMMIT_ID)" --build-arg "VCS_URL=$(GIT_REMOTE_URL)"
 
 # Github host to use for checking the source tree;
 # Override this variable ue with your own value if you're working on forked repo.
@@ -118,7 +120,7 @@ build: build-image
 
 build-image:
 	@echo "Building the $(IMAGE_NAME) image for $(LOCAL_ARCH)..."
-	@docker build -f build/Dockerfile-$(LOCAL_ARCH) -t $(IMAGE_REPO)/$(IMAGE_NAME)-$(LOCAL_ARCH):$(VERSION) .
+	@docker build -f build/Dockerfile-$(LOCAL_ARCH) ${IMAGE_BUILD_OPTS} -t $(IMAGE_REPO)/$(IMAGE_NAME)-$(LOCAL_ARCH):$(VERSION) .
 
 ############################################################
 # push image section
