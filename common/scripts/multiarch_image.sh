@@ -25,7 +25,7 @@ IMAGE_REPO=${1}
 IMAGE_NAME=${2}
 # shellcheck disable=SC2046
 VERSION=${3-"$(git describe --exact-match 2> /dev/null || git describe --match=$(git rev-parse --short=8 HEAD) --always --dirty --abbrev=8)"}
-RELEASE_VERSION=${4:-1.9.0}
+RELEASE_VERSION=${4:-1.9.1}
 
 # support other container tools, e.g. podman
 CONTAINER_CLI=${CONTAINER_CLI:-docker}
