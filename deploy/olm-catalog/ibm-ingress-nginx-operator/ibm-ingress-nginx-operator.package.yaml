@@ -1,7 +1,7 @@
 channels:
-- currentCSV: ibm-ingress-nginx-operator.v1.10.0
+- currentCSV: ibm-ingress-nginx-operator.v1.11.0
   name: dev
-- currentCSV: ibm-ingress-nginx-operator.v1.10.0
+- currentCSV: ibm-ingress-nginx-operator.v1.11.0
   name: beta
 - currentCSV: ibm-ingress-nginx-operator.v1.9.1
   name: v3
