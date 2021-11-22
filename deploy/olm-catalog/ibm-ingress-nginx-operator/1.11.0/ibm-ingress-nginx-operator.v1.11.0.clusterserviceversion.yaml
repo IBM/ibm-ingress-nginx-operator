@@ -123,7 +123,7 @@ spec:
       image: quay.io/opencloudio/default-http-backend:1.5.9
     - name: KUBECTL_IMAGE
       image: quay.io/opencloudio/kubectl:v1.15.9.6
-    - name: ibm-ingress-nginx-operator
+    - name: IBM_INGRESS_NGINX_OPERATOR_IMAGE
       image: quay.io/opencloudio/ibm-ingress-nginx-operator
   apiservicedefinitions: {}
   customresourcedefinitions:
