@@ -116,6 +116,15 @@ metadata:
   name: ibm-ingress-nginx-operator.v1.4.4
   namespace: placeholder
 spec:
+  relatedImages:
+    - name: NGINX_INGRESS_CONTROLLER_IMAGE
+      image: quay.io/opencloudio/nginx-ingress-controller:0.23.15
+    - name: DEFAULT_HTTP_BACKEND_IMAGE
+      image: quay.io/opencloudio/default-http-backend:1.5.9
+    - name: KUBECTL_IMAGE
+      image: quay.io/opencloudio/kubectl:v1.15.9.6
+    - name: IBM_INGRESS_NGINX_OPERATOR_IMAGE
+      image: quay.io/opencloudio/ibm-ingress-nginx-operator
   apiservicedefinitions: {}
   customresourcedefinitions:
     owned:
