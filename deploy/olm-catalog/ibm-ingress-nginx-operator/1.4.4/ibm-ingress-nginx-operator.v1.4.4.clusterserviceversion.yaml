@@ -124,7 +124,7 @@ spec:
     - name: KUBECTL_IMAGE
       image: quay.io/opencloudio/kubectl:v1.15.9.6
     - name: IBM_INGRESS_NGINX_OPERATOR_IMAGE
-      image: quay.io/opencloudio/ibm-ingress-nginx-operator
+      image: quay.io/opencloudio/ibm-ingress-nginx-operator:1.4.4
   apiservicedefinitions: {}
   customresourcedefinitions:
     owned:
