@@ -4,8 +4,8 @@
   kind: NginxIngress
   chart: helm-charts/nginx-ingress
   overrideValues:
-    ingress.imageDigest: ${INGRESS_IMAGE_DIGEST}
-    defaultBackend.imageDigest: ${DEFAULT_BACKEND_IMAGE_DIGEST}
-    kubectl.imageDigest: ${KUBECTL_IMAGE_DIGEST}
+    ingress.imageDigest: ${NGINX_INGRESS_CONTROLLER_IMAGE}
+    defaultBackend.imageDigest: ${DEFAULT_HTTP_BACKEND_IMAGE}
+    kubectl.imageDigest: ${KUBECTL_IMAGE}
     init.imageDigest: ${INIT_IMAGE_DIGEST}
     ingress.watchNamespace: '{${WATCH_NAMESPACE}}'
