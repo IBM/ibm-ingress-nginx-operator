@@ -110,7 +110,7 @@ scorecard: ## Run scorecard test
 ############################################################
 
 coverage:
-	@common/scripts/codecov.sh ${BUILD_LOCALLY}
+	@common/scripts/codecov.sh
 
 ############################################################
 # build image section
