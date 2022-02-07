@@ -118,11 +118,11 @@ metadata:
 spec:
   relatedImages:
     - name: NGINX_INGRESS_CONTROLLER_IMAGE
-      image: quay.io/opencloudio/nginx-ingress-controller:0.23.23
+      image: quay.io/opencloudio/nginx-ingress-controller:0.23.25
     - name: DEFAULT_HTTP_BACKEND_IMAGE
-      image: quay.io/opencloudio/default-http-backend:1.5.16
+      image: quay.io/opencloudio/default-http-backend:1.5.17
     - name: KUBECTL_IMAGE
-      image: quay.io/opencloudio/kubectl:v1.15.9.12
+      image: quay.io/opencloudio/kubectl:v1.15.9.13
     - name: IBM_INGRESS_NGINX_OPERATOR_IMAGE
       image: quay.io/opencloudio/ibm-ingress-nginx-operator:1.13.0
   apiservicedefinitions: {}
