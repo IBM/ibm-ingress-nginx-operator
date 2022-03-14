@@ -21,4 +21,4 @@ name: nginx-ingress
 sources:
 - https://github.com/kubernetes/ingress
 tillerVersion: '>=2.12.3'
-version: 1.13.0
+version: 1.14.0
