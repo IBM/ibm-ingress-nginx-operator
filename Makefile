@@ -115,21 +115,20 @@ coverage:
 ############################################################
 # build image section
 ############################################################
+ifeq ($(BUILD_LOCALLY),0)
+    export CONFIG_DOCKER_TARGET = config-docker
+endif
 
 build: build-image
 
-build-image:
+build-image: $(CONFIG_DOCKER_TARGET)
+	echo "CONFIG_DOCKER_TARGET=$CONFIG_DOCKER_TARGET"
 	@echo "Building the $(IMAGE_NAME) image for $(LOCAL_ARCH)..."
 	@docker build -f build/Dockerfile-$(LOCAL_ARCH) ${IMAGE_BUILD_OPTS} -t $(IMAGE_REPO)/$(IMAGE_NAME)-$(LOCAL_ARCH):$(VERSION) .
 
 ############################################################
 # push image section
 ############################################################
-
-ifeq ($(BUILD_LOCALLY),0)
-    export CONFIG_DOCKER_TARGET = config-docker
-	echo "CONFIG_DOCKER_TARGET=$CONFIG_DOCKER_TARGET"
-endif
 
 push-image: $(CONFIG_DOCKER_TARGET) build-image
 	@echo "Pushing the $(IMAGE_NAME) image for $(LOCAL_ARCH)..."
