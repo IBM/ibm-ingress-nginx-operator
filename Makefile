@@ -94,7 +94,7 @@ lint: lint-all
 
 test: test-e2e ## Run integration e2e tests with different options
 
-test-e2e: 
+test-e2e:
 	@echo ... Running the same e2e tests with different args ...
 	@echo ... Running locally ...
 	- operator-sdk test local ./test/e2e --verbose --up-local --namespace=${NAMESPACE}
@@ -138,7 +138,7 @@ push-image: $(CONFIG_DOCKER_TARGET) build-image
 # multiarch-image section
 ############################################################
 
-images: build-image push-image multiarch-image
+images: $(CONFIG_DOCKER_TARGET) build-image push-image multiarch-image
 
 multiarch-image: $(CONFIG_DOCKER_TARGET)
 	@echo "Build multiarch image for $(IMAGE_REPO)/$(IMAGE_NAME):$(RELEASE_VERSION)..."
