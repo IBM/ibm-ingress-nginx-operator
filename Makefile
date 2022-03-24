@@ -128,6 +128,7 @@ build-image:
 
 ifeq ($(BUILD_LOCALLY),0)
     export CONFIG_DOCKER_TARGET = config-docker
+	echo "CONFIG_DOCKER_TARGET=$CONFIG_DOCKER_TARGET"
 endif
 
 push-image: $(CONFIG_DOCKER_TARGET) build-image
