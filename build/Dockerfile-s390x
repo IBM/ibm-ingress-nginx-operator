@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-FROM quay.io/operator-framework/helm-operator:v1.17.0
+FROM hyc-cloud-private-edge-docker-local/build-images/helm-operator:latest
 
 ARG VCS_REF
 ARG VCS_URL
