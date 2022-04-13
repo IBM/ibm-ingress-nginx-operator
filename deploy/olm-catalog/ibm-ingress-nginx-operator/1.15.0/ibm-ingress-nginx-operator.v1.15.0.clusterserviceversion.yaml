@@ -330,7 +330,7 @@ spec:
               annotations:
                 productName: "IBM Cloud Platform Common Services"
                 productID: "068a62892a1e4db39641342e592daa25"
-                productMetric: "FREE"                
+                productMetric: "FREE"
             spec:
               containers:
               - env:
@@ -376,5 +376,4 @@ spec:
   minKubeVersion: 1.9.0
   provider:
     name: IBM
-  replaces: ibm-ingress-nginx-operator.v1.14.0
   version: 1.15.0
