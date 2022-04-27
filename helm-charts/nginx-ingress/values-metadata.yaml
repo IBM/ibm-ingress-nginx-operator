@@ -39,7 +39,7 @@ ingress:
     __metadata:
       name: "image registry setting"
       label: "image registry setting"
-      description: "set image registry, default is quay.io/opencloudio"
+      description: "set image registry, default is icr.io/cpopen/cpfs"
   image:
     repository:
       __metadata:
@@ -77,7 +77,7 @@ ingress:
       description: "extra args to start /nginx-ingress-controller"
 
   config:
-    disable-access-log: 
+    disable-access-log:
       __metadata:
         name: "access log setting"
         label: "access log setting"
