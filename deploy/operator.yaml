@@ -21,7 +21,7 @@ spec:
       serviceAccountName: ibm-ingress-nginx-operator
       containers:
         - name: ibm-ingress-nginx-operator
-          image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
+          image: icr.io/cpopen/ibm-ingress-nginx-operator:latest
           imagePullPolicy: Always
           resources:
             limits:
@@ -42,8 +42,8 @@ spec:
             - name: OPERATOR_NAME
               value: "ibm-ingress-nginx-operator"
             - name: NGINX_INGRESS_CONTROLLER_IMAGE
-              value: "quay.io/opencloudio/nginx-ingress-controller:0.23.27"
+              value: "icr.io/cpopen/cpfs/nginx-ingress-controller:0.23.27"
             - name: DEFAULT_HTTP_BACKEND_IMAGE
-              value: "quay.io/opencloudio/default-http-backend:1.5.17"
+              value: "icr.io/cpopen/cpfs/default-http-backend:1.5.17"
             - name: KUBECTL_IMAGE
-              value: "quay.io/opencloudio/kubectl:v1.15.9.13"
+              value: "icr.io/cpopen/cpfs/kubectl:v1.15.9.13"

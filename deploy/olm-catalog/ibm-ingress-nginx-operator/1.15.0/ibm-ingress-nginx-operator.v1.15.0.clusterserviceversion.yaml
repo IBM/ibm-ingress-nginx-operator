@@ -13,7 +13,7 @@ metadata:
           },
           "spec": {
             "defaultBackend": {
-              "imageRegistry": "quay.io/opencloudio",
+              "imageRegistry": "icr.io/cpopen/cpfs",
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "default-http-backend@sha256",
@@ -49,7 +49,7 @@ metadata:
               "hostPort": false,
               "httpPort": 7080,
               "httpsPort": 7443,
-              "imageRegistry": "quay.io/opencloudio",
+              "imageRegistry": "icr.io/cpopen/cpfs",
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "nginx-ingress-controller@sha256",
@@ -73,7 +73,7 @@ metadata:
               "tolerations": []
             },
             "init": {
-              "imageRegistry": "quay.io/opencloudio",
+              "imageRegistry": "icr.io/cpopen/cpfs",
               "image": {
                 "pullPolicy": "IfNotPresent",
                 "repository": "icp-initcontainer@sha256",
@@ -91,7 +91,7 @@ metadata:
                   "memory": "512Mi"
                 }
               },
-              "imageRegistry": "quay.io/opencloudio",
+              "imageRegistry": "icr.io/cpopen/cpfs",
               "image": {
                 "repository": "kubectl@sha256",
                 "tag": "78b8c05746d6cdef32dbabd31ee7a658ad6ac15aec9939e14385dafffb4eb3ab"
@@ -103,7 +103,7 @@ metadata:
     capabilities: Basic Install
     categories: Developer Tools
     certified: "false"
-    containerImage: quay.io/opencloudio/ibm-ingress-nginx-operator:1.15.0
+    containerImage: icr.io/cpopen/ibm-ingress-nginx-operator:1.15.0
     createdAt: "2021-12-10T17:30:00Z"
     description: Operator for managing deployment of ingress nginx service.
     repository: https://github.com/IBM/ibm-ingress-nginx-operator.git
@@ -118,13 +118,13 @@ metadata:
 spec:
   relatedImages:
     - name: NGINX_INGRESS_CONTROLLER_IMAGE
-      image: quay.io/opencloudio/nginx-ingress-controller:0.23.26
+      image: icr.io/cpopen/cpfs/nginx-ingress-controller:0.23.26
     - name: DEFAULT_HTTP_BACKEND_IMAGE
-      image: quay.io/opencloudio/default-http-backend:1.5.17
+      image: icr.io/cpopen/cpfs/default-http-backend:1.5.17
     - name: KUBECTL_IMAGE
-      image: quay.io/opencloudio/kubectl:v1.15.9.13
+      image: icr.io/cpopen/cpfs/kubectl:v1.15.9.13
     - name: IBM_INGRESS_NGINX_OPERATOR_IMAGE
-      image: quay.io/opencloudio/ibm-ingress-nginx-operator:1.15.0
+      image: icr.io/cpopen/ibm-ingress-nginx-operator:1.15.0
   apiservicedefinitions: {}
   customresourcedefinitions:
     owned:
@@ -346,12 +346,12 @@ spec:
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
                 - name: NGINX_INGRESS_CONTROLLER_IMAGE
-                  value: quay.io/opencloudio/nginx-ingress-controller:0.23.27
+                  value: icr.io/cpopen/cpfs/nginx-ingress-controller:0.23.27
                 - name: DEFAULT_HTTP_BACKEND_IMAGE
-                  value: quay.io/opencloudio/default-http-backend:1.5.17
+                  value: icr.io/cpopen/cpfs/default-http-backend:1.5.17
                 - name: KUBECTL_IMAGE
-                  value: quay.io/opencloudio/kubectl:v1.15.9.13
-                image: quay.io/opencloudio/ibm-ingress-nginx-operator:latest
+                  value: icr.io/cpopen/cpfs/kubectl:v1.15.9.13
+                image: icr.io/cpopen/ibm-ingress-nginx-operator:latest
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
                 resources:
