@@ -13,6 +13,7 @@
 # limitations under the License.
 #
 
+
 # Default goal
 .DEFAULT_GOAL:=help
 GIT_COMMIT_ID=$(shell git rev-parse --short HEAD)
