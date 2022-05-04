@@ -70,3 +70,4 @@ spec:
       repository: kubectl
       tag: v1.15.9.3
   fips_enabled: false
+  version: 1.15.0

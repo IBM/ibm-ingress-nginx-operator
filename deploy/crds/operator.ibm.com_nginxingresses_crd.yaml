@@ -12,6 +12,11 @@ spec:
         openAPIV3Schema:
           type: object
           x-kubernetes-preserve-unknown-fields: true
+          properties:
+            spec:
+              properties:
+                version:
+                  type: string
       subresources:
         status: {}
   scope: Namespaced
