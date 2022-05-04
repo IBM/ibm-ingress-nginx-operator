@@ -36,7 +36,7 @@ metadata:
               "tolerations": []
             },
             "fips_enabled": false,
-            "version": "1.15.0"
+            "version": "1.15.0",
             "ingress": {
               "annotations": {},
               "config": {
