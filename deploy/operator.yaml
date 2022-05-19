@@ -42,7 +42,7 @@ spec:
             - name: OPERATOR_NAME
               value: "ibm-ingress-nginx-operator"
             - name: NGINX_INGRESS_CONTROLLER_IMAGE
-              value: "icr.io/cpopen/cpfs/nginx-ingress-controller:0.23.27"
+              value: "icr.io/cpopen/cpfs/nginx-ingress-controller:0.23.28"
             - name: DEFAULT_HTTP_BACKEND_IMAGE
               value: "icr.io/cpopen/cpfs/default-http-backend:1.5.17"
             - name: KUBECTL_IMAGE
