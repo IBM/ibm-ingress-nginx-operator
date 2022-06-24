@@ -31,7 +31,7 @@ NAMESPACE ?= ibm-common-services
 # IMAGE_REPO, IMAGE_NAME and RELEASE_TAG environment variable.
 IMAGE_REPO ?= hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom
 IMAGE_NAME ?= ibm-ingress-nginx-operator
-CSV_VERSION ?= 1.16.0
+CSV_VERSION ?= $(shell cat ./version/version.go | grep "Version =" | awk '{ print $$3}' | tr -d '"')
 IMAGE_BUILD_OPTS=--build-arg "VCS_REF=$(GIT_COMMIT_ID)" --build-arg "VCS_URL=$(GIT_REMOTE_URL)"
 
 # Github host to use for checking the source tree;
