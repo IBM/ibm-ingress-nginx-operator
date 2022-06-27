@@ -1,0 +1,574 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+ 
+
+# Make data base, printed on Mon Jun 27 11:23:20 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+VSCODE_LOG_NATIVE = false
+# environment
+NVM_INC = /Users/sgrube/.nvm/versions/node/v12.22.7/include/node
+# automatic
+ 
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/sgrube/dev/src/github.com/IBM/ibm-ingress-nginx-operator
+# makefile
+SHELL = /bin/sh
+# makefile (from `Makefile', line 27)
+NAMESPACE = ibm-common-services
+# makefile (from `Makefile', line 50)
+XARGS_FLAGS = 
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 33)
+IMAGE_NAME = ibm-ingress-nginx-operator
+# makefile (from `common/Makefile.common.mk', line 1)
+MAKEFILE_LIST :=  Makefile common/Makefile.common.mk
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# makefile (from `Makefile', line 41)
+VERSION = $(shell date +v%Y%m%d)-$(shell git describe --match=$(git rev-parse --short=8 HEAD) --tags --always --dirty)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+__CFBundleIdentifier = com.microsoft.VSCode
+# makefile (from `common/Makefile.common.mk', line 27)
+ZONE = us-west1-a
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/cn/sg28mkmn11vgczzw07n02tgw0000gn/T/vscode-ipc-fd0671da-e396-4f44-9086-1a6bdff8267b.sock
+# environment
+VSCODE_CWD = /Users/sgrube/dev/src/github.com/IBM/ibm-ingress-nginx-operator
+# environment
+GOPROXY = https://proxy.golang.org,direct
+# environment
+PATH = /Users/sgrube/bin:/Users/sgrube/dev:/Users/sgrube/.nvm/versions/node/v12.22.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/sgrube/dev/bin
+# makefile (from `Makefile', line 42)
+RELEASE_VERSION = $(shell cat ./version/version.go | grep "Version =" | awk '{ print $$3}' | tr -d '"')
+# makefile (from `common/Makefile.common.mk', line 26)
+PROJECT = oceanic-guard-191815
+# makefile (from `common/Makefile.common.mk', line 28)
+CLUSTER = prow
+# makefile (from `common/Makefile.common.mk', line 46)
+XARGS = xargs -0 ${XARGS_FLAGS}
+# environment
+GOPATH = /Users/sgrube/dev
+# makefile (from `common/Makefile.common.mk', line 47)
+CLEANXARGS = xargs ${XARGS_FLAGS}
+# environment
+NVM_BIN = /Users/sgrube/.nvm/versions/node/v12.22.7/bin
+# environment
+LaunchInstanceID = 465431F9-0D5D-4147-8B6D-EDF44AF6223D
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.cduItOANxw/Listeners
+# environment
+NODE_OPTIONS = 
+# automatic
+%F = $(notdir $%)
+# makefile (from `Makefile', line 39)
+GIT_HOST = github.com
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /Users/sgrube/dev/src/github.com/IBM/ibm-ingress-nginx-operator
+# makefile (from `Makefile', line 44)
+LOCAL_OS := Darwin
+# environment
+ICPUICOMPONENT_PWD = QUtDcDVjYndiVnA1TVBwWlptV2FlRnRxaGVDNlVhQTkzeUpRWHFTUjkxMlJVMmtMQndKVXR2VjFyOHNybzZQYTdGSld6anlQVg==
+# makefile (from `common/Makefile.common.mk', line 45)
+FINDFILES = find . \( -path ./.git -o -path ./.github \) -prune -o -type f
+# environment
+GOMODCACHE = /Users/sgrube/dev/pkg/mod
+# environment
+HOME = /Users/sgrube
+# default
+MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+# environment
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/sgrube/Library/Application Support/Code/CachedData/57fd6d0195bb9b9d1b49f6da5db789060795de47
+# environment
+LOGNAME = sgrube
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+NVM_CD_FLAGS = -q
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# makefile (from `Makefile', line 32)
+IMAGE_REPO = hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom
+# environment
+SHLVL = 3
+# makefile (from `Makefile', line 24)
+BUILD_LOCALLY = 1
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = sgrube
+# makefile (from `Makefile', line 18)
+.DEFAULT_GOAL := help
+# environment
+TERM_SESSION_ID = C80EAE0C-68E9-440D-83AE-B2450D00B518
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# makefile (from `Makefile', line 58)
+LOCAL_ARCH = "amd64"
+# makefile (from `Makefile', line 49)
+TARGET_OS = darwin
+# default
+MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
+# environment
+ARTIFACTORY_USER = icpuidv@us.ibm.com
+# makefile (from `Makefile', line 35)
+IMAGE_BUILD_OPTS = --build-arg "VCS_REF=$(GIT_COMMIT_ID)" --build-arg "VCS_URL=$(GIT_REMOTE_URL)"
+# environment
+TERM_PROGRAM = Apple_Terminal
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/cn/sg28mkmn11vgczzw07n02tgw0000gn/T/
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/sgrube/Library/Application Support/Code/1.67.0-main.sock
+# makefile (from `Makefile', line 55)
+ARCH := x86_64
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+TERM_PROGRAM_VERSION = 445
+# environment
+NVM_DIR = /Users/sgrube/.nvm
+# makefile (from `Makefile', line 19)
+GIT_COMMIT_ID = $(shell git rev-parse --short HEAD)
+# environment
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.41209034.41209040.068FB39B-1D50-4164-B927-8D0D9B871332
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# makefile (from `Makefile', line 34)
+CSV_VERSION = 1.16.0
+# environment
+LC_ALL = C
+# environment
+SECURITYSESSIONID = 186a4
+# automatic
+^F = $(notdir $^)
+# environment
+REGISTRY_DEV = hyc-cloud-private-scratch-docker-local.artifactory.swg-devops.com/sgrube
+# default
+SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/local/include
+# environment
+MAKELEVEL := 0
+# environment
+LANG = C
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+TERM = xterm-256color
+# environment
+VSCODE_PID = 1749
+# variable set hash-table stats:
+ 
+# Load=102/1024=10%, Rehash=0, Collisions=10/160=6%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 16777225, inode 12433486): 18 files, no impossibilities.
+
+# 18 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+csv:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 153):
+	@RELEASE=${CSV_VERSION} common/scripts/push-csv.sh
+	
+
+all: fmt check test coverage build-image images
+#  Phony target (prerequisite of .PHONY).
+#  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+
+.PHONY: lint-dockerfiles lint-scripts lint-yaml lint-helm lint-copyright-banner lint-go lint-python lint-markdown lint-all format-go format-python all fmt check coverage test build-image multiarch-image images clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+scorecard:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 106):
+	@echo ... Running the scorecard test
+	- operator-sdk scorecard --verbose
+	
+
+get-cluster-credentials: activate-serviceaccount
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 36):
+	@gcloud container clusters get-credentials "$(CLUSTER)" --project="$(PROJECT)" --zone="$(ZONE)"
+	
+
+format-python:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 85):
+	@${FINDFILES} -name '*.py' -print0 | ${XARGS} autopep8 --max-line-length 160 --aggressive --aggressive -i
+	
+
+lint-scripts:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 53):
+	@${FINDFILES} -name '*.sh' -print0 | ${XARGS} shellcheck
+	
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-27 11:22:48
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+push-image: build-image
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 135):
+	@echo "Pushing the $(IMAGE_NAME) image for $(LOCAL_ARCH)..."
+	@docker push $(IMAGE_REPO)/$(IMAGE_NAME)-$(LOCAL_ARCH):$(VERSION)
+	
+
+test: test-e2e
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+lint-helm:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 59):
+	@${FINDFILES} -name 'Chart.yaml' -print0 | ${XARGS} -L 1 dirname | ${CLEANXARGS} helm lint
+	
+
+build: build-image
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+build-image:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 126):
+	echo "CONFIG_DOCKER_TARGET=$CONFIG_DOCKER_TARGET"
+	@echo "Building the $(IMAGE_NAME) image for $(LOCAL_ARCH)..."
+	@docker build -f build/Dockerfile-$(LOCAL_ARCH) ${IMAGE_BUILD_OPTS} -t $(IMAGE_REPO)/$(IMAGE_NAME)-$(LOCAL_ARCH):$(VERSION) .
+	
+
+config-docker: get-cluster-credentials
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 39):
+	@common/scripts/config_docker.sh
+	
+
+lint-dockerfiles:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 50):
+	@${FINDFILES} -name 'Dockerfile*' -print0 | ${XARGS} hadolint -c ./common/config/.hadolint.yml
+	
+
+lint-go:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 66):
+	# @${FINDFILES} -name '*.go' \( ! \( -name '*.gen.go' -o -name '*.pb.go' \) \) -print0 | ${XARGS} common/scripts/lint_go.sh
+	
+
+images: build-image push-image multiarch-image
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+lint-copyright-banner:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 62):
+	@${FINDFILES} \( -name '*.go' -o -name '*.cc' -o -name '*.h' -o -name '*.proto' -o -name '*.py' -o -name '*.sh' \) \( ! \( -name '*.gen.go' -o -name '*.pb.go' -o -name '*_pb2.py' \) \) -print0 |\
+	${XARGS} common/scripts/lint_copyright_banner.sh
+	
+
+help:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 165):
+	@echo "Usage:\n  make \033[36m<target>\033[0m"
+	@awk 'BEGIN {FS = ":.*##"}; \
+	/^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2 } \
+	/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+	
+
+multiarch-image:
+#  Phony target (prerequisite of .PHONY).
+ 
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 145):
+	@echo "Build multiarch image for $(IMAGE_REPO)/$(IMAGE_NAME):$(RELEASE_VERSION)..."
+	@common/scripts/multiarch_image.sh $(IMAGE_REPO) $(IMAGE_NAME) $(VERSION) $(RELEASE_VERSION)
+	
+
+INSTALL_HOOKS:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 20):
+	@find .git/hooks -type l -exec rm {} \; && \
+	find common/scripts/.githooks -type f -exec ln -sf ../../{} .git/hooks/ \;
+	
+
+lint-yaml:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 56):
+	@${FINDFILES} \( -name '*.yml' -o -name '*.yaml' \) -print0 | ${XARGS} grep -L -e "{{" | ${CLEANXARGS} yamllint -c ./common/config/.yamllint.yml
+	
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+common/Makefile.common.mk:
+#  Implicit rule search has been done.
+#  Last modified 2022-03-24 15:58:19
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+activate-serviceaccount:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+test-e2e:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 99):
+	@echo ... Running the same e2e tests with different args ...
+	@echo ... Running locally ...
+	- operator-sdk test local ./test/e2e --verbose --up-local --namespace=${NAMESPACE}
+	# @echo ... Running with the param ...
+	# - operator-sdk test local ./test/e2e --namespace=${NAMESPACE}
+	
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 159):
+	@rm -rf build/_output
+	
+
+coverage:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 114):
+	@common/scripts/codecov.sh
+	
+
+lint-python:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 69):
+	@${FINDFILES} -name '*.py' \( ! \( -name '*_pb2.py' \) \) -print0 | ${XARGS} autopep8 --max-line-length 160 --exit-code -d
+	
+
+fmt: format-go format-python
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+
+lint: lint-all
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+check: lint
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+format-go:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := format-go
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=3/13=23%
+#  commands to execute (from `common/Makefile.common.mk', line 82):
+	@${FINDFILES} -name '*.go' \( ! \( -name '*.gen.go' -o -name '*.pb.go' \) \) -print0 | ${XARGS} goimports -w -local "github.com/IBM"
+	
+
+lint-all: lint-dockerfiles lint-scripts lint-yaml lint-helm lint-copyright-banner lint-go lint-python lint-markdown
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+lint-markdown:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `common/Makefile.common.mk', line 72):
+	@${FINDFILES} -name '*.md' -print0 | ${XARGS} mdl --ignore-front-matter --style common/config/mdl.rb
+	@${FINDFILES} -name '*.md' -print0 | ${XARGS} awesome_bot --skip-save-results --allow_ssl --allow-timeout --allow-dupe --allow-redirect
+	
+
+# files hash-table stats:
+# Load=36/1024=4%, Rehash=0, Collisions=0/98=0%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 2
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4061 / max = 4061 / min = 4061 / avg = 4061
+
+# Finished Make data base on Mon Jun 27 11:23:20 2022
+
+ 

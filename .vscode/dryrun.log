@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/sgrube/dev/src/github.com/IBM/ibm-ingress-nginx-operator'
+echo "Usage:\n  make \033[36m<target>\033[0m"
+ 
+awk 'BEGIN {FS = ":.*##"}; \
+		/^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-20s\033[0m %s\n", $1, $2 } \
+		/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($0, 5) } '  Makefile common/Makefile.common.mk
+make: Leaving directory `/Users/sgrube/dev/src/github.com/IBM/ibm-ingress-nginx-operator'
+ 
