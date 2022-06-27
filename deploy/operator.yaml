@@ -46,4 +46,4 @@ spec:
             - name: DEFAULT_HTTP_BACKEND_IMAGE
               value: "icr.io/cpopen/cpfs/default-http-backend:1.5.22"
             - name: KUBECTL_IMAGE
-              value: "icr.io/cpopen/cpfs/kubectl:v1.15.9.13"
+              value: "icr.io/cpopen/cpfs/kubectl:v1.15.9.18"
