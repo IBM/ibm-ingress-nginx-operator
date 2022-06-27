@@ -21,7 +21,7 @@
 
 ALL_PLATFORMS="amd64 ppc64le s390x"
 
-REL_VERSION=$(grep = version/version.go | cut -d '"' -f2)
+REL_VERSION=$(grep '=' version/version.go | cut -d '"' -f2)
 
 IMAGE_REPO=${1}
 IMAGE_NAME=${2}
