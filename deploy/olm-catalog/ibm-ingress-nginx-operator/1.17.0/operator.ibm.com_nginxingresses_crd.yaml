@@ -3,6 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   name: nginxingresses.operator.ibm.com
 spec:
+  x-kubernetes-preserve-unknown-fields: true
   group: operator.ibm.com
   versions:
     - name: v1alpha1
