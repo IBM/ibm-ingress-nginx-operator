@@ -107,7 +107,10 @@ spec:
         image: "{{ .Values.ingress.imageRegistry }}/{{ .Values.ingress.image.repository }}:{{ .Values.ingress.image.tag }}"
         {{- end }}
         securityContext:
-          allowPrivilegeEscalation: true
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
           capabilities:
             drop:
               - ALL
