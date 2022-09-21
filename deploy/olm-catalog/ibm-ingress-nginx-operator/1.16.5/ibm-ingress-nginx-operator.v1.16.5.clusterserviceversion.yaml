@@ -108,6 +108,7 @@ metadata:
     description: Operator for managing deployment of ingress nginx service.
     repository: https://github.com/IBM/ibm-ingress-nginx-operator.git
     support: IBM
+    operators.operatorframework.io/operator-type: 'non-standalone'
   labels:
     operatorframework.io/arch.amd64: supported
     operatorframework.io/arch.ppc64le: supported
