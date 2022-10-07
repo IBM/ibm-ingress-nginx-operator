@@ -347,11 +347,11 @@ spec:
                 - name: OPERATOR_NAME
                   value: ibm-ingress-nginx-operator
                 - name: NGINX_INGRESS_CONTROLLER_IMAGE
-                  value: icr.io/cpopen/cpfs/nginx-ingress-controller:2.6.3
+                  value: icr.io/cpopen/cpfs/nginx-ingress-controller:2.6.4
                 - name: DEFAULT_HTTP_BACKEND_IMAGE
-                  value: icr.io/cpopen/cpfs/default-http-backend:2.6.3
+                  value: icr.io/cpopen/cpfs/default-http-backend:2.6.4
                 - name: KUBECTL_IMAGE
-                  value: icr.io/cpopen/cpfs/kubectl:2.6.3
+                  value: icr.io/cpopen/cpfs/kubectl:2.6.4
                 image: icr.io/cpopen/ibm-ingress-nginx-operator:latest
                 imagePullPolicy: Always
                 name: ibm-ingress-nginx-operator
