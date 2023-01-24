@@ -29,7 +29,7 @@ NAMESPACE ?= ibm-common-services
 # Image URL to use all building/pushing image targets;
 # Use your own docker registry and image name for dev/test by overridding the
 # IMAGE_REPO, IMAGE_NAME and RELEASE_TAG environment variable.
-IMAGE_REPO ?= hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom
+IMAGE_REPO ?= docker-na-public.artifactory.swg-devops.com/hyc-cloud-private-integration-docker-local
 IMAGE_NAME ?= ibm-ingress-nginx-operator
 CSV_VERSION ?= $(shell cat version/version.go | grep = | cut -d '"' -f2)
 IMAGE_BUILD_OPTS=--build-arg "VCS_REF=$(GIT_COMMIT_ID)" --build-arg "VCS_URL=$(GIT_REMOTE_URL)"
