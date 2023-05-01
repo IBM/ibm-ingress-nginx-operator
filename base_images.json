@@ -40,7 +40,7 @@
     "destStage": "edge",
     "destNamespace": "build-images",
     "destImage": "helm-operator",
-    "tag": "v1.28.0",
+    "tag": "v1.28.1",
     "updatePackages": []
   },
   {
@@ -58,5 +58,3 @@
     "libertyVersion": "23.0.0.3"
   }
 ]
-
-
