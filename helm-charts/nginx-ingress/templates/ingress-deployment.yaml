@@ -80,15 +80,13 @@ spec:
         whenUnsatisfiable: ScheduleAnyway
         labelSelector:
           matchLabels:
-            key: app
-            values: {{ .Values.ingress.name }}
+            app: {{ .Values.ingress.name }}
       - maxSkew: 1
         topologyKey: topology.kubernetes.io/region
         whenUnsatisfiable: ScheduleAnyway
         labelSelector:
           matchLabels:
-            key: app
-            values: {{ .Values.ingress.name }}
+            app: {{ .Values.ingress.name }}
       hostNetwork: {{ .Values.ingress.hostNetwork }}
       serviceAccount: nginx-ingress
       serviceAccountName: nginx-ingress
