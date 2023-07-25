@@ -187,6 +187,17 @@ spec:
       permissions:
       - rules:
         - apiGroups:
+          - coordination.k8s.io
+          resources:
+          - leases
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - update
+          - watch
+        - apiGroups:
           - operator.ibm.com
           resources:
           - nginxingresses
