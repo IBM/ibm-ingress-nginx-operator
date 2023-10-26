@@ -33,7 +33,7 @@ ingress:
       memory: 512Mi
   config:
     disable-access-log: 'true'
-    keep-alive-requests: '10000'
+    keep-alive-requests: '1000'
     upstream-keepalive-connections: '64'
     server-tokens: 'false'
     ssl-ciphers: 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA256'
