@@ -148,7 +148,7 @@ The following table lists the configurable parameters of the `ICP Management Ing
 | ingress.resources.requests.memory               | memory request to run this deployment                          | 256Mi                           |
 | ingress.extraArgs                               | setting extra command line args                                | {}                              |
 | ingress.config.disable-access-log               | NGINX Ingress Controller configmap setting of disable-access-log             | true              |
-| ingress.config.keep-alive-requests              | NGINX Ingress Controller configmap setting of keep-alive-requests            | 10000             |
+| ingress.config.keep-alive-requests              | NGINX Ingress Controller configmap setting of keep-alive-requests            | 1000             |
 | ingress.config.upstream-keepalive-connections   | NGINX Ingress Controller configmap setting of upstream-keepalive-connections | 64                |
 | ingress.config.server-tokens                    | NGINX Ingress Controller configmap setting of server-tokens                  | false             |
 | ingress.config.ssl-ciphers                      | NGINX Ingress Controller configmap setting of ssl-ciphers      | ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256 |

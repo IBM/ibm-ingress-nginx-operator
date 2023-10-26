@@ -26,7 +26,7 @@ spec:
         memory: 512Mi
     config:
       disable-access-log: 'true'
-      keep-alive-requests: '10000'
+      keep-alive-requests: '1000'
       upstream-keepalive-connections: '64'
       server-tokens: 'false'
     extraArgs: {}

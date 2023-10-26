@@ -86,7 +86,7 @@ ingress:
       __metadata:
         name: "keep-alive-requests setting"
         label: "keep-alive-requests setting"
-        description: "set keep-alive-requests numbers, default is 10000"
+        description: "set keep-alive-requests numbers, default is 1000"
     upstream-keepalive-connections:
       __metadata:
         name: "upstream-keepalive-connections setting"
