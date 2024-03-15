@@ -13,7 +13,10 @@
 # limitations under the License.
 #
 
-FROM docker-na-public.artifactory.swg-devops.com/hyc-cloud-private-edge-docker-local/build-images/helm-operator:latest
+# There was an issue with v1.34.x where it couldn't read CRs.  Rolling back to v1.33.0 for now.
+# Roadmap issue 62635
+#FROM docker-na-public.artifactory.swg-devops.com/hyc-cloud-private-edge-docker-local/build-images/helm-operator:latest
+FROM docker-na-public.artifactory.swg-devops.com/hyc-cloud-private-edge-docker-local/build-images/helm-operator:v1.33.0
 
 ARG VCS_REF
 ARG VCS_URL
